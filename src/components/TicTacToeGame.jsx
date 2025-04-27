@@ -1,36 +1,48 @@
-
 import React, { useState, useEffect } from 'react';
 
-const questions = [
+const questionsBank = [
   { question: '5 + 3', answer: '8' },
   { question: '12 / 4', answer: '3' },
   { question: '7 - 2', answer: '5' },
   { question: '3 x 4', answer: '12' },
-  { question: '√16', answer: '4' },
+  { question: '\u221A16', answer: '4' },
   { question: '6 + 7', answer: '13' },
   { question: '9 - 5', answer: '4' },
   { question: '10 / 2', answer: '5' },
-  { question: '2²', answer: '4' },
+  { question: '14+9', answer: '23' },
+  { question: '15x4', answer: '60' },
+  { question: '2\u00B3', answer: '8' },
 ];
 
 const TicTacToeGame = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [questionIndex, setQuestionIndex] = useState(null);
+  const [availableQuestions, setAvailableQuestions] = useState([]);
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [userAnswer, setUserAnswer] = useState('');
-  const [message, setMessage] = useState('');
   const [winner, setWinner] = useState(null);
+  const [answers, setAnswers] = useState({ X: [], O: [] });
+  const [turnInfo, setTurnInfo] = useState('');
   const [timer, setTimer] = useState(45);
 
   useEffect(() => {
+    setAvailableQuestions(shuffleArray([...questionsBank]));
+    setTurnInfo(`Player ${currentPlayer}'s turn`);
+  }, []);
+
+  useEffect(() => {
+    setTurnInfo(`Player ${currentPlayer}'s turn`);
+  }, [currentPlayer]);
+
+  useEffect(() => {
     let interval;
-    if (questionIndex !== null) {
+    if (selectedQuestion) {
       setTimer(45);
       interval = setInterval(() => {
-        setTimer((prev) => {
+        setTimer(prev => {
           if (prev <= 1) {
             clearInterval(interval);
-            skipTurn();
+            handleTimeout();
             return 0;
           }
           return prev - 1;
@@ -38,13 +50,23 @@ const TicTacToeGame = () => {
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [questionIndex]);
+  }, [selectedQuestion]);
+
+  const shuffleArray = (arr) => {
+    return arr.sort(() => Math.random() - 0.5);
+  };
 
   const handleClick = (index) => {
-    if (board[index] || winner) return;
-    setQuestionIndex(index);
+    if (board[index] || winner || selectedQuestion) return;
+    const newQuestion = availableQuestions.pop();
+    setAvailableQuestions([...availableQuestions]);
+    setSelectedQuestion({ ...newQuestion, index });
+  };
+
+  const handleTimeout = () => {
+    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    setSelectedQuestion(null);
     setUserAnswer('');
-    setMessage('');
   };
 
   const checkWinner = (newBoard) => {
@@ -62,44 +84,56 @@ const TicTacToeGame = () => {
   };
 
   const submitAnswer = () => {
-    const correct = questions[questionIndex].answer;
-    if (userAnswer.trim() === correct) {
+    if (!selectedQuestion) return;
+    const isCorrect = userAnswer.trim() === selectedQuestion.answer;
+
+    if (isCorrect) {
       const newBoard = [...board];
-      newBoard[questionIndex] = currentPlayer;
+      newBoard[selectedQuestion.index] = currentPlayer;
       setBoard(newBoard);
       const result = checkWinner(newBoard);
       if (result) {
         setWinner(result);
-        setMessage(result === 'Draw' ? "It's a draw!" : `Player ${result} wins!`);
       } else {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
       }
     } else {
-      setMessage('❌ Wrong answer. Turn goes to the other player!');
-      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X'); // switch turn even if wrong
+      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
     }
-    setQuestionIndex(null); // hide question either way
-  };
-  
 
-  const skipTurn = () => {
-    setMessage('⏰ Time’s up! Switching turn.');
-    setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-    setQuestionIndex(null);
+    setAnswers(prev => ({
+      ...prev,
+      [currentPlayer]: [...prev[currentPlayer], { question: selectedQuestion.question, correctAnswer: selectedQuestion.answer, playerAnswer: userAnswer.trim() }]
+    }));
+
+    setSelectedQuestion(null);
+    setUserAnswer('');
   };
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
     setCurrentPlayer('X');
-    setQuestionIndex(null);
+    setAvailableQuestions(shuffleArray([...questionsBank]));
+    setSelectedQuestion(null);
     setUserAnswer('');
-    setMessage('');
     setWinner(null);
+    setAnswers({ X: [], O: [] });
+  };
+
+  const calculateAccuracy = (player) => {
+    const total = answers[player].length;
+    if (total === 0) return 0;
+    const correct = answers[player].filter(q => q.correctAnswer === q.playerAnswer).length;
+    return Math.round((correct / total) * 100);
   };
 
   return (
     <div className="p-6 min-h-screen bg-gray-100">
-      <h2 className="text-3xl font-bold text-center mb-6">Tic-Tac-Toe Math Game</h2>
+      <h2 className="text-3xl font-bold text-center mb-2">Tic-Tac-Toe Math Game</h2>
+      {!winner && (
+        <p className="text-center mb-4 text-xl font-semibold">{turnInfo}</p>
+      )}
+
       <div className="grid grid-cols-3 gap-4 w-64 mx-auto mb-6">
         {board.map((cell, i) => (
           <button
@@ -112,11 +146,11 @@ const TicTacToeGame = () => {
         ))}
       </div>
 
-      {questionIndex !== null && (
-        <div className="max-w-md mx-auto bg-white p-6 rounded shadow-lg text-center">
+      {selectedQuestion && (
+        <div className="max-w-md mx-auto bg-white p-6 rounded shadow-lg text-center mb-6">
           <p className="mb-2 font-semibold">Player {currentPlayer}, answer:</p>
-          <p className="text-xl font-bold mb-2">{questions[questionIndex].question}</p>
-          <p className="text-sm text-gray-600 mb-2">⏳ Time remaining: <span className="font-bold">{timer}s</span></p>
+          <p className="text-xl font-bold mb-2">{selectedQuestion.question}</p>
+          <p className="text-gray-600 text-sm mb-2">⏳ Time left: {timer}s</p>
           <input
             type="text"
             value={userAnswer}
@@ -132,15 +166,38 @@ const TicTacToeGame = () => {
         </div>
       )}
 
-      {message && <p className="text-center text-lg font-semibold text-red-600 mt-4">{message}</p>}
-
       {winner && (
-        <div className="text-center mt-6">
-          <p className="text-xl font-bold mb-2">
-            {winner === 'Draw' ? "It's a draw!" : `🎉 Player ${winner} wins!`}
-          </p>
+        <div className="text-center mt-8">
+          <h2 className="text-3xl font-bold mb-6">
+            {winner === 'Draw' ? "It's a draw!" : `🎉 Player ${winner} wins! 🎉`}
+          </h2>
+
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {['X', 'O'].map(player => (
+              <div key={player} className="bg-white p-6 rounded-xl shadow-xl">
+                <div className="text-xl font-bold mb-4 p-2 bg-gray-200 rounded-md text-center">
+                  Player {player}
+                </div>
+                <p className="text-green-600 text-lg font-semibold text-center mb-4">Accuracy: {calculateAccuracy(player)}%</p>
+                <div className="space-y-2">
+                  {answers[player].map((entry, idx) => (
+                    <div key={idx} className="p-3 rounded-lg shadow-md bg-gray-50">
+                      <p className="text-sm font-semibold">Q: {entry.question}</p>
+                      <p className={entry.correctAnswer === entry.playerAnswer ? "text-green-600" : "text-red-600"}>
+                        Your answer: {entry.playerAnswer || 'No Answer'}
+                        {entry.correctAnswer !== entry.playerAnswer && (
+                          <span className="text-green-600"> (Correct: {entry.correctAnswer})</span>
+                        )}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
           <button
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="mt-6 bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
             onClick={resetGame}
           >
             Play Again
