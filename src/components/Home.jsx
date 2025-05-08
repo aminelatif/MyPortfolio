@@ -5,6 +5,7 @@ import AboutMe from './AboutMe';
 import TicTacToeMath from './TicTacToeMath';
 import QuizGame from './QuizGame';
 import QuizCard from './QuizCard';
+import BrainSprintCard from './BrainSprintCard';
 
 const Home = () => (
   <div className='h-screen flex flex-col'>
@@ -16,6 +17,7 @@ const Home = () => (
         <div className='grid md:grid-cols-2 gap-6'>
           <TicTacToeMath />
           <QuizCard />
+          <BrainSprintCard />
         </div>
       </main>
     </div>

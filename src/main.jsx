@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Courses from './components/Courses';
 import TicTacToeGame from './components/TicTacToeGame';
 import QuizGame from './components/QuizGame';
+import BrainSprintGame from './components/BrainSprintGame';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -15,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/courses" element={<Courses />} />
         <Route path="/tic-tac-toe" element={<TicTacToeGame />} />
         <Route path="/quiz" element={<QuizGame />} />
+        <Route path="/brain-sprint" element={<BrainSprintGame />} />
       </Routes>
     </Router>
   </React.StrictMode>

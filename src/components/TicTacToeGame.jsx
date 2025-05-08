@@ -22,17 +22,11 @@ const TicTacToeGame = () => {
   const [userAnswer, setUserAnswer] = useState('');
   const [winner, setWinner] = useState(null);
   const [answers, setAnswers] = useState({ X: [], O: [] });
-  const [turnInfo, setTurnInfo] = useState('');
   const [timer, setTimer] = useState(45);
 
   useEffect(() => {
     setAvailableQuestions(shuffleArray([...questionsBank]));
-    setTurnInfo(`Player ${currentPlayer}'s turn`);
   }, []);
-
-  useEffect(() => {
-    setTurnInfo(`Player ${currentPlayer}'s turn`);
-  }, [currentPlayer]);
 
   useEffect(() => {
     let interval;
@@ -103,7 +97,11 @@ const TicTacToeGame = () => {
 
     setAnswers(prev => ({
       ...prev,
-      [currentPlayer]: [...prev[currentPlayer], { question: selectedQuestion.question, correctAnswer: selectedQuestion.answer, playerAnswer: userAnswer.trim() }]
+      [currentPlayer]: [...prev[currentPlayer], {
+        question: selectedQuestion.question,
+        correctAnswer: selectedQuestion.answer,
+        playerAnswer: userAnswer.trim()
+      }]
     }));
 
     setSelectedQuestion(null);
@@ -129,9 +127,10 @@ const TicTacToeGame = () => {
 
   return (
     <div className="p-6 min-h-screen bg-gray-100">
-      <h2 className="text-3xl font-bold text-center mb-2">Tic-Tac-Toe Math Game</h2>
+      <h2 className="text-3xl font-bold text-center mb-4">Tic-Tac-Toe Math Game</h2>
+      
       {!winner && (
-        <p className="text-center mb-4 text-xl font-semibold">{turnInfo}</p>
+        <p className="text-center mb-4 text-xl font-semibold">{currentPlayer} turn</p>
       )}
 
       <div className="grid grid-cols-3 gap-4 w-64 mx-auto mb-6">
@@ -148,7 +147,7 @@ const TicTacToeGame = () => {
 
       {selectedQuestion && (
         <div className="max-w-md mx-auto bg-white p-6 rounded shadow-lg text-center mb-6">
-          <p className="mb-2 font-semibold">Player {currentPlayer}, answer:</p>
+          <p className="mb-2 font-semibold">{currentPlayer}, answer:</p>
           <p className="text-xl font-bold mb-2">{selectedQuestion.question}</p>
           <p className="text-gray-600 text-sm mb-2">⏳ Time left: {timer}s</p>
           <input
@@ -166,6 +165,15 @@ const TicTacToeGame = () => {
         </div>
       )}
 
+      <div className="text-center mt-6">
+        <button
+          className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
+          onClick={resetGame}
+        >
+          Play Again
+        </button>
+      </div>
+
       {winner && (
         <div className="text-center mt-8">
           <h2 className="text-3xl font-bold mb-6">
@@ -178,7 +186,9 @@ const TicTacToeGame = () => {
                 <div className="text-xl font-bold mb-4 p-2 bg-gray-200 rounded-md text-center">
                   Player {player}
                 </div>
-                <p className="text-green-600 text-lg font-semibold text-center mb-4">Accuracy: {calculateAccuracy(player)}%</p>
+                <p className="text-green-600 text-lg font-semibold text-center mb-4">
+                  Accuracy: {calculateAccuracy(player)}%
+                </p>
                 <div className="space-y-2">
                   {answers[player].map((entry, idx) => (
                     <div key={idx} className="p-3 rounded-lg shadow-md bg-gray-50">
@@ -195,13 +205,6 @@ const TicTacToeGame = () => {
               </div>
             ))}
           </div>
-
-          <button
-            className="mt-6 bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
-            onClick={resetGame}
-          >
-            Play Again
-          </button>
         </div>
       )}
     </div>
