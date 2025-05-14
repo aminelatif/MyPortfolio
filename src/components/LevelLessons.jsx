@@ -74,44 +74,9 @@ const LevelLessons = () => {
   // If we have a level without tracks (TCS) and a lessonOrTrackId parameter, 
   // it's a lesson ID, so we should navigate to the lesson page
   if (!level.hasTracks && lessonOrTrackId) {
-    const lesson = getLesson(levelId, null, lessonOrTrackId);
-    
-    if (lesson) {
-      // This is a valid TCS lesson - render the lesson content
-      return (
-        <div className="min-h-screen flex flex-col bg-gray-50">
-          <Header />
-          <div className="flex-grow p-4 md:p-8">
-            <div className="max-w-6xl mx-auto">
-              <LessonContent level={level} lesson={lesson} levelId={levelId} lessonId={lessonOrTrackId} navigate={navigate} />
-            </div>
-          </div>
-          <Footer />
-        </div>
-      );
-    } else {
-      // Invalid lesson ID
-      return (
-        <div className="min-h-screen flex flex-col bg-gray-50">
-          <Header />
-          <div className="flex-grow p-4 md:p-8">
-            <div className="max-w-6xl mx-auto">
-              <div className="bg-white shadow-md rounded-lg p-6 md:p-8">
-                <h1 className="text-2xl font-bold mb-4 text-red-600">Cours non trouvé</h1>
-                <p className="text-gray-700 mb-6">Le cours demandé n'existe pas.</p>
-                <button 
-                  onClick={() => navigate(`/courses/${levelId}`)}
-                  className="btn btn-primary"
-                >
-                  Retour aux cours
-                </button>
-              </div>
-            </div>
-          </div>
-          <Footer />
-        </div>
-      );
-    }
+    // For TCS lessons, go to the lesson page with a "lessons" trackId
+    navigate(`/courses/${levelId}/lessons/${lessonOrTrackId}`);
+    return null;
   }
 
   // If the level has tracks but no track is selected, show track selection
@@ -264,7 +229,7 @@ const LevelLessons = () => {
                       <button 
                         onClick={() => navigate(level.hasTracks 
                           ? `/courses/${levelId}/${lessonOrTrackId}/${lesson.id}`
-                          : `/courses/${levelId}/${lesson.id}`)}
+                          : `/courses/${levelId}/lessons/${lesson.id}`)}
                         className="btn btn-primary w-full"
                       >
                         {progress > 0 && progress < 100 ? 'Continuer le cours' : (isComplete ? 'Revoir le cours' : 'Commencer le cours')}

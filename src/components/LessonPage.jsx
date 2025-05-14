@@ -39,11 +39,12 @@ const LessonPage = () => {
     actualTrackId = trackId;
     actualLessonId = lessonId;
   } else {
-    // For levels without tracks (tcs)
+    // For levels without tracks (tcs) or special "lessons" trackId
     actualTrackId = null;
-    actualLessonId = trackId; // In this case, trackId is actually lessonId
+    actualLessonId = lessonId; 
   }
   
+  // Get the lesson using the correct parameters
   const lesson = getLesson(levelId, actualTrackId, actualLessonId);
   const [activePart, setActivePart] = useState(lesson?.parts[0]?.id || null);
   const [showMobileMenu, setShowMobileMenu] = useState(false);

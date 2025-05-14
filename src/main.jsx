@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:levelId" element={<LevelLessons />} />
         <Route path="/courses/:levelId/:lessonOrTrackId" element={<LevelLessons />} />
+        {/* Unified route for both tcs and levels with tracks */}
         <Route path="/courses/:levelId/:trackId/:lessonId" element={<LessonPage />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         
