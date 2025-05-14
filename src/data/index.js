@@ -16,7 +16,18 @@ import statistiques from './tcs/math/statistiques';
 
 // Import 1BAC lessons
 // Sciences Expérimentales et Technologies
-import limites1BacSET from './1bac/sciences_experimentales_et_technologies/math/limites';
+import limitesSET from './1bac/sciences_experimentales_et_technologies/math/limites';
+import barycentreSET from './1bac/sciences_experimentales_et_technologies/math/barycentre';
+import notionLogiqueSET from './1bac/sciences_experimentales_et_technologies/math/notion-logique';
+import generalitesFonctionsSET from './1bac/sciences_experimentales_et_technologies/math/generalites-fonctions';
+import calculTrigonometriqueSET from './1bac/sciences_experimentales_et_technologies/math/calcul-trigonometrique';
+import produitScalaireSET from './1bac/sciences_experimentales_et_technologies/math/produit-scalaire';
+import rotationSET from './1bac/sciences_experimentales_et_technologies/math/rotation';
+import suitesNumeriquesSET from './1bac/sciences_experimentales_et_technologies/math/suites-numeriques';
+import derivationSET from './1bac/sciences_experimentales_et_technologies/math/derivation';
+import vecteursEspaceSET from './1bac/sciences_experimentales_et_technologies/math/vecteurs-espace';
+import representationGraphiqueSET from './1bac/sciences_experimentales_et_technologies/math/representation-graphique-fonction';
+import etudeAnalytiqueEspaceSET from './1bac/sciences_experimentales_et_technologies/math/etude-analytique-espace';
 
 // Science Mathématiques
 import logiqueRaisonnement from './1bac/science_mathematiques/math/logique-raisonnement';
@@ -37,14 +48,24 @@ import vecteursEspace from './1bac/science_mathematiques/math/vecteurs-espace';
 import espaceAnalytique from './1bac/science_mathematiques/math/espace-analytique';
 import produitVectoriel from './1bac/science_mathematiques/math/produit-vectoriel';
 
-// Import other 1BAC tracks when available
-// import limites1BacSEG from './1bac/sciences_economiques_et_gestion/math/limites';
+// Sciences Économiques et Gestion
+import notionLogiqueSEG from './1bac/sciences_economiques_et_gestion/math/notion-logique';
+import equationsInequationsSEG from './1bac/sciences_economiques_et_gestion/math/equations-inequations';
+import generalitesFonctionsSEG from './1bac/sciences_economiques_et_gestion/math/generalites-fonctions';
+import suitesNumeriquesSEG from './1bac/sciences_economiques_et_gestion/math/suites-numeriques';
+import denombrementSEG from './1bac/sciences_economiques_et_gestion/math/denombrement';
+import matricesSEG from './1bac/sciences_economiques_et_gestion/math/matrices';
+import logarithmeDecimalSEG from './1bac/sciences_economiques_et_gestion/math/logarithme-decimal';
+import limitesFonctionsSEG from './1bac/sciences_economiques_et_gestion/math/limites-fonctions';
+import derivationSEG from './1bac/sciences_economiques_et_gestion/math/derivation';
+import fonctionsNumeriquesSEG from './1bac/sciences_economiques_et_gestion/math/fonctions-numeriques';
 
 // Import 2BAC lessons
 // Sciences Expérimentales et Technologies
 import integration2BacSET from './2bac/sciences_experimentales_et_technologies/math/integration';
-// Import other 2BAC tracks when available
-// import integration2BacEco from './2bac/economie/math/integration';
+
+// Économie
+import probabilites2BacEco from './2bac/economie/math/probabilites';
 
 // Define tracks for each level
 export const tracks = {
@@ -110,7 +131,20 @@ export const levels = {
     hasTracks: true,
     tracks: {
       sciences_experimentales_et_technologies: {
-        lessons: [limites1BacSET]
+        lessons: [
+          notionLogiqueSET,
+          generalitesFonctionsSET,
+          suitesNumeriquesSET,
+          barycentreSET,
+          produitScalaireSET,
+          calculTrigonometriqueSET,
+          rotationSET,
+          limitesSET,
+          derivationSET,
+          vecteursEspaceSET,
+          representationGraphiqueSET,
+          etudeAnalytiqueEspaceSET
+        ]
       },
       science_mathematiques: {
         lessons: [
@@ -134,7 +168,18 @@ export const levels = {
         ]
       },
       sciences_economiques_et_gestion: {
-        lessons: []
+        lessons: [
+          notionLogiqueSEG,
+          equationsInequationsSEG,
+          generalitesFonctionsSEG,
+          suitesNumeriquesSEG,
+          denombrementSEG,
+          matricesSEG,
+          logarithmeDecimalSEG,
+          limitesFonctionsSEG,
+          derivationSEG,
+          fonctionsNumeriquesSEG
+        ]
       }
     }
   },
@@ -148,7 +193,7 @@ export const levels = {
         lessons: [integration2BacSET]
       },
       economie: {
-        lessons: []
+        lessons: [probabilites2BacEco]
       }
     }
   }
