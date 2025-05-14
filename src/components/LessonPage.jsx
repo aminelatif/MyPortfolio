@@ -52,13 +52,17 @@ const LessonPage = () => {
   // Get the lesson using the correct parameters
   const lesson = getLesson(levelId, actualTrackId, actualLessonId);
   console.log("Fetched lesson:", lesson?.title || "Not found");
-  const [activePart, setActivePart] = useState(lesson?.parts[0]?.id || null);
+  
+  // Initialize state to show lesson overview first (parts list)
+  const [showLessonOverview, setShowLessonOverview] = useState(true);
+  const [activePart, setActivePart] = useState(null);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   // Listen for the custom event to change parts
   useEffect(() => {
     const handlePartChange = (event) => {
       setActivePart(event.detail.partId);
+      setShowLessonOverview(false);
     };
 
     document.addEventListener('changePart', handlePartChange);
