@@ -97,16 +97,27 @@ const LessonPage = () => {
   }
 
   const handlePartClick = (partId) => {
+    console.log("Part clicked:", partId);
     setActivePart(partId);
+    setShowLessonOverview(false);
     setShowMobileMenu(false);
   };
 
-  const activeLessonPart = lesson.parts.find(part => part.id === activePart);
-  const activePartTitle = activeLessonPart?.title || "";
-
   const handleShowAllParts = () => {
-    setShowLessonOverview(false);
+    console.log("Show all parts clicked");
+    setActivePart(null);
+    setShowLessonOverview(true);
   };
+
+  // Make sure activeLessonPart is properly defined
+  const activeLessonPart = activePart ? lesson.parts.find(part => part.id === activePart) : null;
+
+  // Debug info
+  console.log("Current state:", { 
+    showLessonOverview, 
+    activePart, 
+    activeLessonPartTitle: activeLessonPart?.title 
+  });
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -115,7 +126,7 @@ const LessonPage = () => {
         <div className="max-w-6xl mx-auto">
           <button 
             onClick={() => navigate(level.hasTracks 
-              ? `/courses/${levelId}/${actualTrackId}` 
+              ? `/courses/${levelId}/${trackId}` 
               : `/courses/${levelId}`)}
             className="mb-4 inline-block text-blue-500 hover:underline border-0 bg-transparent"
           >
@@ -131,8 +142,8 @@ const LessonPage = () => {
                   {lesson.parts.map((part, index) => (
                     <div 
                       key={part.id}
-                      className="lesson-card p-4 md:p-5 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md cursor-pointer transition-all"
                       onClick={() => handlePartClick(part.id)}
+                      className="lesson-card p-4 md:p-5 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md cursor-pointer transition-all"
                     >
                       <div className="flex items-center">
                         <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 font-semibold">
@@ -163,7 +174,7 @@ const LessonPage = () => {
                   onClick={() => setShowMobileMenu(!showMobileMenu)}
                   className="flex items-center justify-between w-full p-3 bg-blue-50 text-blue-700 rounded-lg text-left shadow-sm border border-blue-100"
                 >
-                  <span className="font-medium">{activeLessonPart.title}</span>
+                  <span className="font-medium">{activeLessonPart?.title || "Sélectionner une partie"}</span>
                   <span>{showMobileMenu ? '▲' : '▼'}</span>
                 </button>
                 
