@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TicTacToeGame from './TicTacToeGame';
 import QuizGame from './QuizGame';
 import BrainSprintGame from './BrainSprintGame';
+import { getLesson } from '../data';
 
-const PartPage = ({ part }) => {
+const PartPage = ({ part, allParts }) => {
   const { levelId, trackId, lessonId } = useParams();
   const [activeTab, setActiveTab] = useState('definition');
   const [isCompleted, setIsCompleted] = useState(false);
   const [progress, setProgress] = useState(0);
+  const navigate = useNavigate();
+
+  // Get the current lesson and parts
+  const lesson = getLesson(levelId, trackId, lessonId);
+  const parts = lesson?.parts || [];
+  
+  // Find the current part's index to determine next part
+  const currentPartIndex = parts.findIndex(p => p.id === part.id);
+  const nextPart = currentPartIndex < parts.length - 1 ? parts[currentPartIndex + 1] : null;
 
   // Generate a unique key for this part in localStorage
   const getProgressKey = () => {
@@ -70,6 +80,16 @@ const PartPage = ({ part }) => {
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
     updateProgress(tabName);
+  };
+
+  // Navigate to the next part
+  const goToNextPart = () => {
+    if (nextPart) {
+      // Update the URL without reloading the page
+      const targetPartId = nextPart.id;
+      const event = new CustomEvent('changePart', { detail: { partId: targetPartId } });
+      document.dispatchEvent(event);
+    }
   };
 
   if (!part) {
@@ -216,6 +236,49 @@ const PartPage = ({ part }) => {
             <span>Partie complétée!</span>
           </div>
         )}
+
+        {/* Parts Navigation and Next Part Button */}
+        <div className="mt-8 border-t pt-4">
+          <div className="flex flex-col space-y-4">
+            {/* Parts list */}
+            <div>
+              <h3 className="text-lg font-semibold mb-3">Parties de cette leçon</h3>
+              <div className="flex flex-wrap gap-2">
+                {parts.map((lessonPart, index) => (
+                  <button
+                    key={lessonPart.id}
+                    onClick={() => {
+                      const event = new CustomEvent('changePart', { detail: { partId: lessonPart.id } });
+                      document.dispatchEvent(event);
+                    }}
+                    className={`px-3 py-2 rounded text-sm ${
+                      lessonPart.id === part.id
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                    }`}
+                  >
+                    {index + 1}. {lessonPart.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Next Part button */}
+            {nextPart && (
+              <div className="flex justify-end">
+                <button
+                  onClick={goToNextPart}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded flex items-center"
+                >
+                  Partie suivante
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

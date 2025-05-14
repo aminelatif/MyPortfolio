@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getLesson, levels } from '../data';
 import Header from './Header';
@@ -47,6 +47,20 @@ const LessonPage = () => {
   const lesson = getLesson(levelId, actualTrackId, actualLessonId);
   const [activePart, setActivePart] = useState(lesson?.parts[0]?.id || null);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  // Listen for the custom event to change parts
+  useEffect(() => {
+    const handlePartChange = (event) => {
+      setActivePart(event.detail.partId);
+    };
+
+    document.addEventListener('changePart', handlePartChange);
+    
+    // Cleanup
+    return () => {
+      document.removeEventListener('changePart', handlePartChange);
+    };
+  }, []);
 
   if (!lesson) {
     return (
