@@ -104,6 +104,10 @@ const LessonPage = () => {
   const activeLessonPart = lesson.parts.find(part => part.id === activePart);
   const activePartTitle = activeLessonPart?.title || "";
 
+  const handleShowAllParts = () => {
+    setShowLessonOverview(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -119,69 +123,132 @@ const LessonPage = () => {
           </button>
           <h1 className="text-2xl md:text-3xl font-bold mb-6">{lesson.title}</h1>
 
-          {/* Mobile part selector */}
-          <div className="md:hidden mb-6">
-            <button 
-              onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="flex items-center justify-between w-full p-3 bg-gray-100 rounded-lg text-left"
-            >
-              <span className="font-medium">{activePartTitle}</span>
-              <span>{showMobileMenu ? '▲' : '▼'}</span>
-            </button>
-            
-            {showMobileMenu && (
-              <div className="mt-2 bg-white border rounded-lg shadow-lg overflow-hidden">
-                <ul>
-                  {lesson.parts.map(part => (
-                    <li key={part.id}>
-                      <button
-                        onClick={() => handlePartClick(part.id)}
-                        className={`w-full text-left px-4 py-3 border-b ${
-                          activePart === part.id
-                            ? 'bg-blue-50 text-blue-700 font-medium'
-                            : 'hover:bg-gray-50'
-                        }`}
-                      >
-                        {part.title}
-                      </button>
-                    </li>
+          {showLessonOverview ? (
+            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+              <div className="p-6 md:p-8">
+                <h2 className="text-xl font-semibold mb-4 md:mb-6">Contenu du cours</h2>
+                <div className="space-y-4">
+                  {lesson.parts.map((part, index) => (
+                    <div 
+                      key={part.id}
+                      className="lesson-card p-4 md:p-5 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md cursor-pointer transition-all"
+                      onClick={() => handlePartClick(part.id)}
+                    >
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 font-semibold">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-medium text-gray-800">{part.title}</h3>
+                          <p className="text-sm text-gray-500 mt-1">
+                            Cliquez pour voir les détails de cette partie
+                          </p>
+                        </div>
+                        <div className="text-blue-500 ml-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
-            )}
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-            {/* Desktop sidebar with parts - hidden on mobile */}
-            <div className="hidden md:block md:w-1/4">
-              <div className="bg-gray-100 p-4 rounded-lg sticky top-4">
-                <h2 className="text-lg font-semibold mb-4">Parties du cours</h2>
-                <nav>
-                  <ul className="space-y-2">
-                    {lesson.parts.map(part => (
-                      <li key={part.id}>
+            </div>
+          ) : (
+            <div>
+              {/* Mobile part selector - improved styling */}
+              <div className="md:hidden mb-6">
+                <button 
+                  onClick={() => setShowMobileMenu(!showMobileMenu)}
+                  className="flex items-center justify-between w-full p-3 bg-blue-50 text-blue-700 rounded-lg text-left shadow-sm border border-blue-100"
+                >
+                  <span className="font-medium">{activeLessonPart.title}</span>
+                  <span>{showMobileMenu ? '▲' : '▼'}</span>
+                </button>
+                
+                {showMobileMenu && (
+                  <div className="mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                    <ul>
+                      <li>
                         <button
-                          onClick={() => handlePartClick(part.id)}
-                          className={`w-full text-left px-3 py-2 rounded ${
-                            activePart === part.id
-                              ? 'bg-blue-500 text-white'
-                              : 'hover:bg-gray-200'
-                          }`}
+                          onClick={handleShowAllParts}
+                          className="w-full text-left px-4 py-3 border-b font-medium text-blue-600 bg-blue-50 hover:bg-blue-100"
                         >
-                          {part.title}
+                          Voir toutes les parties
                         </button>
                       </li>
-                    ))}
-                  </ul>
-                </nav>
+                      {lesson.parts.map((part, index) => (
+                        <li key={part.id}>
+                          <button
+                            onClick={() => handlePartClick(part.id)}
+                            className={`w-full text-left px-4 py-3 border-b flex items-center ${
+                              activePart === part.id
+                                ? 'bg-blue-50 text-blue-700 font-medium'
+                                : 'hover:bg-gray-50'
+                            }`}
+                          >
+                            <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 text-sm font-semibold">
+                              {index + 1}
+                            </span>
+                            {part.title}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+                {/* Desktop sidebar with parts - hidden on mobile */}
+                <div className="hidden md:block md:w-1/4">
+                  <div className="bg-white p-4 rounded-lg sticky top-4 shadow-md border border-gray-200">
+                    <button
+                      onClick={handleShowAllParts}
+                      className="w-full text-left px-3 py-2 mb-4 rounded bg-blue-100 text-blue-700 font-medium hover:bg-blue-200 flex items-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                      </svg>
+                      Voir toutes les parties
+                    </button>
+                    <h2 className="text-lg font-semibold mb-4 pb-2 border-b">Parties du cours</h2>
+                    <nav>
+                      <ul className="space-y-2">
+                        {lesson.parts.map((part, index) => (
+                          <li key={part.id}>
+                            <button
+                              onClick={() => handlePartClick(part.id)}
+                              className={`w-full text-left px-3 py-2 rounded flex items-center ${
+                                activePart === part.id
+                                  ? 'bg-blue-500 text-white'
+                                  : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              <span className={`w-6 h-6 rounded-full flex items-center justify-center mr-2 text-sm font-semibold ${
+                                activePart === part.id
+                                  ? 'bg-white text-blue-600'
+                                  : 'bg-blue-100 text-blue-600'
+                              }`}>
+                                {index + 1}
+                              </span>
+                              <span className="line-clamp-2">{part.title}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+
+                {/* Main content */}
+                <div className="md:w-3/4">
+                  {activeLessonPart && <PartPage part={activeLessonPart} allParts={lesson.parts} />}
+                </div>
               </div>
             </div>
-
-            {/* Main content */}
-            <div className="md:w-3/4">
-              {activeLessonPart && <PartPage part={activeLessonPart} />}
-            </div>
-          </div>
+          )}
         </div>
       </div>
       <Footer />
