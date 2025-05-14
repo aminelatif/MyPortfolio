@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const questionsPool = [
+// Default questions if none are provided via props
+const defaultQuestions = [
   { question: '5 + 3', answer: '8' },
   { question: '12 / 4', answer: '3' },
   { question: '7 - 2', answer: '5' },
@@ -14,7 +15,10 @@ const questionsPool = [
   { question: '2\u00B3', answer: '8' },
 ];
 
-const MathBlitzGame = () => {
+const BrainSprintGame = ({ questions: propQuestions }) => {
+  // Use provided questions or default ones
+  const questionsPool = propQuestions || defaultQuestions;
+  
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
@@ -79,18 +83,18 @@ const MathBlitzGame = () => {
   ));
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
+    <div className="p-6 bg-gray-100 rounded-lg">
       {timeLeft === null && (
-        <div className="text-center mt-12">
-          <h2 className="text-3xl font-bold mb-6">Start Math Blitz!</h2>
+        <div className="text-center mt-4">
+          <h2 className="text-2xl font-bold mb-4">Start Math Blitz!</h2>
           <p className="mb-4">Choose your challenge time:</p>
-          {[3, 5, 10].map(min => (
+          {[1, 2, 3].map(min => (
             <button
               key={min}
               onClick={() => startGame(min)}
-              className="m-2 px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700"
+              className="m-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
             >
-              {min} Minutes
+              {min} {min === 1 ? 'Minute' : 'Minutes'}
             </button>
           ))}
         </div>
@@ -126,12 +130,12 @@ const MathBlitzGame = () => {
       )}
 
       {showResults && (
-        <div className="mt-8">
-          <h2 className="text-3xl font-bold text-center mb-6">Game Over</h2>
+        <div className="mt-4">
+          <h2 className="text-2xl font-bold text-center mb-4">Game Over</h2>
           <p className="text-center text-xl mb-4">Score: {score}</p>
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-80 overflow-y-auto">
             {history.map((entry, idx) => (
-              <div key={idx} className="p-4 rounded shadow bg-gray-100">
+              <div key={idx} className="p-4 rounded shadow bg-gray-50">
                 <p className="font-semibold">Q: {entry.question}</p>
                 <p className={entry.correct ? 'text-green-600' : 'text-red-600'}>
                   Your answer: {entry.playerAnswer}
@@ -159,4 +163,4 @@ const MathBlitzGame = () => {
   );
 };
 
-export default MathBlitzGame;
+export default BrainSprintGame;

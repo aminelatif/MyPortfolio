@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 
-const questions = [
+// Default questions if none are provided via props
+const defaultQuestions = [
   {
     question: 'What is 6 + 2?',
     options: ['7', '8', '9'],
@@ -54,43 +54,91 @@ const questions = [
   },
 ];
 
-const QuizGame = () => {
+const QuizGame = ({ questions: propQuestions }) => {
+  // If propQuestions are provided and in the format { question, answer }
+  // transform them to the required format for the QuizGame
+  const processedQuestions = propQuestions 
+    ? propQuestions.map(q => {
+        // Check if the question is already in the correct format
+        if (q.options && q.correct) {
+          return q;
+        }
+        
+        // Convert from { question, answer } format to { question, options, correct }
+        // Create fake options including the correct answer
+        const correctAnswer = q.answer;
+        const fakeOptions = generateFakeOptions(correctAnswer);
+        return {
+          question: q.question,
+          options: fakeOptions,
+          correct: correctAnswer
+        };
+      })
+    : defaultQuestions;
+
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
 
+  // Helper function to generate fake options
+  function generateFakeOptions(correctAnswer) {
+    // The correct answer should be one of the options
+    let options = [correctAnswer];
+    
+    // Generate 2 different fake options based on the type of answer
+    if (!isNaN(correctAnswer)) {
+      // If answer is a number, generate fake numbers close to it
+      const num = parseInt(correctAnswer);
+      options.push(String(num + 1));
+      options.push(String(num - 1 || num + 2)); // Ensure we don't get negative numbers
+    } else {
+      // For text answers, use generic alternatives
+      options.push("Option B");
+      options.push("Option C");
+    }
+    
+    // Shuffle the options
+    return options.sort(() => Math.random() - 0.5);
+  }
+
   const handleAnswer = (option) => {
-    const isCorrect = option === questions[current].correct;
+    const isCorrect = option === processedQuestions[current].correct;
     setAnswers([...answers, { 
-      question: questions[current].question,
+      question: processedQuestions[current].question,
       selected: option,
-      correct: questions[current].correct,
+      correct: processedQuestions[current].correct,
       isCorrect 
     }]);
 
-    if (current + 1 === questions.length) {
+    if (current + 1 === processedQuestions.length) {
       setShowResults(true);
     } else {
       setCurrent(current + 1);
     }
   };
 
-  const accuracy = Math.round(
-    (answers.filter((a) => a.isCorrect).length / questions.length) * 100
-  );
+  const handleReset = () => {
+    setCurrent(0);
+    setAnswers([]);
+    setShowResults(false);
+  };
+
+  const accuracy = answers.length > 0 
+    ? Math.round((answers.filter((a) => a.isCorrect).length / processedQuestions.length) * 100)
+    : 0;
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
-      <h2 className="text-3xl font-bold text-center mb-6">Math Quiz Game</h2>
+    <div className="bg-gray-100 p-6 rounded-lg">
+      <h2 className="text-2xl font-bold text-center mb-6">Quiz</h2>
 
       {!showResults ? (
-        <div className="max-w-xl mx-auto bg-white p-6 rounded shadow">
+        <div className="bg-white p-6 rounded shadow">
           <h3 className="text-lg font-semibold mb-4">
-            Question {current + 1} of {questions.length}
+            Question {current + 1} of {processedQuestions.length}
           </h3>
-          <p className="mb-4">{questions[current].question}</p>
+          <p className="mb-4">{processedQuestions[current].question}</p>
           <div className="grid gap-3">
-            {questions[current].options.map((option) => (
+            {processedQuestions[current].options.map((option) => (
               <button
                 key={option}
                 onClick={() => handleAnswer(option)}
@@ -102,11 +150,11 @@ const QuizGame = () => {
           </div>
         </div>
       ) : (
-        <div className="max-w-2xl mx-auto bg-white p-6 rounded shadow">
+        <div className="bg-white p-6 rounded shadow">
           <h3 className="text-2xl font-semibold mb-4">✅ Results</h3>
           <p className="text-lg mb-4">Accuracy: <strong>{accuracy}%</strong></p>
 
-          <div className="space-y-4">
+          <div className="space-y-4 max-h-96 overflow-y-auto">
             {answers.map((entry, index) => (
               <div key={index} className="p-3 border rounded bg-gray-50">
                 <p className="font-semibold">{entry.question}</p>
@@ -119,6 +167,13 @@ const QuizGame = () => {
               </div>
             ))}
           </div>
+          
+          <button 
+            onClick={handleReset}
+            className="mt-6 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Play Again
+          </button>
         </div>
       )}
     </div>

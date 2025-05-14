@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const questionsBank = [
+// Default questions if none are provided via props
+const defaultQuestions = [
   { question: '5 + 3', answer: '8' },
   { question: '12 / 4', answer: '3' },
   { question: '7 - 2', answer: '5' },
@@ -14,7 +15,10 @@ const questionsBank = [
   { question: '2\u00B3', answer: '8' },
 ];
 
-const TicTacToeGame = () => {
+const TicTacToeGame = ({ questions: propQuestions }) => {
+  // Use provided questions or default ones
+  const questionsBank = propQuestions || defaultQuestions;
+  
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [availableQuestions, setAvailableQuestions] = useState([]);
@@ -26,7 +30,7 @@ const TicTacToeGame = () => {
 
   useEffect(() => {
     setAvailableQuestions(shuffleArray([...questionsBank]));
-  }, []);
+  }, [questionsBank]);
 
   useEffect(() => {
     let interval;
@@ -126,8 +130,8 @@ const TicTacToeGame = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
-      <h2 className="text-3xl font-bold text-center mb-4">Tic-Tac-Toe Math Game</h2>
+    <div className="bg-gray-100 p-6 rounded-lg">
+      <h2 className="text-2xl font-bold text-center mb-4">Tic-Tac-Toe Math Game</h2>
       
       {!winner && (
         <p className="text-center mb-4 text-xl font-semibold">{currentPlayer} turn</p>
