@@ -11,6 +11,9 @@ import QuizGame from './components/QuizGame';
 import BrainSprintGame from './components/BrainSprintGame';
 import UserDashboard from './components/UserDashboard';
 
+// Debug router paths
+console.log("Setting up routes");
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
@@ -18,8 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<Home />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:levelId" element={<LevelLessons />} />
+        {/* For both tracks (filières) in 1bac and direct lessons in tcs */}
         <Route path="/courses/:levelId/:lessonOrTrackId" element={<LevelLessons />} />
-        {/* Unified route for both tcs and levels with tracks */}
+        {/* For lessons within a track or with special "lessons" trackId for tcs */}
         <Route path="/courses/:levelId/:trackId/:lessonId" element={<LessonPage />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         

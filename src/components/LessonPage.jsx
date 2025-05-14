@@ -10,6 +10,9 @@ const LessonPage = () => {
   const navigate = useNavigate();
   const level = levels[levelId];
   
+  // Debug routing parameters
+  console.log("LessonPage params:", { levelId, trackId, lessonId });
+  
   if (!level) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -38,14 +41,17 @@ const LessonPage = () => {
     // For levels with tracks (1bac, 2bac)
     actualTrackId = trackId;
     actualLessonId = lessonId;
+    console.log("Level has tracks, using trackId:", trackId);
   } else {
     // For levels without tracks (tcs) or special "lessons" trackId
     actualTrackId = null;
     actualLessonId = lessonId; 
+    console.log("Level has no tracks, using null trackId");
   }
   
   // Get the lesson using the correct parameters
   const lesson = getLesson(levelId, actualTrackId, actualLessonId);
+  console.log("Fetched lesson:", lesson?.title || "Not found");
   const [activePart, setActivePart] = useState(lesson?.parts[0]?.id || null);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 

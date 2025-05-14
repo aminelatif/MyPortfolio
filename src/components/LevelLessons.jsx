@@ -48,6 +48,9 @@ const LevelLessons = () => {
     navigate('/courses');
   };
 
+  // Debug the current parameters
+  console.log("Current params:", { levelId, lessonOrTrackId, level });
+
   if (!level) {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
@@ -83,6 +86,9 @@ const LevelLessons = () => {
   if (level.hasTracks && !lessonOrTrackId) {
     const levelTracks = tracks[levelId] || [];
     
+    // Debug the tracks
+    console.log("Available tracks:", levelTracks);
+
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Header />
