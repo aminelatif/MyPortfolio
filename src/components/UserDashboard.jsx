@@ -2,129 +2,254 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './footer';
-import { levels, tracks } from '../data';
+import { levels, tracks, getLesson } from '../data';
 
 const UserDashboard = () => {
   const [userProgress, setUserProgress] = useState({});
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [completedLessons, setCompletedLessons] = useState([]);
   const [overallProgress, setOverallProgress] = useState(0);
+  const [error, setError] = useState(null);
   
   // Load progress data from localStorage
   useEffect(() => {
-    // Get all localStorage items related to progress
-    const progressEntries = {};
-    const viewedItems = [];
-    const completed = [];
-    
-    // Total number of parts across all lessons for progress calculation
-    let totalParts = 0;
-    let completedParts = 0;
-    
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      
-      if (key && key.startsWith('math_progress_')) {
-        try {
-          const progressData = JSON.parse(localStorage.getItem(key));
-          progressEntries[key] = progressData;
-          
-          // Parse the key to get level, track, lesson and part info
-          const [_, __, levelId, trackId, lessonId, partId] = key.split('_');
-          
-          // Add to recently viewed if it has a lastVisited timestamp
-          if (progressData.lastVisited) {
-            viewedItems.push({
-              key,
-              levelId,
-              trackId: trackId === 'notrack' ? null : trackId,
-              lessonId,
-              partId,
-              progress: progressData.progress,
-              lastVisited: new Date(progressData.lastVisited)
-            });
+    const loadProgress = () => {
+      try {
+        // Get all localStorage items related to progress
+        const progressEntries = {};
+        const viewedItems = [];
+        const completed = [];
+        const seenLessons = new Set();
+
+        // For unified progress calculation
+        let totalSteps = 0;
+        let completedSteps = 0;
+        const lessonStepMap = {}; // { lessonKey: { total, completed } }
+
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('math_progress_')) {
+            try {
+              const progressData = JSON.parse(localStorage.getItem(key));
+              const [_, __, levelId, trackId, lessonId, partId] = key.split('_');
+              const lessonKey = `${levelId}_${trackId}_${lessonId}`;
+
+              // Validate if the lesson exists in our data structure
+              const lesson = getLesson(levelId, trackId === 'notrack' ? null : trackId, lessonId);
+              if (!lesson) {
+                localStorage.removeItem(key);
+                continue;
+              }
+
+              progressEntries[key] = progressData;
+
+              // Calculate steps for this part
+              const part = lesson.parts.find(p => p.id === partId);
+              if (part) {
+                let partSteps = ['cours', 'quiz'];
+                if (part.exercises && part.exercises.length > 0) {
+                  partSteps.push('exercises');
+                }
+                if (!lessonStepMap[lessonKey]) {
+                  lessonStepMap[lessonKey] = { total: 0, completed: 0, lesson, levelId, trackId, lessonId };
+                }
+                lessonStepMap[lessonKey].total += partSteps.length;
+                totalSteps += partSteps.length;
+                if (progressData.completedSteps) {
+                  lessonStepMap[lessonKey].completed += progressData.completedSteps.length;
+                  completedSteps += progressData.completedSteps.length;
+                }
+              }
+
+              // Add to recently viewed if it has a lastVisited timestamp
+              if (progressData.lastVisited) {
+                if (!seenLessons.has(lessonKey)) {
+                  viewedItems.push({
+                    key,
+                    levelId,
+                    trackId: trackId === 'notrack' ? null : trackId,
+                    lessonId,
+                    partId,
+                    progress: progressData.progress,
+                    lastVisited: new Date(progressData.lastVisited),
+                    lessonTitle: lesson.title
+                  });
+                  seenLessons.add(lessonKey);
+                }
+              }
+            } catch (e) {
+              console.error('Error parsing progress data:', e);
+              localStorage.removeItem(key);
+            }
           }
-          
-          // Track completed lessons
-          if (progressData.isCompleted) {
-            if (!completed.some(item => 
-              item.levelId === levelId && 
-              item.trackId === trackId && 
-              item.lessonId === lessonId
-            )) {
+        }
+
+        // Mark lessons as completed only if all parts are completed
+        Object.entries(lessonStepMap).forEach(([lessonKey, data]) => {
+          const lesson = getLesson(data.levelId, data.trackId === 'notrack' ? null : data.trackId, data.lessonId);
+          if (!lesson) return;
+
+          // Check if all parts are completed
+          const allPartsCompleted = lesson.parts.every(part => {
+            const partKey = `math_progress_${data.levelId}_${data.trackId}_${data.lessonId}_${part.id}`;
+            const partProgress = progressEntries[partKey];
+            return partProgress && partProgress.isCompleted;
+          });
+
+          if (allPartsCompleted) {
+            if (!completed.some(item => item.levelId === data.levelId && item.trackId === data.trackId && item.lessonId === data.lessonId)) {
               completed.push({
-                levelId,
-                trackId: trackId === 'notrack' ? null : trackId,
-                lessonId
+                levelId: data.levelId,
+                trackId: data.trackId === 'notrack' ? null : data.trackId,
+                lessonId: data.lessonId,
+                lessonTitle: data.lesson.title
               });
             }
-            
-            completedParts++;
           }
-          
-          totalParts++;
-        } catch (e) {
-          console.error('Error parsing progress data:', e);
-        }
+        });
+
+        // Sort recently viewed by date (most recent first)
+        const sortedRecentItems = viewedItems
+          .sort((a, b) => b.lastVisited - a.lastVisited)
+          .slice(0, 5);
+
+        setUserProgress(progressEntries);
+        setRecentlyViewed(sortedRecentItems);
+        setCompletedLessons(completed);
+
+        // Calculate overall progress
+        const progressPercentage = totalSteps > 0
+          ? Math.round((completedSteps / totalSteps) * 100)
+          : 0;
+        setOverallProgress(progressPercentage);
+      } catch (e) {
+        console.error('Error loading progress:', e);
+        setError('Une erreur est survenue lors du chargement de vos progrès.');
       }
-    }
-    
-    // Sort recently viewed by date (most recent first)
-    const sortedRecentItems = viewedItems
-      .sort((a, b) => b.lastVisited - a.lastVisited)
-      .slice(0, 5); // Only keep the 5 most recent items
-    
-    setUserProgress(progressEntries);
-    setRecentlyViewed(sortedRecentItems);
-    setCompletedLessons(completed);
-    
-    // Calculate overall progress
-    const progressPercentage = totalParts > 0 
-      ? Math.round((completedParts / totalParts) * 100) 
-      : 0;
-    setOverallProgress(progressPercentage);
+    };
+
+    loadProgress();
+
+    // Listen for lesson progress updates
+    const handleProgressUpdate = () => {
+      loadProgress();
+    };
+    document.addEventListener('lessonProgressUpdate', handleProgressUpdate);
+    window.addEventListener('focus', loadProgress);
+    return () => {
+      document.removeEventListener('lessonProgressUpdate', handleProgressUpdate);
+      window.removeEventListener('focus', loadProgress);
+    };
   }, []);
   
   // Helper function to get lesson title
   const getLessonInfo = (levelId, trackId, lessonId) => {
-    const level = levels[levelId];
-    if (!level) return { levelTitle: 'Unknown Level', lessonTitle: 'Unknown Lesson' };
-    
-    const levelTitle = level.title;
-    let lessonTitle = 'Unknown Lesson';
-    let trackTitle = '';
-    
-    if (level.hasTracks && trackId) {
-      const trackInfo = tracks[levelId]?.find(t => t.id === trackId);
-      trackTitle = trackInfo?.title || '';
+    try {
+      const level = levels[levelId];
+      if (!level) return { levelTitle: 'Unknown Level', lessonTitle: 'Unknown Lesson' };
       
-      const lesson = level.tracks[trackId]?.lessons.find(l => l.id === lessonId);
-      if (lesson) lessonTitle = lesson.title;
-    } else {
-      const lesson = level.lessons.find(l => l.id === lessonId);
-      if (lesson) lessonTitle = lesson.title;
+      const levelTitle = level.title;
+      let lessonTitle = 'Unknown Lesson';
+      let trackTitle = '';
+      
+      if (level.hasTracks && trackId) {
+        const trackInfo = tracks[levelId]?.find(t => t.id === trackId);
+        trackTitle = trackInfo?.title || '';
+        
+        const lesson = level.tracks[trackId]?.lessons.find(l => l.id === lessonId);
+        if (lesson) lessonTitle = lesson.title;
+      } else {
+        const lesson = level.lessons.find(l => l.id === lessonId);
+        if (lesson) lessonTitle = lesson.title;
+      }
+      
+      return { levelTitle, trackTitle, lessonTitle };
+    } catch (e) {
+      console.error('Error getting lesson info:', e);
+      return { levelTitle: 'Unknown Level', lessonTitle: 'Unknown Lesson' };
     }
-    
-    return { levelTitle, trackTitle, lessonTitle };
   };
   
   // Helper function to get part title
   const getPartTitle = (levelId, trackId, lessonId, partId) => {
-    const level = levels[levelId];
-    if (!level) return 'Unknown Part';
-    
-    let lesson;
-    if (level.hasTracks && trackId) {
-      lesson = level.tracks[trackId]?.lessons.find(l => l.id === lessonId);
-    } else {
-      lesson = level.lessons.find(l => l.id === lessonId);
+    try {
+      const lesson = getLesson(levelId, trackId === 'notrack' ? null : trackId, lessonId);
+      if (!lesson) return 'Unknown Part';
+      
+      const part = lesson.parts.find(p => p.id === partId);
+      return part ? part.title : 'Unknown Part';
+    } catch (e) {
+      console.error('Error getting part title:', e);
+      return 'Unknown Part';
     }
-    
-    if (!lesson) return 'Unknown Part';
-    
-    const part = lesson.parts.find(p => p.id === partId);
-    return part ? part.title : 'Unknown Part';
   };
+  
+  // Remove duplicates in recently viewed and completed lessons
+  const uniqueRecentlyViewed = [];
+  const seenRecent = new Set();
+  recentlyViewed.forEach(item => {
+    const key = `${item.levelId}_${item.trackId || 'notrack'}_${item.lessonId}`;
+    if (!seenRecent.has(key)) {
+      uniqueRecentlyViewed.push(item);
+      seenRecent.add(key);
+    }
+  });
+
+  const uniqueCompletedLessons = [];
+  const seenCompleted = new Set();
+  completedLessons.forEach(item => {
+    const key = `${item.levelId}_${item.trackId || 'notrack'}_${item.lessonId}`;
+    if (!seenCompleted.has(key)) {
+      uniqueCompletedLessons.push(item);
+      seenCompleted.add(key);
+    }
+  });
+
+  // Helper to calculate lesson-wide progress (synchronized with LevelLessons)
+  const getLessonProgress = (levelId, trackId, lessonId) => {
+    const lesson = getLesson(levelId, trackId === 'notrack' ? null : trackId, lessonId);
+    if (!lesson) return 0;
+    const parts = lesson.parts || [];
+    if (parts.length === 0) return 0;
+    let totalSteps = 0;
+    let completedSteps = 0;
+    parts.forEach(part => {
+      const partKey = `math_progress_${levelId}_${trackId || 'notrack'}_${lessonId}_${part.id}`;
+      const savedProgress = userProgress[partKey];
+      const partSteps = ['cours', 'quiz'];
+      if (part.exercises && part.exercises.length > 0) {
+        partSteps.push('exercises');
+      }
+      totalSteps += partSteps.length;
+      if (savedProgress && savedProgress.completedSteps) {
+        completedSteps += savedProgress.completedSteps.length;
+      }
+    });
+    return totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
+  };
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 p-4 md:p-6 bg-gray-100">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-semibold text-red-600 mb-4">Erreur</h2>
+              <p className="text-gray-700">{error}</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Rafraîchir la page
+              </button>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -156,10 +281,10 @@ const UserDashboard = () => {
           <div className="bg-white p-4 md:p-6 rounded-lg shadow-md mb-6">
             <h2 className="text-xl font-semibold mb-4">Récemment consultés</h2>
             
-            {recentlyViewed.length > 0 ? (
+            {uniqueRecentlyViewed.length > 0 ? (
               <div className="space-y-3">
-                {recentlyViewed.map((item, index) => {
-                  const { levelTitle, trackTitle, lessonTitle } = getLessonInfo(
+                {uniqueRecentlyViewed.map((item, index) => {
+                  const { levelTitle, trackTitle } = getLessonInfo(
                     item.levelId,
                     item.trackId,
                     item.lessonId
@@ -170,13 +295,12 @@ const UserDashboard = () => {
                     item.lessonId,
                     item.partId
                   );
-                  
                   const url = item.trackId
                     ? `/courses/${item.levelId}/${item.trackId}/${item.lessonId}`
                     : `/courses/${item.levelId}/${item.lessonId}`;
-                  
                   const timeAgo = getTimeAgo(item.lastVisited);
-                  
+                  // Use lesson-wide progress
+                  const lessonProgress = getLessonProgress(item.levelId, item.trackId, item.lessonId);
                   return (
                     <div key={index} className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50">
                       <Link to={url} className="block">
@@ -185,7 +309,7 @@ const UserDashboard = () => {
                             <p className="text-sm text-gray-500">
                               {levelTitle} {trackTitle ? `› ${trackTitle}` : ''}
                             </p>
-                            <p className="font-medium">{lessonTitle}</p>
+                            <p className="font-medium">{item.lessonTitle}</p>
                             <p className="text-sm text-gray-600 mt-1">
                               {partTitle}
                             </p>
@@ -194,7 +318,7 @@ const UserDashboard = () => {
                             <div className="w-12 h-3 bg-gray-200 rounded-full overflow-hidden mt-1">
                               <div 
                                 className="h-full bg-blue-500" 
-                                style={{ width: `${item.progress}%` }}
+                                style={{ width: `${lessonProgress}%` }}
                               ></div>
                             </div>
                             <span className="text-xs text-gray-500 mt-1">{timeAgo}</span>
@@ -214,10 +338,10 @@ const UserDashboard = () => {
           <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">Cours complétés</h2>
             
-            {completedLessons.length > 0 ? (
+            {uniqueCompletedLessons.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {completedLessons.map((item, index) => {
-                  const { levelTitle, trackTitle, lessonTitle } = getLessonInfo(
+                {uniqueCompletedLessons.map((item, index) => {
+                  const { levelTitle, trackTitle } = getLessonInfo(
                     item.levelId,
                     item.trackId,
                     item.lessonId
@@ -233,7 +357,7 @@ const UserDashboard = () => {
                         <p className="text-sm text-gray-500">
                           {levelTitle} {trackTitle ? `› ${trackTitle}` : ''}
                         </p>
-                        <p className="font-medium">{lessonTitle}</p>
+                        <p className="font-medium">{item.lessonTitle}</p>
                         <div className="flex items-center mt-2 text-green-600 text-sm">
                           <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>

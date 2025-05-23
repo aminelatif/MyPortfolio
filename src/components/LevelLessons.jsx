@@ -5,42 +5,119 @@ import Header from './Header';
 import Footer from './footer';
 import PartPage from './PartPage';
 
+// Calculate lesson progress as percentage of parts completed
+const getLessonProgress = (levelId, trackId, lessonId) => {
+  const lesson = getLesson(levelId, trackId === 'notrack' ? null : trackId, lessonId);
+  if (!lesson?.parts?.length) return 0;
+
+  // First, try to detect the key format PartPage is using
+  const samplePartId = lesson.parts[0].id;
+  const possibleKeyFormats = [
+    `math_progress_${levelId}_${trackId}_${lessonId}_${samplePartId}`,
+    `math_progress_${levelId}_notrack_${lessonId}_${samplePartId}`,
+    `math_progress_${levelId}_lessons_${lessonId}_${samplePartId}`,
+    `math_progress_${levelId}_null_${lessonId}_${samplePartId}`,
+  ];
+
+  // Debug logging for key detection
+  console.log("[DEBUG] Checking progress for:", { levelId, trackId, lessonId });
+  console.log("[DEBUG] Possible key formats:", possibleKeyFormats);
+
+  // Detect which format exists in localStorage
+  const detectedFormat = possibleKeyFormats.find(format => 
+    localStorage.getItem(format) !== null
+  )?.split('_').slice(0, -1).join('_'); // Remove the partId
+
+  console.log("[DEBUG] Detected key format:", detectedFormat || "No format detected, will try all formats");
+
+  // Count completed parts using the detected format (or try all formats if none detected)
+  const completedParts = lesson.parts.reduce((count, part) => {
+    const keysToCheck = detectedFormat 
+      ? [`${detectedFormat}_${part.id}`] 
+      : possibleKeyFormats.map(f => f.replace(samplePartId, part.id));
+
+    console.log(`[DEBUG] Checking keys for part ${part.id}:`, keysToCheck);
+
+    for (const key of keysToCheck) {
+      try {
+        const progress = JSON.parse(localStorage.getItem(key));
+        if (progress?.isCompleted) {
+          console.log(`[DEBUG] Found completed part ${part.id} with key:`, key);
+          return count + 1;
+        }
+      } catch (e) {
+        console.error(`[DEBUG] Error reading progress for ${key}:`, e);
+      }
+    }
+    return count;
+  }, 0);
+
+  const progress = Math.round((completedParts / lesson.parts.length) * 100);
+  console.log(`[DEBUG] Final progress for lesson ${lessonId}: ${progress}% (${completedParts}/${lesson.parts.length} parts)`);
+  return progress;
+};
+
+// Helper function to generate consistent progress keys
+const getProgressKey = (levelId, trackId, lessonId, partId) => {
+  const normalizedTrackId = trackId === 'notrack' ? 'notrack' : (trackId || 'lessons');
+  return `math_progress_${levelId}_${normalizedTrackId}_${lessonId}_${partId}`;
+};
+
+// Lesson Card Component
+const LessonCard = ({ lesson, levelId, trackId, lessonId, navigate, level }) => {
+  const progress = getLessonProgress(levelId, trackId, lessonId);
+  const isComplete = progress === 100;
+
+  return (
+    <div className="lesson-card bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all">
+      <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+      <div className="p-5 md:p-6">
+        <div className="flex justify-between items-start mb-2">
+          <h2 className="text-lg md:text-xl font-semibold text-gray-800 flex-1">{lesson.title}</h2>
+          {isComplete && (
+            <span className="badge badge-success">
+              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Complété
+            </span>
+          )}
+        </div>
+        
+        <p className="text-gray-600 mb-3">
+          <span className="font-medium">{lesson.parts.length}</span> partie{lesson.parts.length > 1 ? 's' : ''}
+        </p>
+        
+        <div className="mb-4">
+          <div className="flex justify-between items-center mb-1">
+            <span className="text-sm text-gray-600">Progression</span>
+            <span className="text-sm font-medium text-gray-700">{progress}%</span>
+          </div>
+          <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-blue-500 transition-all duration-500" 
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        </div>
+        
+        <button 
+          onClick={() => navigate(level?.hasTracks 
+            ? `/courses/${levelId}/${trackId}/${lesson.id}`
+            : `/courses/${levelId}/lessons/${lesson.id}`)}
+          className="btn btn-primary w-full"
+        >
+          {progress > 0 && progress < 100 ? 'Continuer le cours' : (isComplete ? 'Revoir le cours' : 'Commencer le cours')}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const LevelLessons = () => {
   const { levelId, lessonOrTrackId } = useParams();
   const navigate = useNavigate();
   const level = levels[levelId];
-  const [userProgress, setUserProgress] = useState({});
-
-  // Load user progress from localStorage on component mount
-  useEffect(() => {
-    const progressData = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && key.startsWith('math_progress_')) {
-        try {
-          progressData[key] = JSON.parse(localStorage.getItem(key));
-        } catch (e) {
-          console.error('Error parsing progress data:', e);
-        }
-      }
-    }
-    setUserProgress(progressData);
-  }, []);
-
-  // Calculate lesson completion
-  const getLessonProgress = (lessonId) => {
-    const relevantKeys = Object.keys(userProgress).filter(key => {
-      const parts = key.split('_');
-      return parts[2] === levelId && 
-             (level.hasTracks ? parts[3] === lessonOrTrackId : true) &&
-             parts[4] === lessonId;
-    });
-    
-    if (relevantKeys.length === 0) return 0;
-    
-    const completedParts = relevantKeys.filter(key => userProgress[key].isCompleted).length;
-    return Math.round((completedParts / relevantKeys.length) * 100);
-  };
 
   // Handle navigation back to courses
   const handleBackToCourses = (e) => {
@@ -77,7 +154,6 @@ const LevelLessons = () => {
   // If we have a level without tracks (TCS) and a lessonOrTrackId parameter, 
   // it's a lesson ID, so we should navigate to the lesson page
   if (!level.hasTracks && lessonOrTrackId) {
-    // For TCS lessons, go to the lesson page with a "lessons" trackId
     navigate(`/courses/${levelId}/lessons/${lessonOrTrackId}`);
     return null;
   }
@@ -86,9 +162,6 @@ const LevelLessons = () => {
   if (level.hasTracks && !lessonOrTrackId) {
     const levelTracks = tracks[levelId] || [];
     
-    // Debug the tracks
-    console.log("Available tracks:", levelTracks);
-
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Header />
@@ -194,7 +267,7 @@ const LevelLessons = () => {
             <p className="text-gray-700">{level.description}</p>
           </div>
 
-          {lessons.length === 0 ? (
+          {!lessons || lessons.length === 0 ? (
             <div className="bg-white shadow-md rounded-lg p-8 text-center">
               <svg className="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
@@ -205,43 +278,17 @@ const LevelLessons = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {lessons.map(lesson => {
-                const progress = getLessonProgress(lesson.id);
-                const isComplete = progress === 100;
-                
+                console.log("[DEBUG] Rendering lesson:", lesson);
                 return (
-                  <div key={lesson.id} className="lesson-card bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all">
-                    <div className="h-2 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
-                    <div className="p-5 md:p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <h2 className="text-lg md:text-xl font-semibold text-gray-800 flex-1">{lesson.title}</h2>
-                        {isComplete && (
-                          <span className="badge badge-success">
-                            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            Complété
-                          </span>
-                        )}
-                      </div>
-                      
-                      <p className="text-gray-600 mb-3">
-                        <span className="font-medium">{lesson.parts.length}</span> partie{lesson.parts.length > 1 ? 's' : ''}
-                      </p>
-                      
-                      <div className="progress-bar mb-4">
-                        <div className="progress-value" style={{ width: `${progress}%` }}></div>
-                      </div>
-                      
-                      <button 
-                        onClick={() => navigate(level.hasTracks 
-                          ? `/courses/${levelId}/${lessonOrTrackId}/${lesson.id}`
-                          : `/courses/${levelId}/lessons/${lesson.id}`)}
-                        className="btn btn-primary w-full"
-                      >
-                        {progress > 0 && progress < 100 ? 'Continuer le cours' : (isComplete ? 'Revoir le cours' : 'Commencer le cours')}
-                      </button>
-                    </div>
-                  </div>
+                  <LessonCard
+                    key={lesson.id}
+                    lesson={lesson}
+                    levelId={levelId}
+                    trackId={level.hasTracks ? lessonOrTrackId : 'notrack'}
+                    lessonId={lesson.id}
+                    navigate={navigate}
+                    level={level}
+                  />
                 );
               })}
             </div>
@@ -249,77 +296,6 @@ const LevelLessons = () => {
         </div>
       </div>
       <Footer />
-    </div>
-  );
-};
-
-// Helper component to display lesson content
-const LessonContent = ({ level, lesson, levelId, lessonId, navigate }) => {
-  const [selectedPart, setSelectedPart] = useState(null);
-  
-  const handlePartClick = (partId) => {
-    setSelectedPart(partId);
-    
-    // We could save the current position in localStorage here
-    // This is just a simple implementation - you might want to expand this
-    const key = `math_progress_${levelId}_notrack_${lessonId}_${partId}`;
-    const progress = {
-      lastVisited: new Date().toISOString(),
-      progress: 0, // Starting progress
-      isCompleted: false
-    };
-    localStorage.setItem(key, JSON.stringify(progress));
-  };
-  
-  if (selectedPart) {
-    const part = lesson.parts.find(p => p.id === selectedPart);
-    if (part) {
-      return <PartPage part={part} lesson={lesson} goBack={() => setSelectedPart(null)} />;
-    }
-  }
-  
-  return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="p-6 md:p-8 border-b border-gray-200">
-        <div className="flex items-center mb-6">
-          <button 
-            onClick={() => navigate(`/courses/${levelId}`)}
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium bg-transparent border-0"
-          >
-            <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Retour aux cours
-          </button>
-        </div>
-        
-        <h1 className="section-title text-2xl md:text-3xl font-bold mb-3 md:mb-4">{lesson.title}</h1>
-        <p className="text-gray-600 mb-2">
-          {lesson.parts.length} partie{lesson.parts.length > 1 ? 's' : ''}
-        </p>
-      </div>
-      
-      <div className="p-6 md:p-8">
-        <h2 className="text-xl font-semibold mb-4 md:mb-6">Contenu du cours</h2>
-        <div className="space-y-4">
-          {lesson.parts.map((part, index) => (
-            <div 
-              key={part.id}
-              className="lesson-card p-4 md:p-5 border border-gray-200 rounded-lg hover:border-blue-300 cursor-pointer transition-all"
-              onClick={() => handlePartClick(part.id)}
-            >
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 font-semibold">
-                  {index + 1}
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-gray-800">{part.title}</h3>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

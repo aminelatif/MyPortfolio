@@ -151,6 +151,12 @@ const Header = () => {
               )}
             </div>
             <Link 
+              to="/games" 
+              className={`text-white hover:text-blue-200 transition-colors duration-200 font-medium ${isActive('/games') ? 'border-b-2 border-white pb-1' : ''}`}
+            >
+              Jeux
+            </Link>
+            <Link 
               to="/dashboard" 
               className={`text-white hover:text-blue-200 transition-colors duration-200 font-medium ${isActive('/dashboard') ? 'border-b-2 border-white pb-1' : ''}`}
             >
@@ -249,10 +255,10 @@ const Header = () => {
                       {course.hasTracks && hoveredLevel === course.id && (
                         <div className="bg-gray-100 pl-10">
                           {course.tracks.map(track => (
-                            <Link 
+                            <Link
                               key={track.id}
                               to={`/courses/${course.id}/${track.id}`}
-                              className="block px-6 py-3 text-gray-700 hover:bg-blue-50 border-t border-gray-200"
+                              className="block px-6 py-3 hover:bg-blue-50 border-t border-gray-200"
                               onClick={() => setShowMenu(false)}
                             >
                               {track.title}
@@ -265,6 +271,15 @@ const Header = () => {
                 </div>
               )}
             </div>
+            
+            <Link 
+              to="/games" 
+              className="px-6 py-4 text-gray-800 hover:bg-blue-50"
+              onClick={() => setShowMenu(false)}
+            >
+              Jeux
+            </Link>
+            
             <Link 
               to="/dashboard" 
               className="px-6 py-4 text-gray-800 hover:bg-blue-50"

@@ -10,6 +10,7 @@ import TicTacToeGame from './components/TicTacToeGame';
 import QuizGame from './components/QuizGame';
 import BrainSprintGame from './components/BrainSprintGame';
 import UserDashboard from './components/UserDashboard';
+import Games from './components/Games';
 
 // Debug router paths
 console.log("Setting up routes");
@@ -27,10 +28,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/courses/:levelId/:trackId/:lessonId" element={<LessonPage />} />
         <Route path="/dashboard" element={<UserDashboard />} />
         
-        {/* Game routes (for testing or standalone use) */}
-        <Route path="/tic-tac-toe" element={<TicTacToeGame />} />
-        <Route path="/quiz" element={<QuizGame />} />
-        <Route path="/brain-sprint" element={<BrainSprintGame />} />
+        {/* Games page route */}
+        <Route path="/games" element={<Games />} />
       </Routes>
     </Router>
   </React.StrictMode>

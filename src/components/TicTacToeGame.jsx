@@ -15,7 +15,7 @@ const defaultQuestions = [
   { question: '2\u00B3', answer: '8' },
 ];
 
-const TicTacToeGame = ({ questions: propQuestions }) => {
+const TicTacToeGame = ({ questions: propQuestions, onComplete }) => {
   // Use provided questions or default ones
   const questionsBank = propQuestions || defaultQuestions;
   
@@ -27,6 +27,8 @@ const TicTacToeGame = ({ questions: propQuestions }) => {
   const [winner, setWinner] = useState(null);
   const [answers, setAnswers] = useState({ X: [], O: [] });
   const [timer, setTimer] = useState(45);
+  const [shake, setShake] = useState(false);
+  const [showCorrectAnimation, setShowCorrectAnimation] = useState(false);
 
   useEffect(() => {
     setAvailableQuestions(shuffleArray([...questionsBank]));
@@ -62,6 +64,8 @@ const TicTacToeGame = ({ questions: propQuestions }) => {
   };
 
   const handleTimeout = () => {
+    setShake(true);
+    setTimeout(() => setShake(false), 500);
     setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
     setSelectedQuestion(null);
     setUserAnswer('');
@@ -86,16 +90,23 @@ const TicTacToeGame = ({ questions: propQuestions }) => {
     const isCorrect = userAnswer.trim() === selectedQuestion.answer;
 
     if (isCorrect) {
+      setShowCorrectAnimation(true);
+      setTimeout(() => setShowCorrectAnimation(false), 1000);
       const newBoard = [...board];
       newBoard[selectedQuestion.index] = currentPlayer;
       setBoard(newBoard);
       const result = checkWinner(newBoard);
       if (result) {
         setWinner(result);
+        if (onComplete && typeof onComplete === 'function') {
+          onComplete();
+        }
       } else {
         setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
       }
     } else {
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
       setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
     }
 
@@ -129,86 +140,132 @@ const TicTacToeGame = ({ questions: propQuestions }) => {
     return Math.round((correct / total) * 100);
   };
 
+  // Improved color scheme
+  const playerXColor = "bg-blue-600";
+  const playerOColor = "bg-teal-600";
+  const currentPlayerBg = currentPlayer === 'X' ? playerXColor : playerOColor;
+
   return (
-    <div className="bg-gray-100 p-6 rounded-lg">
-      <h2 className="text-2xl font-bold text-center mb-4">Tic-Tac-Toe Math Game</h2>
+    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md max-w-md mx-auto">
+      <div className="text-center mb-4 sm:mb-5">
+        <h2 className="text-xl sm:text-2xl font-bold">Math Tic-Tac-Toe</h2>
+        <p className="text-sm sm:text-base text-gray-600 mt-1">Answer correctly to place your mark</p>
+      </div>
       
       {!winner && (
-        <p className="text-center mb-4 text-xl font-semibold">{currentPlayer} turn</p>
-      )}
-
-      <div className="grid grid-cols-3 gap-4 w-64 mx-auto mb-6">
-        {board.map((cell, i) => (
-          <button
-            key={i}
-            className="w-20 h-20 text-2xl bg-white border-2 border-gray-400 hover:bg-gray-200 rounded shadow font-bold"
-            onClick={() => handleClick(i)}
-          >
-            {cell}
-          </button>
-        ))}
-      </div>
-
-      {selectedQuestion && (
-        <div className="max-w-md mx-auto bg-white p-6 rounded shadow-lg text-center mb-6">
-          <p className="mb-2 font-semibold">{currentPlayer}, answer:</p>
-          <p className="text-xl font-bold mb-2">{selectedQuestion.question}</p>
-          <p className="text-gray-600 text-sm mb-2">⏳ Time left: {timer}s</p>
-          <input
-            type="text"
-            value={userAnswer}
-            onChange={(e) => setUserAnswer(e.target.value)}
-            className="border p-2 w-full mb-2 rounded"
-          />
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            onClick={submitAnswer}
-          >
-            Submit
-          </button>
+        <div className={`flex justify-center mb-4 sm:mb-5 ${shake ? 'animate-wiggle' : ''}`}>
+          <div className={`px-3 sm:px-4 py-2 rounded-full ${currentPlayerBg} text-white font-semibold text-sm sm:text-base`}>
+            Player {currentPlayer}'s Turn
+          </div>
         </div>
       )}
 
-      <div className="text-center mt-6">
-        <button
-          className="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700"
-          onClick={resetGame}
-        >
-          Play Again
-        </button>
+      <div className="max-w-[280px] sm:max-w-[320px] mx-auto mb-5 sm:mb-6">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          {board.map((cell, i) => {
+            const cellColorClass = cell === 'X' 
+              ? `${playerXColor} text-white`
+              : cell === 'O' 
+                ? `${playerOColor} text-white`
+                : 'bg-gray-100 hover:bg-gray-200 text-gray-800';
+                
+            return (
+              <button
+                key={i}
+                className={`w-[80px] h-[80px] sm:w-[92px] sm:h-[92px] text-2xl sm:text-3xl font-bold ${cellColorClass} rounded-lg shadow-md flex items-center justify-center transition-transform hover:scale-105`}
+                onClick={() => handleClick(i)}
+                disabled={!!cell || !!winner || !!selectedQuestion}
+              >
+                {cell}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {winner && (
-        <div className="text-center mt-8">
-          <h2 className="text-3xl font-bold mb-6">
-            {winner === 'Draw' ? "It's a draw!" : `🎉 Player ${winner} wins! 🎉`}
-          </h2>
+      {selectedQuestion && (
+        <div className={`max-w-sm mx-auto bg-gray-50 p-4 sm:p-5 rounded-lg shadow-sm mb-4 sm:mb-5 ${showCorrectAnimation ? 'bg-green-50 border border-green-300' : 'border border-gray-200'}`}>
+          <div className="text-center mb-3 sm:mb-4">
+            <div className={`inline-block px-3 py-1.5 rounded-full ${currentPlayerBg} text-white text-sm sm:text-base mb-2 sm:mb-3`}>
+              Player {currentPlayer}
+            </div>
+            <p className="text-lg sm:text-xl font-bold">{selectedQuestion.question}</p>
+          </div>
+          
+          <div className="mb-3 sm:mb-4">
+            <div className="w-full bg-gray-200 rounded-full h-2 sm:h-2.5">
+              <div className="bg-green-500 h-2 sm:h-2.5 rounded-full transition-all duration-300"
+                style={{ width: `${(timer / 45) * 100}%` }}>
+              </div>
+            </div>
+            <p className="text-right text-xs text-gray-500 mt-1 sm:mt-1.5">{timer}s remaining</p>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              className="border border-gray-300 p-2 sm:p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
+              placeholder="Your answer"
+              onKeyPress={(e) => e.key === 'Enter' && submitAnswer()}
+              autoFocus
+            />
+            <button
+              className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-sm sm:text-base transition-colors"
+              onClick={submitAnswer}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      )}
 
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      {winner && (
+        <div className="text-center">
+          <div className="mb-4 sm:mb-5 p-4 sm:p-5 bg-blue-50 rounded-lg border border-blue-100">
+            <h2 className="text-xl sm:text-2xl font-bold text-blue-800">
+              {winner === 'Draw' ? "It's a Draw!" : `Player ${winner} Wins!`}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
             {['X', 'O'].map(player => (
-              <div key={player} className="bg-white p-6 rounded-xl shadow-xl">
-                <div className="text-xl font-bold mb-4 p-2 bg-gray-200 rounded-md text-center">
+              <div key={player} className={`bg-white p-4 sm:p-5 rounded-lg shadow-md border-t-4 ${player === 'X' ? 'border-blue-600' : 'border-teal-600'}`}>
+                <div className={`text-lg sm:text-xl font-bold mb-3 ${player === 'X' ? 'text-blue-700' : 'text-teal-700'}`}>
                   Player {player}
                 </div>
-                <p className="text-green-600 text-lg font-semibold text-center mb-4">
-                  Accuracy: {calculateAccuracy(player)}%
-                </p>
-                <div className="space-y-2">
+                
+                <div className="flex justify-center items-center mb-3 sm:mb-4">
+                  <div className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gray-50 border-2 border-gray-200">
+                    <span className="text-xl sm:text-2xl font-bold">{calculateAccuracy(player)}%</span>
+                  </div>
+                </div>
+                
+                <p className="text-sm text-gray-500 mb-3">Accuracy</p>
+                
+                <div className="max-h-36 sm:max-h-44 overflow-y-auto rounded-md bg-gray-50 p-2">
                   {answers[player].map((entry, idx) => (
-                    <div key={idx} className="p-3 rounded-lg shadow-md bg-gray-50">
-                      <p className="text-sm font-semibold">Q: {entry.question}</p>
-                      <p className={entry.correctAnswer === entry.playerAnswer ? "text-green-600" : "text-red-600"}>
-                        Your answer: {entry.playerAnswer || 'No Answer'}
-                        {entry.correctAnswer !== entry.playerAnswer && (
-                          <span className="text-green-600"> (Correct: {entry.correctAnswer})</span>
-                        )}
-                      </p>
+                    <div key={idx} className="text-xs sm:text-sm p-2 rounded mb-1 bg-white border border-gray-100 flex justify-between items-center">
+                      <span className="font-medium">{entry.question}</span>
+                      <span className={entry.correctAnswer === entry.playerAnswer 
+                        ? 'text-green-600 font-medium'
+                        : 'text-red-600 font-medium'}>
+                        {entry.correctAnswer === entry.playerAnswer ? '✓' : 'X'}
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
           </div>
+          
+          <button
+            onClick={resetGame}
+            className="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors"
+          >
+            Play Again
+          </button>
         </div>
       )}
     </div>
