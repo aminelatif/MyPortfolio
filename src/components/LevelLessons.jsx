@@ -10,51 +10,87 @@ const getLessonProgress = (levelId, trackId, lessonId) => {
   const lesson = getLesson(levelId, trackId === 'notrack' ? null : trackId, lessonId);
   if (!lesson?.parts?.length) return 0;
 
-  // First, try to detect the key format PartPage is using
+  // 1. Check for lesson-level completion (as dashboard does)
+  const lessonLevelKeys = [
+    `lesson_progress_${levelId}_${lessonId}`,
+    `lesson_progress_${levelId}_${trackId}_${lessonId}`,
+    `lesson_progress_${levelId}_lessons_${lessonId}`,
+    `lesson_progress_${levelId}_notrack_${lessonId}`,
+    `math_progress_${levelId}_${trackId}_${lessonId}`,
+    `math_progress_${levelId}_notrack_${lessonId}`,
+    `math_progress_${levelId}_lessons_${lessonId}`,
+    `dashboard_progress_${levelId}_${lessonId}`,
+    `user_progress_${levelId}_${lessonId}`,
+  ];
+
+  for (const key of lessonLevelKeys) {
+    try {
+      const data = localStorage.getItem(key);
+      if (data) {
+        const progress = JSON.parse(data);
+        if (
+          progress?.isCompleted ||
+          progress?.completed ||
+          progress?.status === 'completed' ||
+          progress?.progress === 100
+        ) {
+          return 100;
+        }
+      }
+    } catch (e) {
+      // ignore parse errors
+    }
+  }
+
+  // 2. Fallback: Check part-level completion
   const samplePartId = lesson.parts[0].id;
   const possibleKeyFormats = [
     `math_progress_${levelId}_${trackId}_${lessonId}_${samplePartId}`,
     `math_progress_${levelId}_notrack_${lessonId}_${samplePartId}`,
     `math_progress_${levelId}_lessons_${lessonId}_${samplePartId}`,
     `math_progress_${levelId}_null_${lessonId}_${samplePartId}`,
+    `progress_${levelId}_${lessonId}_${samplePartId}`,
+    `lesson_progress_${levelId}_${lessonId}_${samplePartId}`,
+    `lesson_progress_${levelId}_${trackId}_${lessonId}_${samplePartId}`,
+    `lesson_progress_${levelId}_lessons_${lessonId}_${samplePartId}`,
+    `lesson_progress_${levelId}_notrack_${lessonId}_${samplePartId}`,
+    `math_lesson_${levelId}_${lessonId}_${samplePartId}`,
+    `math_progress_${levelId}_${lessonId}_${samplePartId}`,
+    `progress_${levelId}_${trackId}_${lessonId}_${samplePartId}`,
   ];
 
-  // Debug logging for key detection
-  console.log("[DEBUG] Checking progress for:", { levelId, trackId, lessonId });
-  console.log("[DEBUG] Possible key formats:", possibleKeyFormats);
-
-  // Detect which format exists in localStorage
-  const detectedFormat = possibleKeyFormats.find(format => 
+  const detectedFormat = possibleKeyFormats.find(format =>
     localStorage.getItem(format) !== null
-  )?.split('_').slice(0, -1).join('_'); // Remove the partId
+  )?.split('_').slice(0, -1).join('_');
 
-  console.log("[DEBUG] Detected key format:", detectedFormat || "No format detected, will try all formats");
-
-  // Count completed parts using the detected format (or try all formats if none detected)
   const completedParts = lesson.parts.reduce((count, part) => {
-    const keysToCheck = detectedFormat 
-      ? [`${detectedFormat}_${part.id}`] 
+    const keysToCheck = detectedFormat
+      ? [`${detectedFormat}_${part.id}`]
       : possibleKeyFormats.map(f => f.replace(samplePartId, part.id));
-
-    console.log(`[DEBUG] Checking keys for part ${part.id}:`, keysToCheck);
-
     for (const key of keysToCheck) {
       try {
-        const progress = JSON.parse(localStorage.getItem(key));
-        if (progress?.isCompleted) {
-          console.log(`[DEBUG] Found completed part ${part.id} with key:`, key);
+        const savedData = localStorage.getItem(key);
+        if (!savedData) continue;
+        const progress = JSON.parse(savedData);
+        if (
+          progress?.isCompleted ||
+          progress?.completed ||
+          progress?.status === 'completed' ||
+          progress?.isDone ||
+          progress?.done ||
+          progress?.finished ||
+          progress?.status === 'done' ||
+          progress?.status === 'finished' ||
+          progress?.progress === 100
+        ) {
           return count + 1;
         }
-      } catch (e) {
-        console.error(`[DEBUG] Error reading progress for ${key}:`, e);
-      }
+      } catch (e) {}
     }
     return count;
   }, 0);
 
-  const progress = Math.round((completedParts / lesson.parts.length) * 100);
-  console.log(`[DEBUG] Final progress for lesson ${lessonId}: ${progress}% (${completedParts}/${lesson.parts.length} parts)`);
-  return progress;
+  return Math.round((completedParts / lesson.parts.length) * 100);
 };
 
 // Helper function to generate consistent progress keys
@@ -118,6 +154,14 @@ const LevelLessons = () => {
   const { levelId, lessonOrTrackId } = useParams();
   const navigate = useNavigate();
   const level = levels[levelId];
+
+  // DEBUG: Log all localStorage keys and values on mount
+  useEffect(() => {
+    console.log('[DEBUG] All localStorage keys and values:');
+    Object.keys(localStorage).forEach(key => {
+      console.log(key, localStorage.getItem(key));
+    });
+  }, []);
 
   // Handle navigation back to courses
   const handleBackToCourses = (e) => {
