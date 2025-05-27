@@ -62,10 +62,30 @@ import fonctionsNumeriquesSEG from './1bac/sciences_economiques_et_gestion/math/
 
 // Import 2BAC lessons
 // Sciences Expérimentales et Technologies
-import integration2BacSET from './2bac/sciences_experimentales_et_technologies/math/integration';
+import limitesEtContinuite2BacSET from './2bac/sciences_experimentales_et_technologies/math/limites_et_continuite';
+import derivation2BacSET from './2bac/sciences_experimentales_et_technologies/math/derivation';
+import etudeDesFonctions2BacSET from './2bac/sciences_experimentales_et_technologies/math/etude_des_fonctions';
+import suitesNumeriques2BacSET from './2bac/sciences_experimentales_et_technologies/math/suites_numeriques';
+import fonctionsPrimitives2BacSET from './2bac/sciences_experimentales_et_technologies/math/fonctions_primitives';
+import fonctionsLogarithmiques2BacSET from './2bac/sciences_experimentales_et_technologies/math/fonctions_logarithmiques';
+import fonctionsExponentielles2BacSET from './2bac/sciences_experimentales_et_technologies/math/fonctions_exponentielles';
+import nombresComplexes2BacSET from './2bac/sciences_experimentales_et_technologies/math/nombres_complexes';
+import equationsDifferentielles2BacSET from './2bac/sciences_experimentales_et_technologies/math/equations_differentielles';
+import calculIntegral2BacSET from './2bac/sciences_experimentales_et_technologies/math/calcul_integral';
+import produitScalaire2BacSET from './2bac/sciences_experimentales_et_technologies/math/produit_scalaire';
+import produitVectoriel2BacSET from './2bac/sciences_experimentales_et_technologies/math/produit_vectoriel';
+import denombrementEtProbabilites2BacSET from './2bac/sciences_experimentales_et_technologies/math/denombrement_et_probabilites';
 
 // Économie
-import probabilites2BacEco from './2bac/economie/math/probabilites';
+import limitesEtContinuite2BacEco from './2bac/economie/math/limites_et_continuite';
+import derivation2BacEco from './2bac/economie/math/derivation';
+import etudeDesFonctions2BacEco from './2bac/economie/math/etude_des_fonctions';
+import suitesNumeriques2BacEco from './2bac/economie/math/suites_numeriques';
+import fonctionsPrimitives2BacEco from './2bac/economie/math/fonctions_primitives';
+import fonctionsLogarithmiques2BacEco from './2bac/economie/math/fonctions_logarithmiques';
+import fonctionsExponentielles2BacEco from './2bac/economie/math/fonctions_exponentielles';
+import calculIntegral2BacEco from './2bac/economie/math/calcul_integral';
+import denombrementEtProbabilites2BacEco from './2bac/economie/math/denombrement_et_probabilites';
 
 // Define tracks for each level
 export const tracks = {
@@ -190,10 +210,34 @@ export const levels = {
     hasTracks: true,
     tracks: {
       sciences_experimentales_et_technologies: {
-        lessons: [integration2BacSET]
+        lessons: [
+          limitesEtContinuite2BacSET,
+          derivation2BacSET,
+          etudeDesFonctions2BacSET,
+          suitesNumeriques2BacSET,
+          fonctionsPrimitives2BacSET,
+          fonctionsLogarithmiques2BacSET,
+          fonctionsExponentielles2BacSET,
+          nombresComplexes2BacSET,
+          equationsDifferentielles2BacSET,
+          calculIntegral2BacSET,
+          produitScalaire2BacSET,
+          produitVectoriel2BacSET,
+          denombrementEtProbabilites2BacSET
+        ]
       },
       economie: {
-        lessons: [probabilites2BacEco]
+        lessons: [
+          limitesEtContinuite2BacEco,
+          derivation2BacEco,
+          etudeDesFonctions2BacEco,
+          suitesNumeriques2BacEco,
+          fonctionsPrimitives2BacEco,
+          fonctionsLogarithmiques2BacEco,
+          fonctionsExponentielles2BacEco,
+          calculIntegral2BacEco,
+          denombrementEtProbabilites2BacEco
+        ]
       }
     }
   }
