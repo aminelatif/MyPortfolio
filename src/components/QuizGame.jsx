@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { InlineMath, BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
 
 // Default questions if none are provided via props
 const defaultQuestions = [
@@ -108,6 +110,27 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
     return options.sort(() => Math.random() - 0.5);
   }
 
+  // Helper function to render text with LaTeX
+  const renderWithMath = (text) => {
+    if (!text) return '';
+    
+    // Split text by LaTeX delimiters
+    const parts = text.split(/(\$\$.*?\$\$|\$.*?\$)/g);
+    
+    return parts.map((part, index) => {
+      if (part.startsWith('$$') && part.endsWith('$$')) {
+        // Block math
+        const math = part.slice(2, -2);
+        return <BlockMath key={index} math={math} />;
+      } else if (part.startsWith('$') && part.endsWith('$')) {
+        // Inline math
+        const math = part.slice(1, -1);
+        return <InlineMath key={index} math={math} />;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     const isAnswerCorrect = option === processedQuestions[current].correct;
@@ -162,133 +185,109 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
     ? Math.round((answers.filter((a) => a.isCorrect).length / processedQuestions.length) * 100)
     : 0;
 
+  if (showResults) {
+    return (
+      <div className="text-center p-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Quiz terminé!</h2>
+        <p className="text-xl mb-4">
+          Votre score: {accuracy}%
+        </p>
+        <button
+          onClick={handleReset}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
+        >
+          Recommencer
+        </button>
+      </div>
+    );
+  }
+
+  const question = processedQuestions[current];
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
       <div className="bg-blue-500 text-white p-2.5 sm:p-3 text-center">
         <h2 className="text-lg sm:text-xl font-bold">Math Quiz Challenge</h2>
       </div>
 
-      {!showResults ? (
-        <div className="relative">
-          {/* Progress bar */}
-          <div className="h-1.5 sm:h-2 bg-gray-200">
-            <div 
-              className="h-full bg-blue-500" 
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          
-          {/* Question content */}
-          <div className={`p-3 sm:p-4 transition-opacity duration-300 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="flex justify-between mb-3 sm:mb-4">
-              <span className="text-xs sm:text-sm font-medium px-2 py-1 bg-blue-100 rounded-md">
-                Question {current + 1} / {processedQuestions.length}
-              </span>
-              <span className="text-xs sm:text-sm font-medium px-2 py-1 bg-green-100 rounded-md">
-                Score: {answers.filter(a => a.isCorrect).length}
-              </span>
-            </div>
-            
-            <div className="mb-3 sm:mb-4 bg-gray-50 p-3 sm:p-4 rounded">
-              <h3 className="text-base sm:text-lg font-bold mb-1">
-                {processedQuestions[current].question}
-              </h3>
-            </div>
-            
-            <div className="space-y-1.5 sm:space-y-2">
-              {processedQuestions[current].options.map((option) => {
-                let optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 hover:border-blue-500 hover:bg-blue-50 text-sm sm:text-base";
-                
-                if (showFeedback) {
-                  if (option === processedQuestions[current].correct) {
-                    optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-green-500 bg-green-50 text-sm sm:text-base";
-                  } else if (option === selectedOption && option !== processedQuestions[current].correct) {
-                    optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-red-500 bg-red-50 text-sm sm:text-base";
-                  } else {
-                    optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 opacity-50 text-sm sm:text-base";
-                  }
-                } else if (option === selectedOption) {
-                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-blue-500 bg-blue-50 text-sm sm:text-base";
-                }
-                
-                return (
-                  <button
-                    key={option}
-                    onClick={() => !showFeedback && handleOptionSelect(option)}
-                    className={optionClasses}
-                    disabled={showFeedback}
-                  >
-                    <div className="flex items-center">
-                      <span className="font-medium">{option}</span>
-                      {showFeedback && option === processedQuestions[current].correct && (
-                        <span className="ml-auto text-green-600">✓</span>
-                      )}
-                      {showFeedback && option === selectedOption && option !== processedQuestions[current].correct && (
-                        <span className="ml-auto text-red-600">X</span>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+      <div className="relative">
+        {/* Progress bar */}
+        <div className="h-1.5 sm:h-2 bg-gray-200">
+          <div 
+            className="h-full bg-blue-500" 
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
-      ) : (
-        <div className="p-3 sm:p-4">
-          <div className="text-center mb-3 sm:mb-4">
-            <div className="mb-2">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-100 text-blue-700 mx-auto flex items-center justify-center text-lg sm:text-xl font-bold">
-                {accuracy}%
-              </div>
-            </div>
-            
-            <h2 className="text-base sm:text-lg font-bold mb-1">Quiz Complete!</h2>
-            <p className="text-xs sm:text-sm text-gray-600 mb-3">
-              {accuracy >= 80 ? 'Excellent job!' : 
-               accuracy >= 50 ? 'Good effort!' : 
-               'Keep practicing!'}
-            </p>
-            
-            <button
-              onClick={handleReset}
-              className="bg-blue-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded text-sm sm:text-base"
-            >
-              Try Again
-            </button>
+        
+        {/* Question content */}
+        <div className={`p-3 sm:p-4 transition-opacity duration-300 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="flex justify-between mb-3 sm:mb-4">
+            <span className="text-xs sm:text-sm font-medium px-2 py-1 bg-blue-100 rounded-md">
+              Question {current + 1} / {processedQuestions.length}
+            </span>
+            <span className="text-xs sm:text-sm font-medium px-2 py-1 bg-green-100 rounded-md">
+              Score: {answers.filter(a => a.isCorrect).length}
+            </span>
           </div>
           
-          <div className="bg-gray-50 rounded p-2.5 sm:p-3">
-            <h3 className="font-bold mb-2 text-xs sm:text-sm border-b pb-1">Your Results</h3>
-            
-            <div className="max-h-[250px] sm:max-h-[300px] overflow-y-auto">
-              {answers.map((answer, index) => (
-                <div 
-                  key={index} 
-                  className="py-1.5 sm:py-2 border-b last:border-0"
+          <div className="mb-3 sm:mb-4 bg-gray-50 p-3 sm:p-4 rounded">
+            <h3 className="text-base sm:text-lg font-bold mb-1">
+              {renderWithMath(question.question)}
+            </h3>
+          </div>
+          
+          <div className="space-y-1.5 sm:space-y-2">
+            {question.options.map((option) => {
+              let optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 hover:border-blue-500 hover:bg-blue-50 text-sm sm:text-base";
+              
+              if (showFeedback) {
+                if (option === processedQuestions[current].correct) {
+                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-green-500 bg-green-50 text-sm sm:text-base";
+                } else if (option === selectedOption && option !== processedQuestions[current].correct) {
+                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-red-500 bg-red-50 text-sm sm:text-base";
+                } else {
+                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 opacity-50 text-sm sm:text-base";
+                }
+              } else if (option === selectedOption) {
+                optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-blue-500 bg-blue-50 text-sm sm:text-base";
+              }
+              
+              return (
+                <button
+                  key={option}
+                  onClick={() => !showFeedback && handleOptionSelect(option)}
+                  className={optionClasses}
+                  disabled={showFeedback}
                 >
-                  <div className="flex justify-between text-xs sm:text-sm">
-                    <span className="font-medium">{index + 1}. {answer.question}</span>
-                    <span className={answer.isCorrect ? "text-green-600" : "text-red-600"}>
-                      {answer.isCorrect ? "✓" : "X"}
-                    </span>
-                  </div>
-                  <div className="text-xs sm:text-sm mt-0.5 sm:mt-1">
-                    <span className="text-gray-600">Your answer: </span>
-                    <span className={answer.isCorrect ? "text-green-600" : "text-red-600"}>
-                      {answer.selected}
-                    </span>
-                    {!answer.isCorrect && (
-                      <span className="text-green-600 ml-2 sm:ml-3">
-                        Correct: {answer.correct}
-                      </span>
+                  <div className="flex items-center">
+                    <span className="font-medium">{renderWithMath(option)}</span>
+                    {showFeedback && option === processedQuestions[current].correct && (
+                      <span className="ml-auto text-green-600">✓</span>
+                    )}
+                    {showFeedback && option === selectedOption && option !== processedQuestions[current].correct && (
+                      <span className="ml-auto text-red-600">X</span>
                     )}
                   </div>
-                </div>
-              ))}
-            </div>
+                </button>
+              );
+            })}
           </div>
         </div>
-      )}
+      </div>
+
+      <div className="flex justify-end p-3 sm:p-4">
+        <button
+          onClick={() => handleNextQuestion(null, false)}
+          disabled={selectedOption === null}
+          className={`px-6 py-2 rounded-lg transition-colors ${
+            selectedOption === null
+              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-600 text-white'
+          }`}
+        >
+          {current < processedQuestions.length - 1 ? 'Question suivante' : 'Terminer'}
+        </button>
+      </div>
     </div>
   );
 };

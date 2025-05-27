@@ -253,9 +253,21 @@ const LessonPage = () => {
                   </div>
                 </div>
 
-                {/* Main content */}
+                {/* Main content area */}
                 <div className="md:w-3/4">
-                  {activeLessonPart && <PartPage part={activeLessonPart} allParts={lesson.parts} />}
+                  {activeLessonPart ? (
+                    <PartPage 
+                      part={activeLessonPart}
+                      allParts={lesson.parts}
+                      onLessonProgressUpdate={(lessonId, progress) => {
+                        console.log(`Lesson ${lessonId} progress updated: ${progress}%`);
+                      }}
+                    />
+                  ) : (
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                      <p className="text-gray-600">Sélectionnez une partie pour commencer.</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

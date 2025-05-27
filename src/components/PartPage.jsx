@@ -1,7 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import QuizGame from './QuizGame';
+import MathLesson from './MathLesson.jsx';
 import { getLesson } from '../data';
+import { InlineMath, BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
+
+const renderWithMath = (text) => {
+  if (!text) return '';
+  
+  // Split text by LaTeX delimiters
+  const parts = text.split(/(\$\$.*?\$\$|\$.*?\$)/g);
+  
+  return parts.map((part, index) => {
+    if (part.startsWith('$$') && part.endsWith('$$')) {
+      // Block math
+      const math = part.slice(2, -2);
+      return <BlockMath key={index} math={math} />;
+    } else if (part.startsWith('$') && part.endsWith('$')) {
+      // Inline math
+      const math = part.slice(1, -1);
+      return <InlineMath key={index} math={math} />;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
 
 const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
   const { levelId, trackId, lessonId } = useParams();
@@ -19,6 +42,7 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
   // Find the current part's index to determine next part
   const currentPartIndex = parts.findIndex(p => p.id === part.id);
   const nextPart = currentPartIndex < parts.length - 1 ? parts[currentPartIndex + 1] : null;
+  const prevPart = currentPartIndex > 0 ? parts[currentPartIndex - 1] : null;
   const isLastPart = currentPartIndex === parts.length - 1;
 
   // Calculate total steps for this part
@@ -279,14 +303,24 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
       <div className="py-3 md:py-4">
         {activeTab === 'cours' && (
           <div className="prose max-w-none">
-            <div className="mb-6">
-              <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">Définition</h3>
-              <p className="text-gray-800">{part.definition}</p>
+            <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200 min-h-[200px]">
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-6 text-blue-700">Définition</h3>
+                <div className="text-gray-800 text-base leading-relaxed">
+                  {renderWithMath(part.definition)}
+                </div>
+              </div>
             </div>
-            <div className="mb-6">
-              <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">Exemple</h3>
-              <p className="text-gray-800">{part.example}</p>
+
+            <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+              <div className="p-8">
+                <h3 className="text-xl font-semibold mb-6 text-blue-700">Exemple</h3>
+                <div className="text-gray-800 text-base leading-relaxed">
+                  {renderWithMath(part.example)}
+                </div>
+              </div>
             </div>
+
             <button
               className={`btn btn-success mt-4 ${completedSteps.includes('cours') ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={() => completeStep('cours')}
@@ -322,10 +356,17 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
             <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Exercices</h3>
             <div className="space-y-4">
               {part.exercises.map((exercise, index) => (
-                <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-medium mb-2">Exercice {index + 1}</h4>
-                  <p className="text-gray-800 mb-4">{exercise.question}</p>
-                  {/* Add exercise solution/answer display here */}
+                <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                  <h4 className="font-medium mb-4 text-lg">Exercice {index + 1}</h4>
+                  <div className="text-gray-800 mb-6">
+                    {renderWithMath(exercise.question)}
+                  </div>
+                  <div className="mt-4 p-4 bg-white rounded-lg border border-gray-100">
+                    <h5 className="font-medium text-gray-700 mb-3">Solution:</h5>
+                    <div className="text-gray-800">
+                      {renderWithMath(exercise.answer)}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -370,4 +411,4 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
   );
 };
 
-export default PartPage; 
+export default PartPage;

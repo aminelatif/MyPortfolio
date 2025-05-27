@@ -5,27 +5,27 @@ export default {
   parts: [
     {
       id: "definition-suite",
-      title: "Définition d'une suite numérique",
-      definition: "Une suite numérique est une fonction définie sur N ou une partie de N.",
-      example: "u_n = 2n + 1 est une suite numérique.",
+      title: "Définition d'une suite",
+      definition: "Une suite numérique est une fonction définie sur $\\mathbb{N}$ à valeurs dans $\\mathbb{R}$. On note $(u_n)$ la suite de terme général $u_n$",
+      example: "La suite $(u_n)$ définie par $u_n = n^2$ a pour premiers termes : $u_0 = 0$, $u_1 = 1$, $u_2 = 4$, $u_3 = 9$",
       gameQuestions: [
-        { question: "u_n = n^2 est-elle une suite numérique ?", answer: "Oui" }
+        { question: "Quel est le terme $u_4$ de la suite $(u_n)$ définie par $u_n = 2n + 1$ ?", answer: "$9$" }
       ],
       exercises: [
-        { question: "Donnez un exemple de suite arithmétique.", answer: "u_n = 3n + 2" }
+        { question: "Calculez les 5 premiers termes de la suite $(v_n)$ définie par $v_n = n^2 - 1$", answer: "$v_0 = -1$, $v_1 = 0$, $v_2 = 3$, $v_3 = 8$, $v_4 = 15$" }
       ],
       gameType: "quiz"
     },
     {
-      id: "suite-arithmetique-geometrique",
-      title: "Suite arithmétique et géométrique",
-      definition: "Une suite arithmétique a une raison constante, tandis qu'une suite géométrique a un quotient constant.",
-      example: "u_n = 2n est une suite arithmétique de raison 2, et v_n = 2^n est une suite géométrique de raison 2.",
+      id: "monotonie-suite",
+      title: "Monotonie d'une suite",
+      definition: "Une suite $(u_n)$ est croissante si $u_{n+1} \\geq u_n$ pour tout $n \\in \\mathbb{N}$",
+      example: "La suite $(u_n)$ définie par $u_n = n^2$ est croissante car $u_{n+1} - u_n = (n+1)^2 - n^2 = 2n + 1 > 0$",
       gameQuestions: [
-        { question: "Quelle est la raison de la suite arithmétique u_n = 5n + 1 ?", answer: "5" }
+        { question: "La suite $(u_n)$ définie par $u_n = -n$ est-elle croissante ?", answer: "Non, elle est décroissante" }
       ],
       exercises: [
-        { question: "Calculez la raison de la suite arithmétique u_n = 7n - 3.", answer: "7" }
+        { question: "Étudiez la monotonie de la suite $(u_n)$ définie par $u_n = n^2 - 3n$", answer: "Croissante à partir de $n = 2$" }
       ],
       gameType: "quiz"
     }

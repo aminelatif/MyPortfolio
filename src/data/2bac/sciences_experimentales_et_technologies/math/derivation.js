@@ -6,26 +6,26 @@ export default {
     {
       id: "definition-derivee",
       title: "Définition de la dérivée",
-      definition: "La dérivée d'une fonction en un point est la limite du taux d'accroissement.",
-      example: "La dérivée de f(x) = x² est f'(x) = 2x.",
+      definition: "La dérivée d'une fonction $f$ en un point $a$ est la limite du taux d'accroissement : $f'(a) = \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h}$",
+      example: "Pour $f(x) = x^2$, on a $f'(x) = 2x$",
       gameQuestions: [
-        { question: "Quelle est la dérivée de f(x) = x³ ?", answer: "3x²" }
+        { question: "Quelle est la dérivée de $f(x) = x^3$ ?", answer: "$3x^2$" }
       ],
       exercises: [
-        { question: "Calculez la dérivée de f(x) = 2x² + 3x.", answer: "4x + 3" }
+        { question: "Calculez la dérivée de $f(x) = 2x^2 + 3x$", answer: "$4x + 3$" }
       ],
       gameType: "quiz"
     },
     {
       id: "proprietes-derivee",
       title: "Propriétés de la dérivée",
-      definition: "La dérivée d'une somme est la somme des dérivées, et la dérivée d'un produit suit la règle du produit.",
-      example: "Si f(x) = x² et g(x) = 3x, alors (f + g)'(x) = 2x + 3.",
+      definition: "La dérivée d'une somme est la somme des dérivées : $(f + g)' = f' + g'$",
+      example: "Si $f(x) = x^2$ et $g(x) = 3x$, alors $(f + g)'(x) = 2x + 3$",
       gameQuestions: [
-        { question: "Quelle est la dérivée de f(x) = x² + 3x ?", answer: "2x + 3" }
+        { question: "Quelle est la dérivée de $f(x) = x^2 + 3x$ ?", answer: "$2x + 3$" }
       ],
       exercises: [
-        { question: "Calculez la dérivée de f(x) = x³ + 2x².", answer: "3x² + 4x" }
+        { question: "Calculez la dérivée de $f(x) = x^3 + 2x^2$", answer: "$3x^2 + 4x$" }
       ],
       gameType: "quiz"
     }
