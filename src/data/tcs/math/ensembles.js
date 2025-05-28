@@ -7,6 +7,11 @@ export default {
       title: "Définitions des ensembles numériques",
       definition: "Les ensembles numériques représentent des collections de nombres avec des propriétés spécifiques.",
       example: "N : ensemble des entiers naturels (0, 1, 2, 3, ...)\nZ : ensemble des entiers relatifs (..., -2, -1, 0, 1, 2, ...)",
+      sections: [
+        { title: "Définition", content: "Les ensembles numériques représentent des collections de nombres avec des propriétés spécifiques." },
+        { title: "Exemple", content: "N : ensemble des entiers naturels (0, 1, 2, 3, ...)\nZ : ensemble des entiers relatifs (..., -2, -1, 0, 1, 2, ...)" },
+        { title: "Remarque", content: "Les ensembles sont à la base de la théorie des nombres et de l'algèbre." }
+      ],
       gameQuestions: [
         { question: "À quel ensemble appartient le nombre -5 ?", answer: "Z" },
         { question: "À quel ensemble appartient le nombre 2,5 ?", answer: "Q, D, R" }
@@ -21,6 +26,11 @@ export default {
       title: "Opérations sur les ensembles",
       definition: "Les opérations sur les ensembles incluent l'union (∪), l'intersection (∩), et la différence.",
       example: "A = {1, 2, 3}, B = {3, 4, 5}\nA ∪ B = {1, 2, 3, 4, 5}\nA ∩ B = {3}",
+      sections: [
+        { title: "Définition", content: "Les opérations sur les ensembles incluent l'union (∪), l'intersection (∩), et la différence." },
+        { title: "Exemple", content: "A = {1, 2, 3}, B = {3, 4, 5}\nA ∪ B = {1, 2, 3, 4, 5}\nA ∩ B = {3}" },
+        { title: "Remarque", content: "Les opérations sur les ensembles sont importantes pour la théorie des nombres et de l'algèbre." }
+      ],
       gameQuestions: [
         { question: "Si A = {1, 2, 3} et B = {2, 3, 4}, quel est A ∩ B ?", answer: "{2, 3}" }
       ],

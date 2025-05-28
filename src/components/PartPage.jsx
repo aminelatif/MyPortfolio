@@ -321,6 +321,17 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
               </div>
             )}
 
+            {part.sections && part.sections.length > 0 && part.sections.map((section, index) => (
+              <div key={index} className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                <div className="p-8">
+                  <h3 className="text-xl font-semibold mb-6 text-blue-700">{section.title}</h3>
+                  <div className="text-gray-800 text-base leading-relaxed">
+                    {renderWithMath(section.content)}
+                  </div>
+                </div>
+              </div>
+            ))}
+
             <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200 min-h-[200px]">
               <div className="p-8">
                 <h3 className="text-xl font-semibold mb-6 text-blue-700">Définition</h3>

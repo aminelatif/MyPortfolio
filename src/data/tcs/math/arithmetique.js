@@ -7,6 +7,11 @@ export default {
       title: "Divisibilité",
       definition: "Un nombre a est divisible par b si et seulement s'il existe un entier k tel que a = b × k.",
       example: "12 est divisible par 3 car 12 = 3 × 4",
+      sections: [
+        { title: "Définition", content: "Un nombre $a$ est divisible par $b$ si et seulement s'il existe un entier k tel que $a = b × k.$" },
+        { title: "Exemple", content: "12 est divisible par 3 car 12 = 3 × 4" },
+        { title: "Remarque", content: "Tout nombre est divisible par 1 et par lui-même." }
+      ],
       video:"https://www.youtube.com/embed/MIKbFraDptE?si=hn9J5t1_TYmsCPui",
       gameQuestions: [
         { question: "12 est-il divisible par 3 ?", answer: "Oui" },
@@ -22,6 +27,11 @@ export default {
       title: "PGCD",
       definition: "Le PGCD (Plus Grand Commun Diviseur) de deux nombres entiers a et b est le plus grand entier qui divise à la fois a et b.",
       example: "PGCD(12, 18) = 6 car 6 est le plus grand nombre qui divise à la fois 12 et 18",
+      sections: [
+        { title: "Définition", content: "Le PGCD (Plus Grand Commun Diviseur) de deux nombres entiers a et b est le plus grand entier qui divise à la fois a et b." },
+        { title: "Exemple", content: "PGCD(12, 18) = 6 car 6 est le plus grand nombre qui divise à la fois 12 et 18" },
+        { title: "Remarque", content: "Le PGCD de deux nombres premiers entre eux est 1." }
+      ],
       gameQuestions: [
         { question: "Quel est le PGCD de 24 et 36 ?", answer: "12" }
       ],
