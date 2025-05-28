@@ -303,6 +303,24 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
       <div className="py-3 md:py-4">
         {activeTab === 'cours' && (
           <div className="prose max-w-none">
+            {part.video && (
+              <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                <div className="">
+                  <div className="aspect-video w-full">
+                    <iframe
+                      src={part.video}
+                      className="w-full h-full rounded-lg"
+                      allowFullScreen
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      frameBorder="0"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200 min-h-[200px]">
               <div className="p-8">
                 <h3 className="text-xl font-semibold mb-6 text-blue-700">Définition</h3>

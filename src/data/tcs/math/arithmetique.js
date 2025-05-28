@@ -7,6 +7,7 @@ export default {
       title: "Divisibilité",
       definition: "Un nombre a est divisible par b si et seulement s'il existe un entier k tel que a = b × k.",
       example: "12 est divisible par 3 car 12 = 3 × 4",
+      video:"https://www.youtube.com/embed/MIKbFraDptE?si=hn9J5t1_TYmsCPui",
       gameQuestions: [
         { question: "12 est-il divisible par 3 ?", answer: "Oui" },
         { question: "17 est-il divisible par 4 ?", answer: "Non" }
