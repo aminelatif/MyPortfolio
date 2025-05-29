@@ -5,8 +5,11 @@ export default {
     {
       id: "definition-application",
       title: "Définition et propriétés",
-      definition: "Une application f d'un ensemble E vers un ensemble F est une relation qui à tout élément x de E associe un unique élément y de F noté f(x).",
-      example: "La fonction f : ℝ → ℝ définie par f(x) = x² est une application.",
+      sections: [
+        { title: "Définition", content: "Une application f d'un ensemble E vers un ensemble F est une relation qui à tout élément x de E associe un unique élément y de F noté f(x)." },
+        { title: "Exemple", content: "La fonction f : ℝ → ℝ définie par f(x) = x² est une application." },
+        { title: "Remarque", content: "Les applications sont à la base de la notion de fonction en mathématiques." }
+      ],
       gameQuestions: [
         { question: "Une application f : E → F est injective si et seulement si...", answer: "Pour tout a et b dans E, si f(a) = f(b) alors a = b" }
       ],

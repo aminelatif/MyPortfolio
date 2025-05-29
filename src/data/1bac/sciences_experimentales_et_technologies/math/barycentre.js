@@ -5,8 +5,11 @@ export default {
     {
       id: "definition-barycentre",
       title: "Définition du barycentre",
-      definition: "Le barycentre de n points pondérés (Aᵢ, αᵢ) est le point G tel que ∑αᵢ⃗GA₍ᵢ₎ = ⃗0. Si la somme des coefficients est non nulle (∑αᵢ ≠ 0), alors G est l'unique point tel que ⃗OG = (∑αᵢ⃗OA₍ᵢ₎)/(∑αᵢ).",
-      example: "Le barycentre de deux points pondérés (A, 2) et (B, 3) divise le segment [AB] dans le rapport 3/2, c'est-à-dire GA/GB = 3/2.",
+      sections: [
+        { title: "Définition", content: "Le barycentre de n points pondérés (Aᵢ, αᵢ) est le point G tel que ∑αᵢ⃗GA₍ᵢ₎ = ⃗0. Si la somme des coefficients est non nulle (∑αᵢ ≠ 0), alors G est l'unique point tel que ⃗OG = (∑αᵢ⃗OA₍ᵢ₎)/(∑αᵢ)." },
+        { title: "Exemple", content: "Le barycentre de deux points pondérés (A, 2) et (B, 3) divise le segment [AB] dans le rapport 3/2, c'est-à-dire GA/GB = 3/2." },
+        { title: "Remarque", content: "Le barycentre généralise la notion de centre de gravité et permet de simplifier de nombreux calculs en géométrie vectorielle." }
+      ],
       gameQuestions: [
         { question: "Quelle est la formule des coordonnées du barycentre G de points pondérés (Aᵢ, αᵢ) si ∑αᵢ ≠ 0?", answer: "xG = (∑αᵢxᵢ)/(∑αᵢ) et yG = (∑αᵢyᵢ)/(∑αᵢ)" },
         { question: "Que représente le barycentre de deux points A et B affectés du même coefficient?", answer: "Le milieu du segment [AB]" }
@@ -19,8 +22,11 @@ export default {
     {
       id: "proprietes-barycentre",
       title: "Propriétés du barycentre",
-      definition: "Le barycentre possède plusieurs propriétés importantes: associativité (on peut regrouper les points), commutativité (l'ordre des points n'a pas d'importance), et linéarité (effet d'une homothétie ou d'une translation sur le barycentre).",
-      example: "Le barycentre de (A, α) et (B, β) est le même que le barycentre de (A, α/β) et (B, 1) si β ≠ 0.",
+      sections: [
+        { title: "Définition", content: "Le barycentre possède plusieurs propriétés importantes: associativité (on peut regrouper les points), commutativité (l'ordre des points n'a pas d'importance), et linéarité (effet d'une homothétie ou d'une translation sur le barycentre)." },
+        { title: "Exemple", content: "Le barycentre de (A, α) et (B, β) est le même que le barycentre de (A, α/β) et (B, 1) si β ≠ 0." },
+        { title: "Remarque", content: "Les propriétés du barycentre facilitent la résolution de problèmes complexes en permettant de regrouper ou de déplacer les points sans changer le résultat final." }
+      ],
       gameQuestions: [
         { question: "Comment calcule-t-on le barycentre de (G₁, α₁) et (G₂, α₂) où G₁ et G₂ sont eux-mêmes des barycentres?", answer: "C'est le barycentre des points initiaux avec leurs coefficients respectivement multipliés par α₁ et α₂" },
         { question: "Comment évolue le barycentre G de points pondérés (Aᵢ, αᵢ) si on applique une translation ⃗t à tous les points Aᵢ?", answer: "G est également translaté par ⃗t" }
@@ -33,8 +39,11 @@ export default {
     {
       id: "applications-geometriques",
       title: "Applications géométriques",
-      definition: "Le barycentre permet de caractériser de nombreux points remarquables en géométrie: centre de gravité d'un triangle (barycentre des sommets), centre du cercle inscrit (barycentre des sommets pondérés par les longueurs des côtés opposés) ou orthocentre (barycentre avec coefficients spécifiques).",
-      example: "Le centre de gravité G d'un triangle ABC est le barycentre des points A, B et C affectés du même coefficient. Il est aussi le point d'intersection des médianes.",
+      sections: [
+        { title: "Définition", content: "Le barycentre permet de caractériser de nombreux points remarquables en géométrie: centre de gravité d'un triangle (barycentre des sommets), centre du cercle inscrit (barycentre des sommets pondérés par les longueurs des côtés opposés) ou orthocentre (barycentre avec coefficients spécifiques)." },
+        { title: "Exemple", content: "Le centre de gravité G d'un triangle ABC est le barycentre des points A, B et C affectés du même coefficient. Il est aussi le point d'intersection des médianes." },
+        { title: "Remarque", content: "Le barycentre est un outil fondamental pour la géométrie analytique et la physique (centre de masse, équilibre, etc.)." }
+      ],
       gameQuestions: [
         { question: "Quel est le barycentre des sommets d'un triangle affectés de coefficients égaux?", answer: "Le centre de gravité du triangle" },
         { question: "Quelle est la propriété du centre de gravité G d'un triangle par rapport aux médianes?", answer: "G divise chaque médiane dans le rapport 2/1 à partir du sommet" }

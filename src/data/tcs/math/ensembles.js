@@ -5,8 +5,6 @@ export default {
     {
       id: "definition-ensembles",
       title: "Définitions des ensembles numériques",
-      definition: "Les ensembles numériques représentent des collections de nombres avec des propriétés spécifiques.",
-      example: "N : ensemble des entiers naturels (0, 1, 2, 3, ...)\nZ : ensemble des entiers relatifs (..., -2, -1, 0, 1, 2, ...)",
       sections: [
         { title: "Définition", content: "Les ensembles numériques représentent des collections de nombres avec des propriétés spécifiques." },
         { title: "Exemple", content: "N : ensemble des entiers naturels (0, 1, 2, 3, ...)\nZ : ensemble des entiers relatifs (..., -2, -1, 0, 1, 2, ...)" },
@@ -24,8 +22,6 @@ export default {
     {
       id: "operations-ensembles",
       title: "Opérations sur les ensembles",
-      definition: "Les opérations sur les ensembles incluent l'union (∪), l'intersection (∩), et la différence.",
-      example: "A = {1, 2, 3}, B = {3, 4, 5}\nA ∪ B = {1, 2, 3, 4, 5}\nA ∩ B = {3}",
       sections: [
         { title: "Définition", content: "Les opérations sur les ensembles incluent l'union (∪), l'intersection (∩), et la différence." },
         { title: "Exemple", content: "A = {1, 2, 3}, B = {3, 4, 5}\nA ∪ B = {1, 2, 3, 4, 5}\nA ∩ B = {3}" },

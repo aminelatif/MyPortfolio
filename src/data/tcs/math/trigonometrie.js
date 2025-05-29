@@ -5,8 +5,6 @@ export default {
     {
       id: "angles",
       title: "Les angles et leur mesure",
-      definition: "Un angle est une figure formée par deux demi-droites de même origine. Il peut être mesuré en degrés ou en radians.",
-      example: "Un angle de 180° correspond à π radians. Un tour complet correspond à 360° ou 2π radians.",
       sections: [
         { title: "Définition", content: "Un angle est une figure formée par deux demi-droites de même origine. Il peut être mesuré en degrés ou en radians." },
         { title: "Exemple", content: "Un angle de 180° correspond à π radians. Un tour complet correspond à 360° ou 2π radians." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "fonctions-trigonometriques",
       title: "Fonctions trigonométriques",
-      definition: "Les principales fonctions trigonométriques sont le sinus, le cosinus et la tangente d'un angle.",
-      example: "Pour un angle de 30° (ou π/6 radians), sin(30°) = 1/2, cos(30°) = √3/2, et tan(30°) = 1/√3.",
       sections: [
         { title: "Définition", content: "Les principales fonctions trigonométriques sont le sinus, le cosinus et la tangente d'un angle." },
         { title: "Exemple", content: "Pour un angle de 30° (ou π/6 radians), sin(30°) = 1/2, cos(30°) = √3/2, et tan(30°) = 1/√3." },
@@ -43,8 +39,6 @@ export default {
     {
       id: "formules-trigonometriques",
       title: "Formules trigonométriques",
-      definition: "Il existe de nombreuses formules reliant les valeurs des fonctions trigonométriques pour différents angles.",
-      example: "sin²(x) + cos²(x) = 1, pour tout angle x.",
       sections: [
         { title: "Définition", content: "Il existe de nombreuses formules reliant les valeurs des fonctions trigonométriques pour différents angles." },
         { title: "Exemple", content: "sin²(x) + cos²(x) = 1, pour tout angle x." },

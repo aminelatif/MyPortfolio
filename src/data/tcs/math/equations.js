@@ -5,8 +5,6 @@ export default {
     {
       id: "equations-premier-degre",
       title: "Équations du premier degré",
-      definition: "Une équation du premier degré à une inconnue est une équation de la forme ax + b = 0, où a ≠ 0.",
-      example: "3x - 6 = 0 est une équation du premier degré dont la solution est x = 2.",
       sections: [
         { title: "Définition", content: "Une équation du premier degré à une inconnue est une équation de la forme ax + b = 0, où a ≠ 0." },
         { title: "Exemple", content: "3x - 6 = 0 est une équation du premier degré dont la solution est x = 2." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "inegalites",
       title: "Inégalités et inéquations",
-      definition: "Une inéquation est une inégalité entre deux expressions mathématiques qui contient des variables.",
-      example: "L'inéquation 2x + 3 < 7 a pour ensemble de solutions x < 2.",
       sections: [
         { title: "Définition", content: "Une inéquation est une inégalité entre deux expressions mathématiques qui contient des variables." },
         { title: "Exemple", content: "L'inéquation 2x + 3 < 7 a pour ensemble de solutions x < 2." },
@@ -42,8 +38,6 @@ export default {
     {
       id: "systemes",
       title: "Systèmes d'équations",
-      definition: "Un système d'équations est un ensemble d'équations comportant plusieurs variables à résoudre simultanément.",
-      example: "Le système {x + y = 5\nx - y = 1 a pour solution (x,y) = (3,2).",
       sections: [
         { title: "Définition", content: "Un système d'équations est un ensemble d'équations comportant plusieurs variables à résoudre simultanément." },
         { title: "Exemple", content: "Le système {x + y = 5\nx - y = 1 a pour solution (x,y) = (3,2)." },

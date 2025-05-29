@@ -5,8 +5,11 @@ export default {
     {
       id: "points-coordonnees",
       title: "Points et coordonnées dans l'espace",
-      definition: "Dans un repère (O, i⃗, j⃗, k⃗) de l'espace, tout point M est repéré par ses coordonnées (x, y, z). La distance entre deux points A(x₁, y₁, z₁) et B(x₂, y₂, z₂) est donnée par d(A,B) = √[(x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²].",
-      example: "La distance entre les points A(1, 2, 3) et B(4, 6, 3) est d(A,B) = √[(4-1)² + (6-2)² + (3-3)²] = √[9 + 16 + 0] = 5.",
+      sections: [
+        { title: "Définition", content: "Dans un repère (O, i⃗, j⃗, k⃗) de l'espace, tout point M est repéré par ses coordonnées (x, y, z). La distance entre deux points A(x₁, y₁, z₁) et B(x₂, y₂, z₂) est donnée par d(A,B) = √[(x₂-x₁)² + (y₂-y₁)² + (z₂-z₁)²]." },
+        { title: "Exemple", content: "La distance entre les points A(1, 2, 3) et B(4, 6, 3) est d(A,B) = √[(4-1)² + (6-2)² + (3-3)²] = √[9 + 16 + 0] = 5." },
+        { title: "Remarque", content: "Le repérage dans l'espace généralise le repérage dans le plan." }
+      ],
       gameQuestions: [
         { question: "Quelle est la formule du milieu du segment [AB] dans l'espace ?", answer: "I((x₁+x₂)/2, (y₁+y₂)/2, (z₁+z₂)/2)" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "droites-espace",
       title: "Droites de l'espace",
-      definition: "Une droite dans l'espace peut être définie par un point A et un vecteur directeur u⃗ (représentation paramétrique) ou par l'intersection de deux plans (représentation cartésienne).",
-      example: "La droite passant par A(1, 2, 3) et de vecteur directeur u⃗(2, 1, -1) a pour équation paramétrique : x = 1 + 2t, y = 2 + t, z = 3 - t, t ∈ ℝ.",
+      sections: [
+        { title: "Définition", content: "Une droite dans l'espace peut être définie par un point A et un vecteur directeur u⃗ (représentation paramétrique) ou par l'intersection de deux plans (représentation cartésienne)." },
+        { title: "Exemple", content: "La droite passant par A(1, 2, 3) et de vecteur directeur u⃗(2, 1, -1) a pour équation paramétrique : x = 1 + 2t, y = 2 + t, z = 3 - t, t ∈ ℝ." },
+        { title: "Remarque", content: "Deux droites de l'espace peuvent être parallèles, sécantes ou gauches." }
+      ],
       gameQuestions: [
         { question: "Comment déterminer si deux droites de l'espace sont parallèles ?", answer: "Si leurs vecteurs directeurs sont colinéaires" }
       ],
@@ -31,8 +37,11 @@ export default {
     {
       id: "plans-espace",
       title: "Plans dans l'espace",
-      definition: "Un plan dans l'espace peut être défini par un point A et deux vecteurs directeurs non colinéaires u⃗ et v⃗, ou par une équation cartésienne de la forme ax + by + cz + d = 0, où (a, b, c) sont les coordonnées du vecteur normal au plan.",
-      example: "Le plan passant par A(1, 2, 3) et de vecteur normal n⃗(2, -1, 1) a pour équation : 2(x-1) - 1(y-2) + 1(z-3) = 0, soit 2x - y + z - 3 = 0.",
+      sections: [
+        { title: "Définition", content: "Un plan dans l'espace peut être défini par un point A et deux vecteurs directeurs non colinéaires u⃗ et v⃗, ou par une équation cartésienne de la forme ax + by + cz + d = 0, où (a, b, c) sont les coordonnées du vecteur normal au plan." },
+        { title: "Exemple", content: "Le plan passant par A(1, 2, 3) et de vecteur normal n⃗(2, -1, 1) a pour équation : 2(x-1) - 1(y-2) + 1(z-3) = 0, soit 2x - y + z - 3 = 0." },
+        { title: "Remarque", content: "Un plan peut être défini de plusieurs façons dans l'espace." }
+      ],
       gameQuestions: [
         { question: "Comment déterminer si une droite est parallèle à un plan ?", answer: "Si le vecteur directeur de la droite est orthogonal au vecteur normal du plan" }
       ],

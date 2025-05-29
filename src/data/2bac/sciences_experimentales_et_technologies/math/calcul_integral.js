@@ -6,8 +6,11 @@ export default {
     {
       id: "definition-integrale",
       title: "Définition de l'intégrale",
-      definition: "L'intégrale d'une fonction sur un intervalle est l'aire sous la courbe de la fonction.",
-      example: "L'intégrale de f(x) = x sur [0,1] est 1/2.",
+      sections: [
+        { title: "Définition", content: "L'intégrale d'une fonction sur un intervalle est l'aire sous la courbe de la fonction." },
+        { title: "Exemple", content: "L'intégrale de f(x) = x sur [0,1] est 1/2." },
+        { title: "Remarque", content: "Le calcul intégral est fondamental pour déterminer des aires et des volumes en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Quelle est l'intégrale de f(x) = 2x sur [0,1] ?", answer: "1" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "proprietes-integrale",
       title: "Propriétés de l'intégrale",
-      definition: "L'intégrale est linéaire et l'intégrale d'une somme est la somme des intégrales.",
-      example: "Si f(x) = x² et g(x) = x, alors ∫(f + g)(x)dx = ∫f(x)dx + ∫g(x)dx.",
+      sections: [
+        { title: "Définition", content: "L'intégrale est linéaire et l'intégrale d'une somme est la somme des intégrales." },
+        { title: "Exemple", content: "Si f(x) = x² et g(x) = x, alors ∫(f + g)(x)dx = ∫f(x)dx + ∫g(x)dx." },
+        { title: "Remarque", content: "Les propriétés de l'intégrale facilitent le calcul d'aires complexes en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Quelle est l'intégrale de f(x) = x² + x sur [0,1] ?", answer: "5/6" }
       ],

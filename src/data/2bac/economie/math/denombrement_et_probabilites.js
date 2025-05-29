@@ -6,8 +6,11 @@ export default {
     {
       id: "denombrement",
       title: "Dénombrement",
-      definition: "Le dénombrement consiste à compter le nombre de possibilités dans une situation donnée.",
-      example: "Le nombre de façons d'arranger 3 objets est 3! = 6.",
+      sections: [
+        { title: "Définition", content: "Le dénombrement consiste à compter le nombre de possibilités dans une situation donnée." },
+        { title: "Exemple", content: "Le nombre de façons d'arranger 3 objets est 3! = 6." },
+        { title: "Remarque", content: "Le dénombrement est essentiel pour l'analyse des choix et des combinaisons en économie." }
+      ],
       gameQuestions: [
         { question: "Combien y a-t-il de façons d'arranger 4 objets ?", answer: "24" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "probabilites",
       title: "Probabilités",
-      definition: "Une probabilité est un nombre entre 0 et 1 qui mesure la chance qu'un événement se réalise.",
-      example: "La probabilité d'obtenir pile en lançant une pièce est 1/2.",
+      sections: [
+        { title: "Définition", content: "Une probabilité est un nombre entre 0 et 1 qui mesure la chance qu'un événement se réalise." },
+        { title: "Exemple", content: "La probabilité d'obtenir pile en lançant une pièce est 1/2." },
+        { title: "Remarque", content: "Les probabilités sont fondamentales pour l'analyse des risques et l'aide à la décision en économie." }
+      ],
       gameQuestions: [
         { question: "Quelle est la probabilité d'obtenir un 6 en lançant un dé ?", answer: "1/6" }
       ],

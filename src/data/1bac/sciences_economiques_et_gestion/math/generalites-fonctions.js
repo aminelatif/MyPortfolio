@@ -3,60 +3,55 @@ export default {
   title: "Généralités sur les fonctions",
   parts: [
     {
-      id: "definition-domaines",
-      title: "Définition et domaines de définition",
-      definition: "Une fonction f associe à chaque élément x d'un ensemble de départ (domaine de définition) un unique élément y = f(x) de l'ensemble d'arrivée. Le domaine de définition est l'ensemble des valeurs pour lesquelles la fonction est définie. En économie, les fonctions modélisent diverses relations comme la demande, le coût, ou l'utilité.",
-      example: "La fonction f(x) = 1/(x-2) a pour domaine Df = ℝ\\{2}, car la division par zéro n'est pas définie. En économie, une fonction de coût C(q) = 5q + 10 a pour domaine ℝ⁺, car on ne peut produire une quantité négative.",
+      id: "definition-fonction",
+      title: "Définition d'une fonction",
+      sections: [
+        { title: "Définition", content: "Une fonction est une relation qui, à chaque élément d'un ensemble de départ, associe un unique élément d'un ensemble d'arrivée. En économie, les fonctions modélisent des relations entre grandeurs économiques, comme le coût, le revenu, la demande, l'offre, etc." },
+        { title: "Exemple", content: "La fonction coût C(q) = 5q + 100 associe à chaque quantité produite q le coût total correspondant. La fonction demande D(p) = 100 - 2p associe à chaque prix p la quantité demandée." },
+        { title: "Remarque", content: "Les fonctions sont fondamentales pour la modélisation et l'analyse des phénomènes économiques." }
+      ],
       gameQuestions: [
-        { question: "Quel est le domaine de définition de la fonction f(x) = √(x+3)?", answer: "[-3, +∞[" },
-        { question: "Si p(q) représente le prix de vente unitaire en fonction de la quantité vendue, quel est généralement le domaine de définition de cette fonction?", answer: "[0, +∞[" }
+        { question: "Quelle est l'image de 4 par la fonction f(x) = 2x + 1 ?", answer: "9" },
+        { question: "Pour la fonction D(p) = 100 - 2p, quelle est la quantité demandée pour p = 20 ?", answer: "60" }
       ],
       exercises: [
-        { question: "L'entreprise MathÉco produit des calculatrices avec une fonction de coût total C(q) = 10 000 + 25q et une fonction de demande q = 5 000 - 50p, où p est le prix unitaire. Déterminez le domaine de définition de la fonction de profit P(q) = q·p(q) - C(q), où p(q) est la fonction de prix inverse de la demande. Interprétez économiquement ce domaine.", answer: "La fonction de demande est q = 5 000 - 50p, donc p(q) = (5 000 - q)/50 = 100 - q/50.\nLa fonction de profit est P(q) = q·(100 - q/50) - (10 000 + 25q) = 100q - q²/50 - 10 000 - 25q = 75q - q²/50 - 10 000.\nLe domaine de définition mathématique est ℝ, mais économiquement, il doit être restreint :\n- La quantité q doit être positive ou nulle : q ≥ 0\n- Le prix doit être positif ou nul : p(q) = 100 - q/50 ≥ 0, donc q ≤ 5 000\n\nLe domaine économiquement significatif est donc [0, 5 000]. Cela signifie que l'entreprise peut produire entre 0 et 5 000 calculatrices, au-delà de quoi le prix deviendrait négatif, ce qui n'a pas de sens économique." }
-      ],
-      gameType: "quiz"
-    },
-    {
-      id: "image-antecedent",
-      title: "Image et antécédent",
-      definition: "Pour une fonction f de domaine D, l'image d'un élément x ∈ D est la valeur y = f(x). L'antécédent d'un élément y par f est tout élément x ∈ D tel que f(x) = y. L'ensemble des images de tous les éléments du domaine est appelé l'image de f, notée f(D). En économie, ces concepts permettent d'analyser par exemple le niveau de production nécessaire pour atteindre un profit donné.",
-      example: "Si f(x) = x² sur ℝ, alors f(3) = 9 (l'image de 3), et les antécédents de 4 sont 2 et -2, car f(2) = f(-2) = 4. Dans un contexte économique, si C(q) = q² + 5q + 10 représente le coût de production, alors C(3) = 9 + 15 + 10 = 34 est le coût pour produire 3 unités. Si on cherche la quantité pour laquelle le coût est de 50, on résout C(q) = 50.",
-      gameQuestions: [
-        { question: "Si f(x) = 3x - 6, quelle est l'image de x = 5?", answer: "f(5) = 9" },
-        { question: "Si une fonction de demande est q = 100 - 2p, quel est l'antécédent de q = 60?", answer: "p = 20" }
-      ],
-      exercises: [
-        { question: "Un fabricant a une fonction de revenu R(q) = 100q - q² et une fonction de coût C(q) = 20q + 30. (a) Calculez le profit pour une production de 30 unités. (b) Déterminez les niveaux de production pour lesquels le profit est de 400.", answer: "(a) Le profit pour q = 30 est :\nP(30) = R(30) - C(30) = 100×30 - 30² - (20×30 + 30) = 3 000 - 900 - 600 - 30 = 1 470\n\n(b) Pour que P(q) = 400, on doit résoudre :\nR(q) - C(q) = 400\n100q - q² - 20q - 30 = 400\n80q - q² - 430 = 0\nq² - 80q + 430 = 0\n\nCalculons le discriminant : Δ = (-80)² - 4×1×430 = 6 400 - 1 720 = 4 680\nDonc q = (80 ± √4 680)/2 = (80 ± 68.41)/2 ≈ 74.2 ou 5.8\n\nLes niveaux de production qui donnent un profit de 400 sont environ q ≈ 5.8 et q ≈ 74.2 unités." }
+        { question: "Une entreprise a une fonction de coût C(q) = 3q + 200 et une fonction de revenu R(q) = 10q. (a) Exprimez la fonction de profit П(q). (b) Calculez le profit pour q = 50.", answer: "(a) П(q) = R(q) - C(q) = 10q - (3q + 200) = 7q - 200.\n\n(b) Pour q = 50 : П(50) = 7×50 - 200 = 350 - 200 = 150." }
       ],
       gameType: "quiz"
     },
     {
       id: "operations-fonctions",
       title: "Opérations sur les fonctions",
-      definition: "Les opérations de base sur les fonctions incluent l'addition (f+g)(x) = f(x)+g(x), la soustraction (f-g)(x) = f(x)-g(x), la multiplication (f·g)(x) = f(x)·g(x), la division (f/g)(x) = f(x)/g(x) pour g(x) ≠ 0, et la composition (f∘g)(x) = f(g(x)). Ces opérations permettent de construire des modèles économiques complexes à partir de fonctions simples.",
-      example: "Si f(x) = 2x+1 et g(x) = x², alors (f+g)(x) = 2x+1+x² et (f∘g)(x) = f(g(x)) = f(x²) = 2x²+1. En économie, si C(q) est une fonction de coût et R(q) une fonction de revenu, alors le profit est P(q) = R(q) - C(q), ce qui correspond à la soustraction de fonctions.",
+      sections: [
+        { title: "Définition", content: "On peut additionner, soustraire, multiplier ou composer des fonctions. En économie, ces opérations permettent de modéliser des situations complexes, comme la combinaison de plusieurs coûts ou la composition de fonctions de production." },
+        { title: "Exemple", content: "Si f(x) = 2x et g(x) = x + 3, alors (f+g)(x) = 2x + x + 3 = 3x + 3. La composition (f∘g)(x) = f(g(x)) = 2(x+3) = 2x + 6." },
+        { title: "Remarque", content: "Les opérations sur les fonctions sont utiles pour l'analyse des coûts totaux, des recettes totales et des fonctions de production composées." }
+      ],
       gameQuestions: [
-        { question: "Si f(x) = 3x-4 et g(x) = x²+2, calculez (f∘g)(3).", answer: "(f∘g)(3) = f(g(3)) = f(9+2) = f(11) = 3×11-4 = 33-4 = 29" },
-        { question: "En économie, comment s'exprime la fonction de profit marginal en termes des fonctions de revenu marginal et coût marginal?", answer: "Profit marginal = Revenu marginal - Coût marginal" }
+        { question: "Si f(x) = x² et g(x) = 3x, calculez (f+g)(2)", answer: "f(2) + g(2) = 4 + 6 = 10" },
+        { question: "Pour f(x) = 2x et g(x) = x + 1, calculez (f∘g)(3)", answer: "f(g(3)) = f(4) = 8" }
       ],
       exercises: [
-        { question: "Une entreprise fabrique deux types de produits. La fonction de coût pour le produit A est C_A(q) = q²+5q+10, et celle pour le produit B est C_B(q) = 2q²+3q+15. (a) Exprimez la fonction de coût total si l'entreprise produit q_A unités du produit A et q_B unités du produit B. (b) Si l'entreprise applique une contrainte telle que q_B = 2q_A, exprimez la fonction de coût total en fonction de q_A uniquement.", answer: "(a) La fonction de coût total est la somme des coûts individuels :\nC(q_A, q_B) = C_A(q_A) + C_B(q_B) = (q_A²+5q_A+10) + (2q_B²+3q_B+15) = q_A²+5q_A+2q_B²+3q_B+25\n\n(b) Si q_B = 2q_A, alors :\nC(q_A) = q_A²+5q_A+2(2q_A)²+3(2q_A)+25\n= q_A²+5q_A+8q_A²+6q_A+25\n= 9q_A²+11q_A+25\n\nCela représente la fonction de coût total exprimée uniquement en fonction de la quantité du produit A." }
-      ],
-      gameType: "quiz"
-    },
-    {
-      id: "proprietes-fonctions",
-      title: "Propriétés des fonctions",
-      definition: "Les fonctions peuvent avoir diverses propriétés : parité (paire si f(-x) = f(x), impaire si f(-x) = -f(x)), périodicité (si f(x+T) = f(x) pour un T > 0), croissance (f croissante si x < y implique f(x) ≤ f(y)), et monotonie. En économie, ces propriétés permettent de comprendre le comportement des variables économiques avec plus de nuances.",
-      example: "La fonction f(x) = x² est paire car f(-x) = (-x)² = x² = f(x). Une fonction de coût fixe C(q) = k est constante, tandis qu'une fonction de coût marginal croissante indique des rendements d'échelle décroissants.",
-      gameQuestions: [
-        { question: "La fonction f(x) = 2x³ + x est-elle paire, impaire ou ni l'une ni l'autre?", answer: "Impaire" },
-        { question: "Si une fonction de demande p(q) est strictement décroissante, qu'est-ce que cela signifie économiquement?", answer: "Plus le prix augmente, plus la quantité demandée diminue (loi de la demande)" }
-      ],
-      exercises: [
-        { question: "La fonction d'utilité d'un consommateur pour deux biens est donnée par U(x, y) = x⁰.⁵ y⁰.⁵, où x et y sont les quantités consommées. (a) Cette fonction est-elle croissante par rapport à chacune des variables? (b) Si le consommateur double sa consommation des deux biens, quel est l'effet sur son utilité? Quelle propriété économique cela illustre-t-il?", answer: "(a) Les dérivées partielles sont : \n∂U/∂x = 0.5x⁻⁰.⁵y⁰.⁵ = 0.5y⁰.⁵/x⁰.⁵ > 0 pour x, y > 0\n∂U/∂y = 0.5x⁰.⁵y⁻⁰.⁵ = 0.5x⁰.⁵/y⁰.⁵ > 0 pour x, y > 0\nDonc la fonction est strictement croissante par rapport à chaque variable, ce qui signifie que l'utilité augmente quand la consommation de l'un ou l'autre bien augmente.\n\n(b) Si x et y sont doublés : U(2x, 2y) = (2x)⁰.⁵(2y)⁰.⁵ = 2⁰.⁵x⁰.⁵ × 2⁰.⁵y⁰.⁵ = 2¹x⁰.⁵y⁰.⁵ = 2U(x,y).\nL'utilité est donc doublée. Cette propriété illustre les rendements d'échelle constants : doubler tous les inputs double l'output, ce qui est caractéristique des fonctions homogènes de degré 1." }
+        { question: "Une entreprise a deux fonctions de coût : C₁(q) = 2q + 100 et C₂(q) = 3q + 50. (a) Exprimez la fonction de coût total. (b) Calculez le coût total pour q = 20.", answer: "(a) C(q) = C₁(q) + C₂(q) = 2q + 100 + 3q + 50 = 5q + 150.\n\n(b) Pour q = 20 : C(20) = 5×20 + 150 = 100 + 150 = 250." }
       ],
       gameType: "tictactoe"
+    },
+    {
+      id: "applications-economie",
+      title: "Applications en économie",
+      sections: [
+        { title: "Définition", content: "Les fonctions sont utilisées en économie pour modéliser les coûts, les recettes, la demande, l'offre, la production, etc. Elles permettent d'analyser l'évolution des grandeurs économiques et d'optimiser les décisions." },
+        { title: "Exemple", content: "La fonction de coût marginal C'(q) permet de déterminer le coût de production d'une unité supplémentaire. La fonction de profit П(q) permet de déterminer la quantité qui maximise le profit." },
+        { title: "Remarque", content: "L'utilisation des fonctions en économie est essentielle pour la prise de décision et la planification stratégique." }
+      ],
+      gameQuestions: [
+        { question: "Si C(q) = 2q + 100, quel est le coût marginal ?", answer: "2" },
+        { question: "Pour la fonction de profit П(q) = 5q - 200, quelle quantité maximise le profit ?", answer: "Il n'y a pas de maximum, la fonction est croissante pour tout q." }
+      ],
+      exercises: [
+        { question: "Une entreprise a une fonction de coût C(q) = 2q + 100 et une fonction de revenu R(q) = 8q. (a) Exprimez la fonction de profit П(q). (b) Calculez le profit pour q = 30.", answer: "(a) П(q) = R(q) - C(q) = 8q - (2q + 100) = 6q - 100.\n\n(b) Pour q = 30 : П(30) = 6×30 - 100 = 180 - 100 = 80." }
+      ],
+      gameType: "quiz"
     }
   ]
 }; 

@@ -5,8 +5,6 @@ export default {
     {
       id: "definition-fonction",
       title: "Définition d'une fonction",
-      definition: "Une fonction est une relation qui associe à chaque élément d'un ensemble de départ un unique élément d'un ensemble d'arrivée.",
-      example: "La fonction f : x → x² associe à chaque nombre réel son carré.",
       sections: [
         { title: "Définition", content: "Une fonction est une relation qui associe à chaque élément d'un ensemble de départ un unique élément d'un ensemble d'arrivée." },
         { title: "Exemple", content: "La fonction f : x → x² associe à chaque nombre réel son carré." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "domaine-definition",
       title: "Domaine de définition",
-      definition: "Le domaine de définition d'une fonction est l'ensemble des valeurs pour lesquelles la fonction est définie.",
-      example: "La fonction f : x → 1/x a pour domaine de définition ℝ\\{0} (tous les réels sauf 0).",
       sections: [
         { title: "Définition", content: "Le domaine de définition d'une fonction est l'ensemble des valeurs pour lesquelles la fonction est définie." },
         { title: "Exemple", content: "La fonction f : x → 1/x a pour domaine de définition ℝ\\{0} (tous les réels sauf 0)." },

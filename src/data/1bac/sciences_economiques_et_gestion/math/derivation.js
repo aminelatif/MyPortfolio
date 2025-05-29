@@ -5,8 +5,11 @@ export default {
     {
       id: "nombre-derive",
       title: "Nombre dérivé et fonction dérivée",
-      definition: "Le nombre dérivé d'une fonction f en un point a est la limite du taux d'accroissement f(a+h)-f(a)/h quand h tend vers 0, noté f'(a). Géométriquement, c'est le coefficient directeur de la tangente à la courbe au point d'abscisse a. La fonction dérivée associe à chaque point x le nombre dérivé f'(x).",
-      example: "Pour f(x) = x², f'(a) = lim[h→0] [(a+h)²-a²]/h = lim[h→0] [a²+2ah+h²-a²]/h = lim[h→0] [2a+h] = 2a. Donc f'(x) = 2x. Pour x = 3, f'(3) = 6, la pente de la tangente à la courbe en x = 3 est 6.",
+      sections: [
+        { title: "Définition", content: "Le nombre dérivé d'une fonction f en un point a est la limite du taux d'accroissement f(a+h)-f(a)/h quand h tend vers 0, noté f'(a). Géométriquement, c'est le coefficient directeur de la tangente à la courbe au point d'abscisse a. La fonction dérivée associe à chaque point x le nombre dérivé f'(x)." },
+        { title: "Exemple", content: "Pour f(x) = x², f'(a) = lim[h→0] [(a+h)²-a²]/h = lim[h→0] [a²+2ah+h²-a²]/h = lim[h→0] [2a+h] = 2a. Donc f'(x) = 2x. Pour x = 3, f'(3) = 6, la pente de la tangente à la courbe en x = 3 est 6." },
+        { title: "Remarque", content: "La dérivée est un outil fondamental en économie pour analyser les variations marginales, comme le coût marginal ou le revenu marginal, qui sont essentiels pour la prise de décision." }
+      ],
       gameQuestions: [
         { question: "Quelle est la dérivée de f(x) = 3x² - 2x + 5 ?", answer: "f'(x) = 6x - 2" },
         { question: "Si f(x) = 1/x, quelle est la dérivée f'(x) ?", answer: "-1/x²" }
@@ -19,8 +22,11 @@ export default {
     {
       id: "formules-derivation",
       title: "Formules et règles de dérivation",
-      definition: "La dérivation suit certaines règles: (u+v)' = u' + v', (λu)' = λu', (uv)' = u'v + uv', (u/v)' = (u'v - uv')/v² (v≠0). Pour les fonctions composées, (f∘g)'(x) = f'(g(x)) × g'(x). Certaines dérivées sont connues: (xⁿ)' = nxⁿ⁻¹, (eˣ)' = eˣ, (ln x)' = 1/x.",
-      example: "Pour f(x) = x²⋅ln(x), par la formule du produit: f'(x) = (x²)'⋅ln(x) + x²⋅(ln(x))' = 2x⋅ln(x) + x²⋅(1/x) = 2x⋅ln(x) + x = x(2ln(x) + 1).",
+      sections: [
+        { title: "Définition", content: "La dérivation suit certaines règles: (u+v)' = u' + v', (λu)' = λu', (uv)' = u'v + uv', (u/v)' = (u'v - uv')/v² (v≠0). Pour les fonctions composées, (f∘g)'(x) = f'(g(x)) × g'(x). Certaines dérivées sont connues: (xⁿ)' = nxⁿ⁻¹, (eˣ)' = eˣ, (ln x)' = 1/x." },
+        { title: "Exemple", content: "Pour f(x) = x²⋅ln(x), par la formule du produit: f'(x) = (x²)'⋅ln(x) + x²⋅(ln(x))' = 2x⋅ln(x) + x²⋅(1/x) = 2x⋅ln(x) + x = x(2ln(x) + 1)." },
+        { title: "Remarque", content: "Ces règles de dérivation sont essentielles pour calculer les élasticités en économie, qui mesurent la sensibilité d'une variable par rapport à une autre." }
+      ],
       gameQuestions: [
         { question: "Dériver f(x) = √x⋅(3x+1)", answer: "f'(x) = 1/(2√x)⋅(3x+1) + √x⋅3 = (3x+1)/(2√x) + 3√x" },
         { question: "Si f(x) = e^(2x+1), quelle est f'(x) ?", answer: "f'(x) = e^(2x+1) × 2 = 2e^(2x+1)" }
@@ -33,8 +39,11 @@ export default {
     {
       id: "applications-economie",
       title: "Applications à l'économie",
-      definition: "En économie, les dérivées sont utilisées pour analyser les fonctions de coût, de revenu et de profit. La dérivée du coût total, C'(q), représente le coût marginal, c'est-à-dire le coût de production d'une unité supplémentaire. De même, R'(q) est le revenu marginal et П'(q) le profit marginal.",
-      example: "Si C(q) = 2q² + 30q + 100 est la fonction de coût total (en euros) pour produire q unités, alors le coût marginal est C'(q) = 4q + 30 euros par unité. Pour q = 10 unités, le coût marginal est C'(10) = 4(10) + 30 = 70 euros.",
+      sections: [
+        { title: "Définition", content: "En économie, les dérivées sont utilisées pour analyser les fonctions de coût, de revenu et de profit. La dérivée du coût total, C'(q), représente le coût marginal, c'est-à-dire le coût de production d'une unité supplémentaire. De même, R'(q) est le revenu marginal et П'(q) le profit marginal." },
+        { title: "Exemple", content: "Si C(q) = 2q² + 30q + 100 est la fonction de coût total (en euros) pour produire q unités, alors le coût marginal est C'(q) = 4q + 30 euros par unité. Pour q = 10 unités, le coût marginal est C'(10) = 4(10) + 30 = 70 euros." },
+        { title: "Remarque", content: "L'analyse marginale est fondamentale en microéconomie pour déterminer les quantités optimales de production et les prix d'équilibre." }
+      ],
       gameQuestions: [
         { question: "Si la fonction de revenu est R(q) = 200q - q², quel est le revenu marginal pour q = 50 ?", answer: "R'(q) = 200 - 2q, donc R'(50) = 200 - 2(50) = 100" },
         { question: "Si C(q) = q³ - 6q² + 12q + 10 est la fonction de coût, quel est le coût marginal ?", answer: "C'(q) = 3q² - 12q + 12" }
@@ -47,8 +56,11 @@ export default {
     {
       id: "optimisation",
       title: "Problèmes d'optimisation en économie",
-      definition: "L'optimisation consiste à trouver les valeurs qui maximisent ou minimisent une fonction. En économie, on cherche souvent à maximiser le profit ou minimiser les coûts. Pour une fonction dérivable f, les points où f'(x) = 0 sont des candidats à être des extrema (maximum ou minimum). Le signe de f''(x) permet de déterminer la nature de l'extremum.",
-      example: "Pour maximiser la fonction de profit П(q) = -2q² + 120q - 100, on résout П'(q) = -4q + 120 = 0, d'où q = 30. Comme П''(q) = -4 < 0, il s'agit bien d'un maximum. Le profit maximal est donc П(30) = -2(30)² + 120(30) - 100 = -1800 + 3600 - 100 = 1700.",
+      sections: [
+        { title: "Définition", content: "L'optimisation consiste à trouver les valeurs qui maximisent ou minimisent une fonction. En économie, on cherche souvent à maximiser le profit ou minimiser les coûts. Pour une fonction dérivable f, les points où f'(x) = 0 sont des candidats à être des extrema (maximum ou minimum). Le signe de f''(x) permet de déterminer la nature de l'extremum." },
+        { title: "Exemple", content: "Pour maximiser la fonction de profit П(q) = -2q² + 120q - 100, on résout П'(q) = -4q + 120 = 0, d'où q = 30. Comme П''(q) = -4 < 0, il s'agit bien d'un maximum. Le profit maximal est donc П(30) = -2(30)² + 120(30) - 100 = -1800 + 3600 - 100 = 1700." },
+        { title: "Remarque", content: "L'optimisation est cruciale en économie pour la prise de décision, que ce soit pour la gestion de production, la fixation des prix ou l'allocation des ressources." }
+      ],
       gameQuestions: [
         { question: "Une entreprise a une fonction de coût C(q) = q² + 20q + 50 et vend son produit au prix unitaire p = 60. Quelle quantité q doit-elle produire pour maximiser son profit ?", answer: "q = 20" },
         { question: "Si la demande pour un produit est donnée par p = 500 - 2q, où p est le prix et q la quantité, et que le coût de production est C(q) = q² + 100, quelle quantité maximise le profit ?", answer: "q = 100" }

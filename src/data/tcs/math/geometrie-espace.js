@@ -5,8 +5,6 @@ export default {
     {
       id: "reperage-espace",
       title: "Repérage dans l'espace",
-      definition: "Le repérage dans l'espace se fait à l'aide d'un repère orthonormé (O, i⃗, j⃗, k⃗) où un point M est repéré par ses trois coordonnées (x, y, z).",
-      example: "Dans l'espace, le point M(3, 2, 5) est situé à 3 unités selon l'axe des x, 2 unités selon l'axe des y et 5 unités selon l'axe des z par rapport à l'origine O.",
       sections: [
         { title: "Définition", content: "Le repérage dans l'espace se fait à l'aide d'un repère orthonormé (O, i⃗, j⃗, k⃗) où un point M est repéré par ses trois coordonnées (x, y, z)." },
         { title: "Exemple", content: "Dans l'espace, le point M(3, 2, 5) est situé à 3 unités selon l'axe des x, 2 unités selon l'axe des y et 5 unités selon l'axe des z par rapport à l'origine O." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "droites-plans",
       title: "Droites et plans dans l'espace",
-      definition: "Une droite dans l'espace peut être définie par un point et un vecteur directeur. Un plan peut être défini par un point et deux vecteurs directeurs non colinéaires, ou par un point et un vecteur normal.",
-      example: "La droite passant par le point A(1, 2, 3) et de vecteur directeur v⃗(2, 1, -1) a pour représentation paramétrique : x = 1 + 2t, y = 2 + t, z = 3 - t.",
       sections: [
         { title: "Définition", content: "Une droite dans l'espace peut être définie par un point et un vecteur directeur. Un plan peut être défini par un point et deux vecteurs directeurs non colinéaires, ou par un point et un vecteur normal." },
         { title: "Exemple", content: "La droite passant par le point A(1, 2, 3) et de vecteur directeur v⃗(2, 1, -1) a pour représentation paramétrique : x = 1 + 2t, y = 2 + t, z = 3 - t." },
@@ -42,8 +38,6 @@ export default {
     {
       id: "solides-usuels",
       title: "Solides usuels",
-      definition: "Les solides usuels sont des figures géométriques en trois dimensions telles que le cube, le parallélépipède rectangle, la sphère, le cylindre, le cône et la pyramide.",
-      example: "Un cube de côté a a pour volume V = a³ et pour aire totale A = 6a².",
       sections: [
         { title: "Définition", content: "Les solides usuels sont des figures géométriques en trois dimensions telles que le cube, le parallélépipède rectangle, la sphère, le cylindre, le cône et la pyramide." },
         { title: "Exemple", content: "Un cube de côté a a pour volume V = a³ et pour aire totale A = 6a²." },

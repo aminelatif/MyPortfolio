@@ -5,8 +5,6 @@ export default {
     {
       id: "projection-definition",
       title: "Définition de la projection",
-      definition: "La projection est une transformation qui associe à un point son ombre sur une droite ou un plan selon une direction donnée.",
-      example: "La projection d'un point M sur une droite D parallèlement à une direction Δ est le point P situé à l'intersection de D et de la droite passant par M et parallèle à Δ.",
       sections: [
         { title: "Définition", content: "La projection est une transformation qui associe à un point son ombre sur une droite ou un plan selon une direction donnée." },
         { title: "Exemple", content: "La projection d'un point M sur une droite D parallèlement à une direction Δ est le point P situé à l'intersection de D et de la droite passant par M et parallèle à Δ." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "projection-vectorielle",
       title: "Projection vectorielle",
-      definition: "La projection d'un vecteur u⃗ sur un vecteur v⃗ est la composante de u⃗ qui est parallèle à v⃗.",
-      example: "La projection de u⃗ sur v⃗ est donnée par la formule : proj_v⃗(u⃗) = (u⃗·v⃗)/(|v⃗|²) × v⃗",
       sections: [
         { title: "Définition", content: "La projection d'un vecteur u⃗ sur un vecteur v⃗ est la composante de u⃗ qui est parallèle à v⃗." },
         { title: "Exemple", content: "La projection de u⃗ sur v⃗ est donnée par la formule : proj_v⃗(u⃗) = (u⃗·v⃗)/(|v⃗|²) × v⃗" },

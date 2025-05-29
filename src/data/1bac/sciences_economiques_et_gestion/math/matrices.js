@@ -3,58 +3,70 @@ export default {
   title: "Matrices",
   parts: [
     {
-      id: "definition-types",
-      title: "Définition et types de matrices",
-      definition: "Une matrice est un tableau rectangulaire de nombres disposés en lignes et colonnes. Une matrice de dimensions m×n comporte m lignes et n colonnes. Les matrices peuvent être carrées (m=n), triangulaires, diagonales, symétriques, etc. En économie, les matrices permettent de représenter et manipuler des données multidimensionnelles, comme les relations entre différents secteurs d'une économie.",
-      example: "La matrice A = $\\begin{pmatrix} 3 & 2 & 1 \\\\ 4 & 5 & 6 \\end{pmatrix}$ est de dimension 2×3 (2 lignes, 3 colonnes). La matrice B = $\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$ est une matrice carrée d'ordre 2, qui est aussi la matrice identité. Dans un modèle économique, une matrice pourrait représenter les quantités de différentes matières premières nécessaires pour produire différents biens.",
+      id: "definition-operations",
+      title: "Définition et opérations",
+      sections: [
+        { title: "Définition", content: "Une matrice est un tableau rectangulaire de nombres. Les matrices sont utilisées en économie pour représenter des systèmes d'équations linéaires, des tableaux d'entrées-sorties, et des modèles d'équilibre général. Les opérations de base sur les matrices sont l'addition, la multiplication par un scalaire, et la multiplication matricielle." },
+        { title: "Exemple", content: "Pour deux matrices A = [[1,2],[3,4]] et B = [[5,6],[7,8]], leur somme est A+B = [[6,8],[10,12]] et leur produit est A×B = [[19,22],[43,50]]. En économie, une matrice de coefficients techniques peut représenter les quantités d'intrants nécessaires pour produire une unité de chaque bien." },
+        { title: "Remarque", content: "Les matrices sont fondamentales pour l'analyse des systèmes économiques complexes et l'étude des interdépendances entre secteurs." }
+      ],
       gameQuestions: [
-        { question: "Quelles sont les dimensions de la matrice $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\\\ 10 & 11 & 12 \\end{pmatrix}$?", answer: "4×3" },
-        { question: "Qu'est-ce qu'une matrice triangulaire supérieure?", answer: "Une matrice carrée dont tous les éléments en dessous de la diagonale principale sont nuls" }
+        { question: "Quelle est la somme des matrices [[1,2],[3,4]] et [[5,6],[7,8]]?", answer: "[[6,8],[10,12]]" },
+        { question: "Quel est le produit de la matrice [[1,2],[3,4]] par le scalaire 2?", answer: "[[2,4],[6,8]]" }
       ],
       exercises: [
-        { question: "Soit la matrice A = $\\begin{pmatrix} 2 & 3 & 5 \\\\ 1 & -2 & 4 \\\\ 0 & 7 & -3 \\end{pmatrix}$. (a) Donnez sa dimension. (b) Est-elle triangulaire? (c) Est-elle symétrique? (d) Quels sont les éléments a₁₃ et a₃₁?", answer: "(a) A est une matrice carrée de dimension 3×3.\n\n(b) A n'est pas triangulaire car elle possède des éléments non nuls à la fois au-dessus et en dessous de la diagonale principale.\n\n(c) A n'est pas symétrique car a₁₂ = 3 ≠ a₂₁ = 1, par exemple.\n\n(d) L'élément a₁₃ est celui qui se trouve à la 1ère ligne et 3ème colonne, soit a₁₃ = 5. L'élément a₃₁ est celui qui se trouve à la 3ème ligne et 1ère colonne, soit a₃₁ = 0." }
-      ],
-      gameType: "quiz"
-    },
-    {
-      id: "operations-matrices",
-      title: "Opérations sur les matrices",
-      definition: "Les principales opérations sur les matrices sont l'addition, la soustraction, la multiplication par un scalaire et la multiplication matricielle. Pour additionner ou soustraire deux matrices, elles doivent avoir les mêmes dimensions. Pour multiplier deux matrices A et B, le nombre de colonnes de A doit être égal au nombre de lignes de B. Ces opérations permettent de modéliser des changements ou des transformations dans les systèmes économiques.",
-      example: "Si A = $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ et B = $\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$, alors A+B = $\\begin{pmatrix} 1+5 & 2+6 \\\\ 3+7 & 4+8 \\end{pmatrix} = \\begin{pmatrix} 6 & 8 \\\\ 10 & 12 \\end{pmatrix}$. Le produit AB = $\\begin{pmatrix} 1×5+2×7 & 1×6+2×8 \\\\ 3×5+4×7 & 3×6+4×8 \\end{pmatrix} = \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$. Dans un modèle économique, la multiplication matricielle peut représenter la combinaison de processus de production.",
-      gameQuestions: [
-        { question: "Si A = $\\begin{pmatrix} 2 & 3 \\\\ 1 & 4 \\end{pmatrix}$ et B = $\\begin{pmatrix} 0 & 1 \\\\ 5 & 2 \\end{pmatrix}$, calculez A + 2B.", answer: "$\\begin{pmatrix} 2+2×0 & 3+2×1 \\\\ 1+2×5 & 4+2×2 \\end{pmatrix} = \\begin{pmatrix} 2 & 5 \\\\ 11 & 8 \\end{pmatrix}$" },
-        { question: "Si A = $\\begin{pmatrix} 2 & 1 \\\\ 3 & 4 \\end{pmatrix}$ et B = $\\begin{pmatrix} 1 & 0 \\\\ 2 & 3 \\end{pmatrix}$, calculez AB.", answer: "$\\begin{pmatrix} 2×1+1×2 & 2×0+1×3 \\\\ 3×1+4×2 & 3×0+4×3 \\end{pmatrix} = \\begin{pmatrix} 4 & 3 \\\\ 11 & 12 \\end{pmatrix}$" }
-      ],
-      exercises: [
-        { question: "Une entreprise fabrique deux produits (P₁ et P₂) qui nécessitent trois types de matières premières (M₁, M₂, M₃). La matrice A = $\\begin{pmatrix} 2 & 3 \\\\ 1 & 2 \\\\ 4 & 1 \\end{pmatrix}$ représente les unités de chaque matière première nécessaires pour fabriquer une unité de chaque produit (aᵢⱼ est le nombre d'unités de Mᵢ pour fabriquer une unité de Pⱼ). Si l'entreprise veut produire 100 unités de P₁ et 150 unités de P₂, utilisez la multiplication matricielle pour déterminer la quantité totale de chaque matière première nécessaire.", answer: "Nous devons calculer le produit de la matrice A par le vecteur de production $\\begin{pmatrix} 100 \\\\ 150 \\end{pmatrix}$ :\n\n$\\begin{pmatrix} 2 & 3 \\\\ 1 & 2 \\\\ 4 & 1 \\end{pmatrix} \\begin{pmatrix} 100 \\\\ 150 \\end{pmatrix} = \\begin{pmatrix} 2×100 + 3×150 \\\\ 1×100 + 2×150 \\\\ 4×100 + 1×150 \\end{pmatrix} = \\begin{pmatrix} 200 + 450 \\\\ 100 + 300 \\\\ 400 + 150 \\end{pmatrix} = \\begin{pmatrix} 650 \\\\ 400 \\\\ 550 \\end{pmatrix}$\n\nDonc, l'entreprise a besoin de 650 unités de M₁, 400 unités de M₂ et 550 unités de M₃." }
+        { question: "Une entreprise produit deux biens A et B. La matrice de coûts unitaires est C = [[10,15],[20,25]], où la première ligne représente les coûts directs et la seconde les coûts indirects. (a) Calculez le coût total pour produire 100 unités de A et 200 unités de B. (b) Si les prix de vente sont respectivement 30 et 40, calculez le profit total.", answer: "(a) Le vecteur de production est P = [100,200]. Le coût total est C×P = [[10,15],[20,25]]×[100,200] = [10×100+15×200, 20×100+25×200] = [4000, 7000]. Le coût total est donc 4000 + 7000 = 11000.\n\n(b) Le revenu total est 100×30 + 200×40 = 11000. Le profit est donc 11000 - 11000 = 0." }
       ],
       gameType: "quiz"
     },
     {
       id: "determinant-inverse",
       title: "Déterminant et matrice inverse",
-      definition: "Le déterminant d'une matrice carrée est un nombre qui fournit des informations importantes sur la matrice. Pour une matrice 2×2, le déterminant est ad-bc. Une matrice carrée A est inversible si et seulement si son déterminant est non nul. L'inverse de A, notée A⁻¹, est la matrice telle que A·A⁻¹ = A⁻¹·A = I (matrice identité). En économie, les matrices inverses sont utilisées pour résoudre des systèmes d'équations linéaires, comme dans les modèles d'entrées-sorties.",
-      example: "Pour la matrice A = $\\begin{pmatrix} 3 & 1 \\\\ 2 & 2 \\end{pmatrix}$, le déterminant est det(A) = 3×2 - 1×2 = 6 - 2 = 4. Comme det(A) ≠ 0, A est inversible. Son inverse est A⁻¹ = $\\frac{1}{det(A)} \\begin{pmatrix} 2 & -1 \\\\ -2 & 3 \\end{pmatrix} = \\frac{1}{4} \\begin{pmatrix} 2 & -1 \\\\ -2 & 3 \\end{pmatrix} = \\begin{pmatrix} 0.5 & -0.25 \\\\ -0.5 & 0.75 \\end{pmatrix}$",
+      sections: [
+        { title: "Définition", content: "Le déterminant d'une matrice carrée est un nombre qui caractérise certaines propriétés de la matrice. Une matrice carrée est inversible si et seulement si son déterminant est non nul. La matrice inverse A^(-1) d'une matrice A vérifie A×A^(-1) = A^(-1)×A = I, où I est la matrice identité. En économie, les matrices inverses sont utilisées pour résoudre des systèmes d'équations et calculer des multiplicateurs." },
+        { title: "Exemple", content: "Pour une matrice A = [[a,b],[c,d]], le déterminant est det(A) = ad-bc. Si det(A) ≠ 0, alors A^(-1) = (1/det(A))×[[d,-b],[-c,a]]. Dans un modèle d'équilibre général, la matrice inverse des coefficients techniques permet de calculer les effets d'une variation de la demande finale sur la production totale." },
+        { title: "Remarque", content: "Le déterminant et l'inverse sont cruciaux pour l'analyse des systèmes économiques et la résolution des modèles d'équilibre." }
+      ],
       gameQuestions: [
-        { question: "Quel est le déterminant de la matrice $\\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$?", answer: "4×3 - 2×1 = 12 - 2 = 10" },
-        { question: "Une matrice dont le déterminant est égal à zéro est-elle inversible?", answer: "Non, une telle matrice n'est pas inversible" }
+        { question: "Quel est le déterminant de la matrice [[2,3],[4,5]]?", answer: "2×5 - 3×4 = -2" },
+        { question: "Une matrice est-elle inversible si son déterminant est nul?", answer: "Non" }
       ],
       exercises: [
-        { question: "Considérez la matrice A = $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$. (a) Calculez son déterminant. (b) Si possible, trouvez sa matrice inverse A⁻¹. (c) Vérifiez que A·A⁻¹ = I.", answer: "(a) det(A) = 2×3 - 1×5 = 6 - 5 = 1\n\n(b) Comme det(A) = 1 ≠ 0, A est inversible.\nA⁻¹ = $\\frac{1}{det(A)} \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$\n\n(c) Vérifions que A·A⁻¹ = I :\nA·A⁻¹ = $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix} \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix} = \\begin{pmatrix} 2×3 + 1×(-5) & 2×(-1) + 1×2 \\\\ 5×3 + 3×(-5) & 5×(-1) + 3×2 \\end{pmatrix} = \\begin{pmatrix} 6 - 5 & -2 + 2 \\\\ 15 - 15 & -5 + 6 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix} = I$" }
+        { question: "Dans un modèle d'équilibre général, la matrice des coefficients techniques est A = [[0.2,0.3],[0.4,0.1]]. (a) Calculez le déterminant de (I-A), où I est la matrice identité. (b) Déterminez si la matrice (I-A) est inversible. (c) Si la demande finale est [100,200], calculez la production totale nécessaire.", answer: "(a) I-A = [[0.8,-0.3],[-0.4,0.9]]. Le déterminant est 0.8×0.9 - (-0.3)×(-0.4) = 0.72 - 0.12 = 0.6.\n\n(b) Comme le déterminant est non nul (0.6), la matrice (I-A) est inversible.\n\n(c) La production totale X vérifie (I-A)X = D, où D est la demande finale. Donc X = (I-A)^(-1)×D. La matrice inverse est (1/0.6)×[[0.9,0.3],[0.4,0.8]] = [[1.5,0.5],[0.67,1.33]]. Donc X = [[1.5,0.5],[0.67,1.33]]×[100,200] = [250,233]." }
       ],
       gameType: "tictactoe"
     },
     {
       id: "applications-economie",
       title: "Applications en économie",
-      definition: "Les matrices sont largement utilisées en économie, notamment dans les modèles d'entrées-sorties de Leontief, l'analyse des chaînes de Markov pour les parts de marché, les modèles d'équilibre général, et la résolution de systèmes d'équations linéaires. Elles permettent de représenter les interdépendances complexes entre les différents secteurs d'une économie ou les différentes variables économiques.",
-      example: "Dans un modèle d'entrées-sorties avec 3 secteurs (agriculture, industrie, services), une matrice A = $\\begin{pmatrix} 0.2 & 0.1 & 0.0 \\\\ 0.3 & 0.4 & 0.2 \\\\ 0.1 & 0.2 & 0.3 \\end{pmatrix}$ pourrait représenter les coefficients techniques, où aᵢⱼ est la quantité produite par le secteur i nécessaire pour produire une unité dans le secteur j. Si la demande finale est d = $\\begin{pmatrix} 100 \\\\ 200 \\\\ 300 \\end{pmatrix}$, alors la production totale x nécessaire pour satisfaire cette demande est donnée par x = (I-A)⁻¹d.",
+      sections: [
+        { title: "Définition", content: "Les matrices sont des outils essentiels en économie pour l'analyse des tableaux d'entrées-sorties, la résolution de systèmes d'équations d'équilibre, et l'étude des multiplicateurs. Elles permettent de modéliser les interdépendances entre secteurs économiques et d'analyser les effets d'une variation de la demande finale sur l'ensemble de l'économie." },
+        { title: "Exemple", content: "Dans un tableau d'entrées-sorties, la matrice A des coefficients techniques montre les quantités d'intrants nécessaires pour produire une unité de chaque bien. La matrice (I-A)^(-1) est la matrice des multiplicateurs, qui permet de calculer les effets totaux d'une variation de la demande finale. Pour une économie à deux secteurs, si A = [[0.2,0.3],[0.4,0.1]], alors (I-A)^(-1) = [[1.5,0.5],[0.67,1.33]]." },
+        { title: "Remarque", content: "L'analyse des matrices en économie permet de comprendre les effets d'entraînement et les interdépendances sectorielles." }
+      ],
       gameQuestions: [
-        { question: "Dans un modèle à deux secteurs, si la matrice des coefficients techniques est A = $\\begin{pmatrix} 0.2 & 0.3 \\\\ 0.4 & 0.1 \\end{pmatrix}$, que représente l'élément a₁₂ = 0.3?", answer: "La quantité produite par le secteur 1 nécessaire pour produire une unité dans le secteur 2" },
-        { question: "Dans un modèle d'entrées-sorties, pourquoi la matrice (I-A) doit-elle être inversible?", answer: "Pour pouvoir calculer la production totale nécessaire pour satisfaire la demande finale" }
+        { question: "Dans un tableau d'entrées-sorties, que représente la matrice des coefficients techniques?", answer: "Les quantités d'intrants nécessaires pour produire une unité de chaque bien" },
+        { question: "Que permet de calculer la matrice (I-A)^(-1) dans un modèle d'équilibre général?", answer: "Les effets totaux d'une variation de la demande finale" }
       ],
       exercises: [
-        { question: "Considérez une économie simplifiée à deux secteurs (1 : Agriculture, 2 : Industrie) avec la matrice des coefficients techniques A = $\\begin{pmatrix} 0.2 & 0.3 \\\\ 0.4 & 0.5 \\end{pmatrix}$. (a) Calculez la matrice (I-A). (b) Déterminez si cette matrice est inversible en calculant son déterminant. (c) Si la demande finale est d = $\\begin{pmatrix} 100 \\\\ 150 \\end{pmatrix}$, calculez la production totale nécessaire x = (I-A)⁻¹d.", answer: "(a) I-A = $\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix} - \\begin{pmatrix} 0.2 & 0.3 \\\\ 0.4 & 0.5 \\end{pmatrix} = \\begin{pmatrix} 0.8 & -0.3 \\\\ -0.4 & 0.5 \\end{pmatrix}$\n\n(b) det(I-A) = 0.8×0.5 - (-0.3)×(-0.4) = 0.4 - 0.12 = 0.28 ≠ 0, donc (I-A) est inversible.\n\n(c) (I-A)⁻¹ = $\\frac{1}{det(I-A)} \\begin{pmatrix} 0.5 & 0.3 \\\\ 0.4 & 0.8 \\end{pmatrix} = \\frac{1}{0.28} \\begin{pmatrix} 0.5 & 0.3 \\\\ 0.4 & 0.8 \\end{pmatrix} ≈ \\begin{pmatrix} 1.79 & 1.07 \\\\ 1.43 & 2.86 \\end{pmatrix}$\n\nLa production totale nécessaire est :\nx = (I-A)⁻¹d = $\\begin{pmatrix} 1.79 & 1.07 \\\\ 1.43 & 2.86 \\end{pmatrix} \\begin{pmatrix} 100 \\\\ 150 \\end{pmatrix} = \\begin{pmatrix} 1.79×100 + 1.07×150 \\\\ 1.43×100 + 2.86×150 \\end{pmatrix} = \\begin{pmatrix} 179 + 160.5 \\\\ 143 + 429 \\end{pmatrix} = \\begin{pmatrix} 339.5 \\\\ 572 \\end{pmatrix}$\n\nLe secteur 1 (Agriculture) doit produire environ 339.5 unités et le secteur 2 (Industrie) environ 572 unités pour satisfaire la demande finale." }
+        { question: "Une économie est composée de deux secteurs : l'agriculture et l'industrie. La matrice des coefficients techniques est A = [[0.2,0.3],[0.4,0.1]]. (a) Interprétez les coefficients de cette matrice. (b) Si la demande finale augmente de 100 unités dans le secteur agricole et de 200 unités dans le secteur industriel, calculez l'augmentation totale de la production dans chaque secteur. (c) Calculez le multiplicateur total de cette économie.", answer: "(a) Les coefficients indiquent que :\n- Pour produire 1 unité agricole, il faut 0.2 unité agricole et 0.4 unité industrielle\n- Pour produire 1 unité industrielle, il faut 0.3 unité agricole et 0.1 unité industrielle\n\n(b) La matrice (I-A)^(-1) = [[1.5,0.5],[0.67,1.33]]. L'augmentation de la production est donc :\n[[1.5,0.5],[0.67,1.33]]×[100,200] = [250,233]\n\n(c) Le multiplicateur total est la somme des éléments de la matrice (I-A)^(-1), soit 1.5 + 0.5 + 0.67 + 1.33 = 4. Cela signifie qu'une augmentation de 1 unité de la demande finale génère une augmentation totale de 4 unités de production." }
+      ],
+      gameType: "quiz"
+    },
+    {
+      id: "modeles-economiques",
+      title: "Modèles économiques et matrices",
+      sections: [
+        { title: "Définition", content: "Les matrices sont utilisées dans de nombreux modèles économiques, notamment les modèles d'équilibre général, les modèles de croissance, et les modèles de planification. Elles permettent de représenter les relations entre variables économiques et de résoudre des systèmes d'équations complexes. Les modèles matriciels sont particulièrement utiles pour l'analyse des politiques économiques et la prévision des effets des chocs exogènes." },
+        { title: "Exemple", content: "Dans un modèle de croissance à deux secteurs, la matrice de transition A représente les coefficients de capital par unité de production. La solution du système X(t+1) = AX(t) + D(t) donne l'évolution de la production au fil du temps. Pour une matrice A = [[0.8,0.2],[0.3,0.7]] et une demande finale constante D = [100,200], la production d'équilibre est X = (I-A)^(-1)D = [500,1000]." },
+        { title: "Remarque", content: "Les modèles matriciels sont fondamentaux pour l'analyse des politiques économiques et la planification stratégique." }
+      ],
+      gameQuestions: [
+        { question: "Dans un modèle de croissance, que représente la matrice de transition?", answer: "Les coefficients de capital par unité de production" },
+        { question: "Comment calcule-t-on la production d'équilibre dans un modèle matriciel?", answer: "X = (I-A)^(-1)D" }
+      ],
+      exercises: [
+        { question: "Un économiste étudie un modèle de croissance à deux secteurs. La matrice de transition est A = [[0.8,0.2],[0.3,0.7]] et la demande finale est D = [100,200]. (a) Calculez la production d'équilibre. (b) Si la demande finale augmente de 10% dans chaque secteur, quelle est la nouvelle production d'équilibre? (c) Calculez le multiplicateur de cette économie.", answer: "(a) La production d'équilibre est X = (I-A)^(-1)D. I-A = [[0.2,-0.2],[-0.3,0.3]]. Le déterminant est 0.06. La matrice inverse est (1/0.06)×[[0.3,0.2],[0.3,0.2]] = [[5,3.33],[5,3.33]]. Donc X = [[5,3.33],[5,3.33]]×[100,200] = [1166.67,1166.67].\n\n(b) La nouvelle demande finale est D' = [110,220]. La nouvelle production d'équilibre est X' = [[5,3.33],[5,3.33]]×[110,220] = [1283.33,1283.33].\n\n(c) Le multiplicateur est la somme des éléments de la matrice (I-A)^(-1), soit 5 + 3.33 + 5 + 3.33 = 16.66. Cela signifie qu'une augmentation de 1 unité de la demande finale génère une augmentation totale de 16.66 unités de production." }
       ],
       gameType: "quiz"
     }

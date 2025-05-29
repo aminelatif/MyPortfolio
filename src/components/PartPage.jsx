@@ -332,24 +332,6 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
               </div>
             ))}
 
-            <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200 min-h-[200px]">
-              <div className="p-8">
-                <h3 className="text-xl font-semibold mb-6 text-blue-700">Définition</h3>
-                <div className="text-gray-800 text-base leading-relaxed">
-                  {renderWithMath(part.definition)}
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
-              <div className="p-8">
-                <h3 className="text-xl font-semibold mb-6 text-blue-700">Exemple</h3>
-                <div className="text-gray-800 text-base leading-relaxed">
-                  {renderWithMath(part.example)}
-                </div>
-              </div>
-            </div>
-
             <button
               className={`btn btn-success mt-4 ${completedSteps.includes('cours') ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={() => completeStep('cours')}

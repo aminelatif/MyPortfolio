@@ -5,8 +5,11 @@ export default {
     {
       id: "principes-denombrement",
       title: "Principes fondamentaux du dénombrement",
-      definition: "Le dénombrement est l'étude du nombre de façons d'arranger ou de choisir des objets. Deux principes fondamentaux sont le principe multiplicatif (si une opération peut être réalisée en m façons, suivie d'une seconde opération en n façons, alors l'ensemble peut être réalisé en m×n façons) et le principe additif (si une tâche peut être réalisée soit en m façons, soit en n façons, alors le nombre total de façons est m+n).",
-      example: "Une entreprise propose 3 modèles de téléphones et 4 forfaits différents. Par le principe multiplicatif, un client peut choisir parmi 3×4=12 combinaisons téléphone-forfait. Si un restaurant propose 5 entrées, 8 plats et 4 desserts, un client qui choisit un menu complet a 5×8×4=160 possibilités.",
+      sections: [
+        { title: "Définition", content: "Le dénombrement est l'étude du nombre de façons d'arranger ou de choisir des objets. Deux principes fondamentaux sont le principe multiplicatif (si une opération peut être réalisée en m façons, suivie d'une seconde opération en n façons, alors l'ensemble peut être réalisé en m×n façons) et le principe additif (si une tâche peut être réalisée soit en m façons, soit en n façons, alors le nombre total de façons est m+n)." },
+        { title: "Exemple", content: "Une entreprise propose 3 modèles de téléphones et 4 forfaits différents. Par le principe multiplicatif, un client peut choisir parmi 3×4=12 combinaisons téléphone-forfait. Si un restaurant propose 5 entrées, 8 plats et 4 desserts, un client qui choisit un menu complet a 5×8×4=160 possibilités." },
+        { title: "Remarque", content: "Ces principes sont fondamentaux en économie pour évaluer les possibilités de choix des consommateurs et planifier les combinaisons de produits." }
+      ],
       gameQuestions: [
         { question: "Une agence de voyage propose 4 destinations et 3 types d'hébergement pour chaque destination. Combien de choix différents un client a-t-il?", answer: "12 choix" },
         { question: "Un magasin vend des ordinateurs avec 3 processeurs différents, 2 types de mémoire RAM et 2 disques durs. Combien de configurations différentes sont disponibles?", answer: "12 configurations" }
@@ -19,8 +22,11 @@ export default {
     {
       id: "permutations",
       title: "Permutations et arrangements",
-      definition: "Une permutation est un arrangement ordonné de tous les éléments d'un ensemble. Le nombre de permutations de n éléments distincts est n! = n×(n-1)×...×2×1. Un arrangement est une sélection ordonnée de k éléments parmi n (avec k ≤ n). Le nombre d'arrangements est A(n,k) = n!/(n-k)! = n×(n-1)×...×(n-k+1).",
-      example: "Dans une entreprise de 5 employés, le nombre de façons de constituer un ordre de passage pour une présentation est 5! = 5×4×3×2×1 = 120. Pour choisir 3 finalistes parmi 10 candidats et les classer (or, argent, bronze), le nombre d'arrangements est A(10,3) = 10!/(10-3)! = 10×9×8 = 720.",
+      sections: [
+        { title: "Définition", content: "Une permutation est un arrangement ordonné de tous les éléments d'un ensemble. Le nombre de permutations de n éléments distincts est n! = n×(n-1)×...×2×1. Un arrangement est une sélection ordonnée de k éléments parmi n (avec k ≤ n). Le nombre d'arrangements est A(n,k) = n!/(n-k)! = n×(n-1)×...×(n-k+1)." },
+        { title: "Exemple", content: "Dans une entreprise de 5 employés, le nombre de façons de constituer un ordre de passage pour une présentation est 5! = 5×4×3×2×1 = 120. Pour choisir 3 finalistes parmi 10 candidats et les classer (or, argent, bronze), le nombre d'arrangements est A(10,3) = 10!/(10-3)! = 10×9×8 = 720." },
+        { title: "Remarque", content: "Les permutations et arrangements sont essentiels en économie pour l'analyse des ordres de priorité, des classements et des séquences de décision." }
+      ],
       gameQuestions: [
         { question: "Combien y a-t-il de permutations possibles des lettres du mot 'PARIS'?", answer: "5! = 120 permutations" },
         { question: "Dans un conseil d'administration de 8 personnes, de combien de façons peut-on choisir un président, un vice-président et un trésorier?", answer: "A(8,3) = 8×7×6 = 336 façons" }
@@ -33,8 +39,11 @@ export default {
     {
       id: "combinaisons",
       title: "Combinaisons et coefficients binomiaux",
-      definition: "Une combinaison est une sélection non ordonnée de k éléments parmi n (avec k ≤ n). Le nombre de combinaisons est C(n,k) = n!/(k!×(n-k)!) et est aussi noté (n k). Ces nombres sont appelés coefficients binomiaux car ils apparaissent dans le développement de (a+b)^n. En économie, ils sont utilisés pour calculer le nombre de portefeuilles d'actifs possibles.",
-      example: "Pour former un comité de 3 personnes parmi 7 candidats, le nombre de possibilités est C(7,3) = 7!/(3!×4!) = 35. Lors d'un tirage de loto, le nombre de combinaisons de 6 numéros parmi 49 est C(49,6) = 49!/(6!×43!) = 13 983 816.",
+      sections: [
+        { title: "Définition", content: "Une combinaison est une sélection non ordonnée de k éléments parmi n (avec k ≤ n). Le nombre de combinaisons est C(n,k) = n!/(k!×(n-k)!) et est aussi noté (n k). Ces nombres sont appelés coefficients binomiaux car ils apparaissent dans le développement de (a+b)^n. En économie, ils sont utilisés pour calculer le nombre de portefeuilles d'actifs possibles." },
+        { title: "Exemple", content: "Pour former un comité de 3 personnes parmi 7 candidats, le nombre de possibilités est C(7,3) = 7!/(3!×4!) = 35. Lors d'un tirage de loto, le nombre de combinaisons de 6 numéros parmi 49 est C(49,6) = 49!/(6!×43!) = 13 983 816." },
+        { title: "Remarque", content: "Les combinaisons sont fondamentales en finance pour l'analyse des portefeuilles d'investissement et la diversification des risques." }
+      ],
       gameQuestions: [
         { question: "Un investisseur souhaite choisir 4 actions parmi 10 pour constituer son portefeuille. Combien de portefeuilles différents peut-il former?", answer: "C(10,4) = 210 portefeuilles" },
         { question: "Dans le développement de (x+y)^5, quel est le coefficient de x^2y^3?", answer: "C(5,2) = 10" }
@@ -47,8 +56,11 @@ export default {
     {
       id: "applications-economie",
       title: "Applications en économie et statistiques",
-      definition: "En économie et en statistiques, les techniques de dénombrement sont essentielles pour calculer les probabilités, analyser des combinaisons d'investissements ou de produits, et évaluer le nombre de résultats possibles dans des situations de décision. Le dénombrement est également utilisé en marketing pour déterminer toutes les combinaisons possibles de caractéristiques de produits.",
-      example: "Une entreprise propose 4 produits différents dans 3 gammes de prix. Pour une étude de marché visant à analyser les préférences des consommateurs, il faut considérer 4×3=12 scénarios distincts. Si une banque propose 5 types de prêts immobiliers, 3 durées et 4 options de remboursement, elle doit gérer 5×3×4=60 produits financiers différents.",
+      sections: [
+        { title: "Définition", content: "En économie et en statistiques, les techniques de dénombrement sont essentielles pour calculer les probabilités, analyser des combinaisons d'investissements ou de produits, et évaluer le nombre de résultats possibles dans des situations de décision. Le dénombrement est également utilisé en marketing pour déterminer toutes les combinaisons possibles de caractéristiques de produits." },
+        { title: "Exemple", content: "Une entreprise propose 4 produits différents dans 3 gammes de prix. Pour une étude de marché visant à analyser les préférences des consommateurs, il faut considérer 4×3=12 scénarios distincts. Si une banque propose 5 types de prêts immobiliers, 3 durées et 4 options de remboursement, elle doit gérer 5×3×4=60 produits financiers différents." },
+        { title: "Remarque", content: "Le dénombrement est crucial pour l'analyse des marchés, la gestion des risques et la planification stratégique en entreprise." }
+      ],
       gameQuestions: [
         { question: "Un fabricant propose 3 modèles de téléphones, chacun disponible en 4 couleurs et 2 capacités de stockage. Combien d'options différentes doit-il gérer dans son inventaire?", answer: "3×4×2 = 24 options" },
         { question: "Dans un sondage, on demande de classer 4 marques par ordre de préférence. Combien de classements différents les répondants peuvent-ils fournir?", answer: "4! = 24 classements" }

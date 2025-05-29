@@ -6,8 +6,11 @@ export default {
     {
       id: "definition-produit-scalaire",
       title: "Définition du produit scalaire",
-      definition: "Le produit scalaire de deux vecteurs u et v est un nombre réel noté u·v, égal à |u||v|cos(θ), où θ est l'angle entre u et v.",
-      example: "Si u = (1,2,3) et v = (4,5,6), alors u·v = 1×4 + 2×5 + 3×6 = 32.",
+      sections: [
+        { title: "Définition", content: "Le produit scalaire de deux vecteurs u et v est un nombre réel noté u·v, égal à |u||v|cos(θ), où θ est l'angle entre u et v." },
+        { title: "Exemple", content: "Si u = (1,2,3) et v = (4,5,6), alors u·v = 1×4 + 2×5 + 3×6 = 32." },
+        { title: "Remarque", content: "Le produit scalaire est fondamental pour l'étude des angles et des projections en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Calculez le produit scalaire de u = (2,0,1) et v = (1,3,2).", answer: "4" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "proprietes-produit-scalaire",
       title: "Propriétés du produit scalaire",
-      definition: "Le produit scalaire est commutatif et distributif par rapport à l'addition vectorielle.",
-      example: "u·v = v·u et u·(v + w) = u·v + u·w.",
+      sections: [
+        { title: "Définition", content: "Le produit scalaire est commutatif et distributif par rapport à l'addition vectorielle." },
+        { title: "Exemple", content: "u·v = v·u et u·(v + w) = u·v + u·w." },
+        { title: "Remarque", content: "Les propriétés du produit scalaire facilitent les calculs vectoriels en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Le produit scalaire est-il commutatif ?", answer: "Oui" }
       ],

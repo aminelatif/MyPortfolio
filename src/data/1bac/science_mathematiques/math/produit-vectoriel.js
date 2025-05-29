@@ -5,8 +5,11 @@ export default {
     {
       id: "definition-proprietes",
       title: "Définition et propriétés",
-      definition: "Le produit vectoriel de deux vecteurs u⃗ et v⃗ est un vecteur noté u⃗ × v⃗, orthogonal à u⃗ et v⃗, de norme ||u⃗ × v⃗|| = ||u⃗|| · ||v⃗|| · sin(θ) où θ est l'angle entre u⃗ et v⃗, et de sens donné par la règle de la main droite.",
-      example: "Si u⃗(1, 0, 0) et v⃗(0, 1, 0) sont les vecteurs unitaires selon les axes x et y, alors u⃗ × v⃗ = (0, 0, 1) est le vecteur unitaire selon l'axe z.",
+      sections: [
+        { title: "Définition", content: "Le produit vectoriel de deux vecteurs u⃗ et v⃗ est un vecteur noté u⃗ × v⃗, orthogonal à u⃗ et v⃗, de norme ||u⃗ × v⃗|| = ||u⃗|| · ||v⃗|| · sin(θ) où θ est l'angle entre u⃗ et v⃗, et de sens donné par la règle de la main droite." },
+        { title: "Exemple", content: "Si u⃗(1, 0, 0) et v⃗(0, 1, 0) sont les vecteurs unitaires selon les axes x et y, alors u⃗ × v⃗ = (0, 0, 1) est le vecteur unitaire selon l'axe z." },
+        { title: "Remarque", content: "Le produit vectoriel est nul si les vecteurs sont colinéaires." }
+      ],
       gameQuestions: [
         { question: "Que vaut la norme du produit vectoriel de deux vecteurs orthogonaux de norme 1 ?", answer: "1" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "calcul-produit-vectoriel",
       title: "Calcul du produit vectoriel",
-      definition: "Si u⃗(x₁, y₁, z₁) et v⃗(x₂, y₂, z₂), alors u⃗ × v⃗ = (y₁z₂ - z₁y₂, z₁x₂ - x₁z₂, x₁y₂ - y₁x₂). On peut utiliser le déterminant : u⃗ × v⃗ = det(i⃗, j⃗, k⃗, x₁, y₁, z₁, x₂, y₂, z₂).",
-      example: "Le produit vectoriel de u⃗(1, 2, 3) et v⃗(4, 5, 6) est u⃗ × v⃗ = (2·6 - 3·5, 3·4 - 1·6, 1·5 - 2·4) = (-3, 6, -3).",
+      sections: [
+        { title: "Définition", content: "Si u⃗(x₁, y₁, z₁) et v⃗(x₂, y₂, z₂), alors u⃗ × v⃗ = (y₁z₂ - z₁y₂, z₁x₂ - x₁z₂, x₁y₂ - y₁x₂). On peut utiliser le déterminant : u⃗ × v⃗ = det(i⃗, j⃗, k⃗, x₁, y₁, z₁, x₂, y₂, z₂)." },
+        { title: "Exemple", content: "Le produit vectoriel de u⃗(1, 2, 3) et v⃗(4, 5, 6) est u⃗ × v⃗ = (2·6 - 3·5, 3·4 - 1·6, 1·5 - 2·4) = (-3, 6, -3)." },
+        { title: "Remarque", content: "Le produit vectoriel permet de calculer l'aire d'un parallélogramme ou d'un triangle." }
+      ],
       gameQuestions: [
         { question: "Comment calculer l'aire d'un parallélogramme construit sur deux vecteurs u⃗ et v⃗ ?", answer: "Aire = ||u⃗ × v⃗||" }
       ],
@@ -31,8 +37,11 @@ export default {
     {
       id: "applications-geometriques",
       title: "Applications géométriques",
-      definition: "Le produit vectoriel est utilisé pour calculer des aires, déterminer l'équation d'un plan, vérifier que trois points sont alignés, et définir des repères orthonormés directs.",
-      example: "L'équation du plan passant par un point A et de vecteurs directeurs u⃗ et v⃗ peut s'écrire sous la forme (u⃗ × v⃗)(M - A) = 0.",
+      sections: [
+        { title: "Définition", content: "Le produit vectoriel est utilisé pour calculer des aires, déterminer l'équation d'un plan, vérifier que trois points sont alignés, et définir des repères orthonormés directs." },
+        { title: "Exemple", content: "L'équation du plan passant par un point A et de vecteurs directeurs u⃗ et v⃗ peut s'écrire sous la forme (u⃗ × v⃗)(M - A) = 0." },
+        { title: "Remarque", content: "Le produit vectoriel permet de vérifier l'alignement de trois points." }
+      ],
       gameQuestions: [
         { question: "Comment calculer le volume d'un parallélépipède construit sur trois vecteurs u⃗, v⃗ et w⃗ ?", answer: "Volume = |(u⃗ × v⃗) · w⃗|" }
       ],

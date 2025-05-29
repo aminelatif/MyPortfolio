@@ -5,8 +5,6 @@ export default {
     {
       id: "divisibility",
       title: "Divisibilité",
-      definition: "Un nombre a est divisible par b si et seulement s'il existe un entier k tel que a = b × k.",
-      example: "12 est divisible par 3 car 12 = 3 × 4",
       sections: [
         { title: "Définition", content: "Un nombre $a$ est divisible par $b$ si et seulement s'il existe un entier k tel que $a = b × k.$" },
         { title: "Exemple", content: "12 est divisible par 3 car 12 = 3 × 4" },
@@ -25,8 +23,6 @@ export default {
     {
       id: "pgcd",
       title: "PGCD",
-      definition: "Le PGCD (Plus Grand Commun Diviseur) de deux nombres entiers a et b est le plus grand entier qui divise à la fois a et b.",
-      example: "PGCD(12, 18) = 6 car 6 est le plus grand nombre qui divise à la fois 12 et 18",
       sections: [
         { title: "Définition", content: "Le PGCD (Plus Grand Commun Diviseur) de deux nombres entiers a et b est le plus grand entier qui divise à la fois a et b." },
         { title: "Exemple", content: "PGCD(12, 18) = 6 car 6 est le plus grand nombre qui divise à la fois 12 et 18" },

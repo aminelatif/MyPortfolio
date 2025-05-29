@@ -5,8 +5,20 @@ export default {
     {
       id: "notion-representation",
       title: "Notion de représentation graphique",
-      definition: "La représentation graphique d'une fonction f est l'ensemble des points de coordonnées (x, f(x)) dans un repère cartésien, où x parcourt le domaine de définition de f. Cette courbe, notée Cf, permet de visualiser le comportement de la fonction et ses propriétés (croissance, extrema, symétries, etc.).",
-      example: "Pour la fonction f(x) = x², la représentation graphique est une parabole d'équation y = x². Si x = 2, alors f(2) = 4, ce qui correspond au point (2, 4) sur la courbe.",
+      sections: [
+        {
+          title: "Définition",
+          content: "La représentation graphique d'une fonction f est l'ensemble des points de coordonnées (x, f(x)) dans un repère cartésien, où x parcourt le domaine de définition de f. Cette courbe, notée Cf, permet de visualiser le comportement de la fonction et ses propriétés (croissance, extrema, symétries, etc.)."
+        },
+        {
+          title: "Exemple",
+          content: "Pour la fonction f(x) = x², la représentation graphique est une parabole d'équation y = x². Si x = 2, alors f(2) = 4, ce qui correspond au point (2, 4) sur la courbe."
+        },
+        {
+          title: "Remarque",
+          content: "La représentation graphique est un outil puissant pour comprendre le comportement d'une fonction. Elle permet de visualiser immédiatement les propriétés qui seraient difficiles à déduire uniquement de l'expression algébrique."
+        }
+      ],
       gameQuestions: [
         { question: "Quel est le point de la courbe représentative de f(x) = 3x - 1 correspondant à x = 2?", answer: "(2, 5)" },
         { question: "Si un point de coordonnées (3, 7) appartient à la courbe représentative d'une fonction f, que vaut f(3)?", answer: "f(3) = 7" }
@@ -19,8 +31,20 @@ export default {
     {
       id: "elements-caracteristiques",
       title: "Éléments caractéristiques d'une courbe",
-      definition: "Les éléments caractéristiques d'une courbe incluent : le domaine de définition, les intersections avec les axes, les extrema (maximum, minimum), les asymptotes, les points d'inflexion, les intervalles de croissance et décroissance, et les symétries éventuelles. Ces éléments permettent d'esquisser et d'analyser la courbe.",
-      example: "Pour f(x) = 1/x, la courbe présente deux branches infinies avec des asymptotes : l'axe des ordonnées (x = 0) et l'axe des abscisses (y = 0). La fonction est décroissante sur ]−∞, 0[ et sur ]0, +∞[, et la courbe présente une symétrie par rapport à l'origine.",
+      sections: [
+        {
+          title: "Définition",
+          content: "Les éléments caractéristiques d'une courbe incluent : le domaine de définition, les intersections avec les axes, les extrema (maximum, minimum), les asymptotes, les points d'inflexion, les intervalles de croissance et décroissance, et les symétries éventuelles. Ces éléments permettent d'esquisser et d'analyser la courbe."
+        },
+        {
+          title: "Exemple",
+          content: "Pour f(x) = 1/x, la courbe présente deux branches infinies avec des asymptotes : l'axe des ordonnées (x = 0) et l'axe des abscisses (y = 0). La fonction est décroissante sur ]−∞, 0[ et sur ]0, +∞[, et la courbe présente une symétrie par rapport à l'origine."
+        },
+        {
+          title: "Remarque",
+          content: "L'étude des éléments caractéristiques d'une courbe est une étape essentielle avant son tracé. Elle permet d'avoir une vision globale du comportement de la fonction et d'éviter les erreurs courantes dans la représentation graphique."
+        }
+      ],
       gameQuestions: [
         { question: "Quelle est l'équation de l'asymptote horizontale de la fonction f(x) = (3x-1)/(x+2) quand x tend vers +∞?", answer: "y = 3" },
         { question: "Pour la fonction g(x) = x³ - 3x² + 2, en quel point la tangente à la courbe est-elle horizontale?", answer: "Pour x = 0 et x = 2" }
@@ -33,8 +57,20 @@ export default {
     {
       id: "techniques-trace",
       title: "Techniques de tracé",
-      definition: "Pour tracer la courbe représentative d'une fonction, on utilise plusieurs techniques : tableau de variation, calcul des coordonnées de points particuliers, étude des tangentes, et utilisation des symétries. Pour les fonctions complexes, on peut utiliser la décomposition en fonctions plus simples ou l'approximation locale par des fonctions de référence.",
-      example: "Pour tracer f(x) = x³, on peut calculer quelques points : (-1, -1), (0, 0), (1, 1), et utiliser le fait que f est impaire (symétrie par rapport à l'origine). Le tableau de variation montre que f est strictement croissante sur ℝ avec f'(x) = 3x².",
+      sections: [
+        {
+          title: "Définition",
+          content: "Pour tracer la courbe représentative d'une fonction, on utilise plusieurs techniques : tableau de variation, calcul des coordonnées de points particuliers, étude des tangentes, et utilisation des symétries. Pour les fonctions complexes, on peut utiliser la décomposition en fonctions plus simples ou l'approximation locale par des fonctions de référence."
+        },
+        {
+          title: "Exemple",
+          content: "Pour tracer f(x) = x³, on peut calculer quelques points : (-1, -1), (0, 0), (1, 1), et utiliser le fait que f est impaire (symétrie par rapport à l'origine). Le tableau de variation montre que f est strictement croissante sur ℝ avec f'(x) = 3x²."
+        },
+        {
+          title: "Remarque",
+          content: "Le tracé d'une courbe doit être précis et respecter les propriétés de la fonction. Il est important de bien choisir l'échelle du repère et de marquer clairement les points caractéristiques pour une représentation fidèle."
+        }
+      ],
       gameQuestions: [
         { question: "Quelle propriété de la fonction f(x) = cos(x) permet de simplifier son tracé?", answer: "Sa périodicité de 2π et sa parité (fonction paire)" },
         { question: "Pour tracer rapidement la fonction g(x) = e^(-x²), quel est l'élément essentiel à calculer?", answer: "Le maximum en x = 0, où g(0) = 1" }
@@ -47,8 +83,20 @@ export default {
     {
       id: "applications-sciences",
       title: "Applications en sciences expérimentales",
-      definition: "En sciences expérimentales, la représentation graphique est essentielle pour visualiser des relations entre variables, interpréter des données, modéliser des phénomènes physiques, biologiques ou chimiques, et prévoir des comportements. Des techniques comme la régression permettent d'ajuster une courbe théorique à des points expérimentaux.",
-      example: "En physique, le graphique position-temps d'un objet en chute libre est une parabole. En chimie, la concentration d'un réactif en fonction du temps lors d'une réaction d'ordre 1 suit une décroissance exponentielle, représentée par C(t) = C₀e^(-kt).",
+      sections: [
+        {
+          title: "Définition",
+          content: "En sciences expérimentales, la représentation graphique est essentielle pour visualiser des relations entre variables, interpréter des données, modéliser des phénomènes physiques, biologiques ou chimiques, et prévoir des comportements. Des techniques comme la régression permettent d'ajuster une courbe théorique à des points expérimentaux."
+        },
+        {
+          title: "Exemple",
+          content: "En physique, le graphique position-temps d'un objet en chute libre est une parabole. En chimie, la concentration d'un réactif en fonction du temps lors d'une réaction d'ordre 1 suit une décroissance exponentielle, représentée par C(t) = C₀e^(-kt)."
+        },
+        {
+          title: "Remarque",
+          content: "La représentation graphique en sciences expérimentales permet de valider des modèles théoriques et de faire des prédictions. Elle est un outil indispensable pour l'analyse et l'interprétation des résultats expérimentaux."
+        }
+      ],
       gameQuestions: [
         { question: "En biologie, quelle fonction modélise généralement la croissance d'une population bactérienne en phase exponentielle?", answer: "P(t) = P₀e^(rt) où r est le taux de croissance" },
         { question: "Dans l'étude d'un circuit RC en physique, comment varie la tension aux bornes du condensateur lors de sa décharge?", answer: "Selon une fonction exponentielle décroissante : U(t) = U₀e^(-t/RC)" }

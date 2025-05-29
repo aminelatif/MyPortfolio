@@ -5,8 +5,6 @@ export default {
     {
       id: "vecteurs-definition",
       title: "Définition d'un vecteur",
-      definition: "Un vecteur est une entité mathématique caractérisée par une direction, un sens et une norme (longueur).",
-      example: "Un vecteur AB⃗ est représenté par deux points A (origine) et B (extrémité).",
       sections: [
         { title: "Définition", content: "Un vecteur est une entité mathématique caractérisée par une direction, un sens et une norme (longueur)." },
         { title: "Exemple", content: "Un vecteur AB⃗ est représenté par deux points A (origine) et B (extrémité)." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "operations-vecteurs",
       title: "Opérations sur les vecteurs",
-      definition: "Les opérations principales sur les vecteurs sont l'addition, la soustraction, et la multiplication par un scalaire.",
-      example: "Si u⃗(2,3) et v⃗(1,4), alors u⃗ + v⃗ = (3,7) et 2u⃗ = (4,6)",
       sections: [
         { title: "Définition", content: "Les opérations principales sur les vecteurs sont l'addition, la soustraction, et la multiplication par un scalaire." },
         { title: "Exemple", content: "Si u⃗(2,3) et v⃗(1,4), alors u⃗ + v⃗ = (3,7) et 2u⃗ = (4,6)." },

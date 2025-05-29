@@ -5,8 +5,6 @@ export default {
     {
       id: "definition-produit-scalaire",
       title: "Définition du produit scalaire",
-      definition: "Le produit scalaire de deux vecteurs u⃗ et v⃗ est une opération qui associe à ces vecteurs un nombre réel. Il peut être défini par u⃗·v⃗ = |u⃗|×|v⃗|×cos(θ), où θ est l'angle entre les deux vecteurs.",
-      example: "Si u⃗ et v⃗ sont perpendiculaires, alors u⃗·v⃗ = 0, car cos(90°) = 0.",
       sections: [
         { title: "Définition", content: "Le produit scalaire de deux vecteurs u⃗ et v⃗ est une opération qui associe à ces vecteurs un nombre réel. Il peut être défini par u⃗·v⃗ = |u⃗|×|v⃗|×cos(θ), où θ est l'angle entre les deux vecteurs." },
         { title: "Exemple", content: "Si u⃗ et v⃗ sont perpendiculaires, alors u⃗·v⃗ = 0, car cos(90°) = 0." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "proprietes-produit-scalaire",
       title: "Propriétés du produit scalaire",
-      definition: "Le produit scalaire possède des propriétés importantes : commutativité, bilinéarité, et positivité.",
-      example: "Commutativité : u⃗·v⃗ = v⃗·u⃗\nBilinéarité : (λu⃗)·v⃗ = λ(u⃗·v⃗)",
       sections: [
         { title: "Définition", content: "Le produit scalaire possède des propriétés importantes : commutativité, bilinéarité, et positivité." },
         { title: "Exemple", content: "Commutativité : u⃗·v⃗ = v⃗·u⃗\nBilinéarité : (λu⃗)·v⃗ = λ(u⃗·v⃗)" },
@@ -42,8 +38,6 @@ export default {
     {
       id: "applications-produit-scalaire",
       title: "Applications du produit scalaire",
-      definition: "Le produit scalaire est utile pour de nombreuses applications en géométrie et en physique.",
-      example: "Le produit scalaire permet de calculer la projection d'un vecteur sur un autre, de vérifier l'orthogonalité, et de calculer des angles entre vecteurs.",
       sections: [
         { title: "Définition", content: "Le produit scalaire est utile pour de nombreuses applications en géométrie et en physique." },
         { title: "Exemple", content: "Le produit scalaire permet de calculer la projection d'un vecteur sur un autre, de vérifier l'orthogonalité, et de calculer des angles entre vecteurs." },

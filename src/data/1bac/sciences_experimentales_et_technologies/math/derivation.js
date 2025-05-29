@@ -5,8 +5,20 @@ export default {
     {
       id: "notion-derivee",
       title: "Notion de dérivée",
-      definition: "La dérivée d'une fonction f au point x₀, notée f'(x₀), est définie comme la limite du taux de variation de f entre x₀ et x₀+h lorsque h tend vers 0. Mathématiquement : f'(x₀) = lim[h→0] (f(x₀+h) - f(x₀))/h. Géométriquement, la dérivée représente la pente de la tangente à la courbe de f au point (x₀, f(x₀)).",
-      example: "Pour la fonction f(x) = x², on a f'(x) = lim[h→0] ((x+h)² - x²)/h = lim[h→0] (x² + 2xh + h² - x²)/h = lim[h→0] (2xh + h²)/h = lim[h→0] (2x + h) = 2x. Donc f'(x) = 2x. En particulier, au point x₀ = 3, la dérivée vaut f'(3) = 2×3 = 6.",
+      sections: [
+        {
+          title: "Définition",
+          content: "La dérivée d'une fonction f au point x₀, notée f'(x₀), est définie comme la limite du taux de variation de f entre x₀ et x₀+h lorsque h tend vers 0. Mathématiquement : f'(x₀) = lim[h→0] (f(x₀+h) - f(x₀))/h. Géométriquement, la dérivée représente la pente de la tangente à la courbe de f au point (x₀, f(x₀))."
+        },
+        {
+          title: "Exemple",
+          content: "Pour la fonction f(x) = x², on a f'(x) = lim[h→0] ((x+h)² - x²)/h = lim[h→0] (x² + 2xh + h² - x²)/h = lim[h→0] (2xh + h²)/h = lim[h→0] (2x + h) = 2x. Donc f'(x) = 2x. En particulier, au point x₀ = 3, la dérivée vaut f'(3) = 2×3 = 6."
+        },
+        {
+          title: "Remarque",
+          content: "La dérivée en un point n'existe que si la fonction est continue en ce point. Cependant, la réciproque est fausse : une fonction peut être continue en un point sans y être dérivable (comme la fonction valeur absolue en 0)."
+        }
+      ],
       gameQuestions: [
         { question: "Quelle est l'interprétation géométrique de la dérivée d'une fonction en un point?", answer: "La pente de la tangente à la courbe en ce point" },
         { question: "Si f(x) = x³, calculez f'(2).", answer: "12" }
@@ -19,8 +31,20 @@ export default {
     {
       id: "regles-calcul",
       title: "Règles de calcul des dérivées",
-      definition: "Pour calculer efficacement les dérivées, on utilise des règles : (1) Dérivée d'une constante : (k)' = 0. (2) Dérivée de l'identité : (x)' = 1. (3) Linéarité : (αf + βg)' = αf' + βg'. (4) Dérivée d'un produit : (fg)' = f'g + fg'. (5) Dérivée d'un quotient : (f/g)' = (f'g - fg')/g². (6) Dérivée de la composée : (f∘g)' = (f'∘g) × g'.",
-      example: "Calculons la dérivée de h(x) = (2x+1)(x²-3). En utilisant la règle du produit : h'(x) = (2x+1)'(x²-3) + (2x+1)(x²-3)' = 2(x²-3) + (2x+1)(2x) = 2x²-6 + 4x²+2x = 6x²+2x-6.",
+      sections: [
+        {
+          title: "Définition",
+          content: "Pour calculer efficacement les dérivées, on utilise des règles : (1) Dérivée d'une constante : (k)' = 0. (2) Dérivée de l'identité : (x)' = 1. (3) Linéarité : (αf + βg)' = αf' + βg'. (4) Dérivée d'un produit : (fg)' = f'g + fg'. (5) Dérivée d'un quotient : (f/g)' = (f'g - fg')/g². (6) Dérivée de la composée : (f∘g)' = (f'∘g) × g'."
+        },
+        {
+          title: "Exemple",
+          content: "Calculons la dérivée de h(x) = (2x+1)(x²-3). En utilisant la règle du produit : h'(x) = (2x+1)'(x²-3) + (2x+1)(x²-3)' = 2(x²-3) + (2x+1)(2x) = 2x²-6 + 4x²+2x = 6x²+2x-6."
+        },
+        {
+          title: "Remarque",
+          content: "L'ordre d'application des règles de dérivation est important. Pour une fonction composée, il faut d'abord identifier les fonctions élémentaires puis appliquer la règle de dérivation appropriée."
+        }
+      ],
       gameQuestions: [
         { question: "Quelle est la dérivée de f(x) = (3x+2)(x-1)?", answer: "f'(x) = (3x+2)(1) + (3)(x-1) = 3x+2 + 3x-3 = 6x-1" },
         { question: "Quelle est la formule de la dérivée du quotient de deux fonctions f(x)/g(x)?", answer: "(f'g - fg')/g²" }
@@ -33,8 +57,20 @@ export default {
     {
       id: "derivees-usuelles",
       title: "Dérivées des fonctions usuelles",
-      definition: "Voici les dérivées des fonctions usuelles : (1) (xⁿ)' = nxⁿ⁻¹. (2) (sin x)' = cos x. (3) (cos x)' = -sin x. (4) (eˣ)' = eˣ. (5) (ln x)' = 1/x, pour x > 0. Ces formules permettent de calculer rapidement les dérivées de nombreuses fonctions.",
-      example: "Pour f(x) = x³.sin(x), appliquons la règle du produit : f'(x) = (x³)'sin(x) + x³(sin(x))' = 3x²sin(x) + x³cos(x).",
+      sections: [
+        {
+          title: "Définition",
+          content: "Voici les dérivées des fonctions usuelles : (1) (xⁿ)' = nxⁿ⁻¹. (2) (sin x)' = cos x. (3) (cos x)' = -sin x. (4) (eˣ)' = eˣ. (5) (ln x)' = 1/x, pour x > 0. Ces formules permettent de calculer rapidement les dérivées de nombreuses fonctions."
+        },
+        {
+          title: "Exemple",
+          content: "Pour f(x) = x³.sin(x), appliquons la règle du produit : f'(x) = (x³)'sin(x) + x³(sin(x))' = 3x²sin(x) + x³cos(x)."
+        },
+        {
+          title: "Remarque",
+          content: "Ces formules de dérivation sont fondamentales et doivent être connues par cœur. Elles servent de base pour dériver des fonctions plus complexes en les combinant avec les règles de dérivation."
+        }
+      ],
       gameQuestions: [
         { question: "Quelle est la dérivée de f(x) = x⁴?", answer: "f'(x) = 4x³" },
         { question: "Quelle est la dérivée de g(x) = e^(2x)?", answer: "g'(x) = 2e^(2x)" }
@@ -47,8 +83,20 @@ export default {
     {
       id: "applications-derivees",
       title: "Applications des dérivées",
-      definition: "Les dérivées ont de nombreuses applications : (1) Étude des variations d'une fonction : si f'(x) > 0 sur un intervalle, f est strictement croissante; si f'(x) < 0, f est strictement décroissante. (2) Recherche des extrema : les extrema locaux se trouvent parmi les points où f'(x) = 0 ou f'(x) n'existe pas. (3) Étude de la concavité via la dérivée seconde f''(x). (4) Approximation linéaire d'une fonction près d'un point.",
-      example: "Étudions les variations de f(x) = x³ - 3x² + 2. On a f'(x) = 3x² - 6x = 3x(x - 2). Donc f'(x) = 0 pour x = 0 et x = 2. De plus, f'(x) > 0 pour x < 0 et x > 2, et f'(x) < 0 pour 0 < x < 2. Ainsi, f est croissante sur ]-∞, 0] et [2, +∞[, et décroissante sur [0, 2]. La fonction f admet un maximum local en x = 0 et un minimum local en x = 2.",
+      sections: [
+        {
+          title: "Définition",
+          content: "Les dérivées ont de nombreuses applications : (1) Étude des variations d'une fonction : si f'(x) > 0 sur un intervalle, f est strictement croissante; si f'(x) < 0, f est strictement décroissante. (2) Recherche des extrema : les extrema locaux se trouvent parmi les points où f'(x) = 0 ou f'(x) n'existe pas. (3) Étude de la concavité via la dérivée seconde f''(x). (4) Approximation linéaire d'une fonction près d'un point."
+        },
+        {
+          title: "Exemple",
+          content: "Étudions les variations de f(x) = x³ - 3x² + 2. On a f'(x) = 3x² - 6x = 3x(x - 2). Donc f'(x) = 0 pour x = 0 et x = 2. De plus, f'(x) > 0 pour x < 0 et x > 2, et f'(x) < 0 pour 0 < x < 2. Ainsi, f est croissante sur ]-∞, 0] et [2, +∞[, et décroissante sur [0, 2]. La fonction f admet un maximum local en x = 0 et un minimum local en x = 2."
+        },
+        {
+          title: "Remarque",
+          content: "L'étude des variations d'une fonction via sa dérivée est une application fondamentale qui permet de tracer son graphe et de résoudre des problèmes d'optimisation."
+        }
+      ],
       gameQuestions: [
         { question: "Si f'(x) < 0 sur un intervalle I, que peut-on dire de f sur cet intervalle?", answer: "f est strictement décroissante sur I" },
         { question: "Quelle condition nécessaire doivent vérifier les abscisses des extrema locaux d'une fonction dérivable?", answer: "f'(x) = 0" }
@@ -61,8 +109,20 @@ export default {
     {
       id: "applications-physique",
       title: "Applications en physique",
-      definition: "La dérivation est fondamentale en physique : (1) La vitesse est la dérivée de la position par rapport au temps: v(t) = s'(t). (2) L'accélération est la dérivée de la vitesse: a(t) = v'(t) = s''(t). (3) Le débit est la dérivée du volume par rapport au temps. (4) La puissance est la dérivée de l'énergie par rapport au temps.",
-      example: "Un objet en chute libre a une position s(t) = -4.9t² + v₀t + s₀, où v₀ est la vitesse initiale et s₀ la position initiale. Sa vitesse est v(t) = s'(t) = -9.8t + v₀, et son accélération est a(t) = v'(t) = -9.8 m/s², qui est l'accélération due à la gravité.",
+      sections: [
+        {
+          title: "Définition",
+          content: "La dérivation est fondamentale en physique : (1) La vitesse est la dérivée de la position par rapport au temps: v(t) = s'(t). (2) L'accélération est la dérivée de la vitesse: a(t) = v'(t) = s''(t). (3) Le débit est la dérivée du volume par rapport au temps. (4) La puissance est la dérivée de l'énergie par rapport au temps."
+        },
+        {
+          title: "Exemple",
+          content: "Un objet en chute libre a une position s(t) = -4.9t² + v₀t + s₀, où v₀ est la vitesse initiale et s₀ la position initiale. Sa vitesse est v(t) = s'(t) = -9.8t + v₀, et son accélération est a(t) = v'(t) = -9.8 m/s², qui est l'accélération due à la gravité."
+        },
+        {
+          title: "Remarque",
+          content: "La dérivation en physique permet de passer d'une grandeur à sa variation instantanée, ce qui est essentiel pour comprendre les phénomènes dynamiques et les lois de la nature."
+        }
+      ],
       gameQuestions: [
         { question: "Si la position d'un objet est donnée par s(t) = 3t² - 2t + 1, quelle est sa vitesse à t = 2?", answer: "v(2) = s'(2) = 6t - 2|_{t=2} = 12 - 2 = 10" },
         { question: "Quelle est la relation entre l'accélération et la position d'un objet?", answer: "L'accélération est la dérivée seconde de la position: a(t) = s''(t)" }

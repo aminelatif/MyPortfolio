@@ -6,8 +6,11 @@ export default {
     {
       id: "definition-equation-differentielle",
       title: "Définition d'une équation différentielle",
-      definition: "Une équation différentielle est une équation qui relie une fonction inconnue à ses dérivées.",
-      example: "y' + y = 0 est une équation différentielle du premier ordre.",
+      sections: [
+        { title: "Définition", content: "Une équation différentielle est une équation qui relie une fonction inconnue à ses dérivées." },
+        { title: "Exemple", content: "y' + y = 0 est une équation différentielle du premier ordre." },
+        { title: "Remarque", content: "Les équations différentielles sont essentielles pour modéliser des phénomènes dynamiques en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Quelle est la solution générale de y' = 2y ?", answer: "y = Ce^{2x}" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "applications-equations-differentielles",
       title: "Applications des équations différentielles",
-      definition: "Les équations différentielles modélisent de nombreux phénomènes physiques, économiques et biologiques.",
-      example: "La croissance d'une population peut être modélisée par une équation différentielle.",
+      sections: [
+        { title: "Définition", content: "Les équations différentielles modélisent de nombreux phénomènes physiques, économiques et biologiques." },
+        { title: "Exemple", content: "La croissance d'une population peut être modélisée par une équation différentielle." },
+        { title: "Remarque", content: "Les applications des équations différentielles sont vastes, couvrant des domaines comme la physique, la biologie et l'économie." }
+      ],
       gameQuestions: [
         { question: "Donnez un exemple d'application d'une équation différentielle.", answer: "Modélisation de la croissance d'une population" }
       ],

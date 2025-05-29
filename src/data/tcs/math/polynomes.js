@@ -5,8 +5,6 @@ export default {
     {
       id: "definition-polynome",
       title: "Définition d'un polynôme",
-      definition: "Un polynôme est une expression algébrique qui consiste en une somme de termes, chaque terme étant le produit d'une constante et d'une ou plusieurs variables élevées à une puissance entière non négative.",
-      example: "P(x) = 3x³ - 5x² + 2x - 7 est un polynôme de degré 3.",
       sections: [
         { title: "Définition", content: "Un polynôme est une expression algébrique qui consiste en une somme de termes, chaque terme étant le produit d'une constante et d'une ou plusieurs variables élevées à une puissance entière non négative." },
         { title: "Exemple", content: "P(x) = 3x³ - 5x² + 2x - 7 est un polynôme de degré 3." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "operations-polynomes",
       title: "Opérations sur les polynômes",
-      definition: "Les opérations fondamentales sur les polynômes comprennent l'addition, la soustraction, la multiplication et la division.",
-      example: "Si P(x) = x² + 2x + 1 et Q(x) = x - 1, alors P(x) + Q(x) = x² + 3x et P(x) × Q(x) = x³ + 2x² - x - 1",
       sections: [
         { title: "Définition", content: "Les opérations fondamentales sur les polynômes comprennent l'addition, la soustraction, la multiplication et la division." },
         { title: "Exemple", content: "Si P(x) = x² + 2x + 1 et Q(x) = x - 1, alors P(x) + Q(x) = x² + 3x et P(x) × Q(x) = x³ + 2x² - x - 1" },

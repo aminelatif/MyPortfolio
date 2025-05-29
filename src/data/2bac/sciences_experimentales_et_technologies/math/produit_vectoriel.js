@@ -6,8 +6,11 @@ export default {
     {
       id: "definition-produit-vectoriel",
       title: "Définition du produit vectoriel",
-      definition: "Le produit vectoriel de deux vecteurs u et v dans l'espace est un vecteur perpendiculaire à u et v, noté u × v.",
-      example: "Si u = (1,0,0) et v = (0,1,0), alors u × v = (0,0,1).",
+      sections: [
+        { title: "Définition", content: "Le produit vectoriel de deux vecteurs u et v dans l'espace est un vecteur perpendiculaire à u et v, noté u × v." },
+        { title: "Exemple", content: "Si u = (1,0,0) et v = (0,1,0), alors u × v = (0,0,1)." },
+        { title: "Remarque", content: "Le produit vectoriel est fondamental pour l'étude des moments et des rotations en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Calculez le produit vectoriel de u = (2,0,0) et v = (0,3,0).", answer: "(0,0,6)" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "proprietes-produit-vectoriel",
       title: "Propriétés du produit vectoriel",
-      definition: "Le produit vectoriel est anti-commutatif et distributif par rapport à l'addition vectorielle.",
-      example: "u × v = - (v × u) et u × (v + w) = u × v + u × w.",
+      sections: [
+        { title: "Définition", content: "Le produit vectoriel est anti-commutatif et distributif par rapport à l'addition vectorielle." },
+        { title: "Exemple", content: "u × v = - (v × u) et u × (v + w) = u × v + u × w." },
+        { title: "Remarque", content: "Les propriétés du produit vectoriel facilitent les calculs de moments et de forces en sciences expérimentales." }
+      ],
       gameQuestions: [
         { question: "Le produit vectoriel est-il commutatif ?", answer: "Non" }
       ],

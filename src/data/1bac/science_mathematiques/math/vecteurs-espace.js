@@ -5,8 +5,11 @@ export default {
     {
       id: "generalites-vecteurs",
       title: "Généralités sur les vecteurs de l'espace",
-      definition: "Un vecteur de l'espace est défini par une direction, un sens et une norme (longueur). Deux vecteurs sont égaux s'ils ont même direction, même sens et même norme.",
-      example: "Dans l'espace, les vecteurs AB⃗ et CD⃗ sont égaux si le quadrilatère ABDC est un parallélogramme.",
+      sections: [
+        { title: "Définition", content: "Un vecteur de l'espace est défini par une direction, un sens et une norme (longueur). Deux vecteurs sont égaux s'ils ont même direction, même sens et même norme." },
+        { title: "Exemple", content: "Dans l'espace, les vecteurs AB⃗ et CD⃗ sont égaux si le quadrilatère ABDC est un parallélogramme." },
+        { title: "Remarque", content: "Les vecteurs de l'espace généralisent les vecteurs du plan." }
+      ],
       gameQuestions: [
         { question: "Que représente géométriquement la somme de deux vecteurs u⃗ et v⃗ ?", answer: "La diagonale du parallélogramme construit sur u⃗ et v⃗" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "operations-vecteurs",
       title: "Opérations sur les vecteurs",
-      definition: "Dans l'espace, on peut additionner des vecteurs, les multiplier par un scalaire, et établir des relations de colinéarité. Un vecteur de l'espace possède trois composantes (x,y,z) dans un repère.",
-      example: "Si u⃗(2,3,5) et v⃗(1,-1,2), alors u⃗+v⃗ = (3,2,7) et 2u⃗ = (4,6,10).",
+      sections: [
+        { title: "Définition", content: "Dans l'espace, on peut additionner des vecteurs, les multiplier par un scalaire, et établir des relations de colinéarité. Un vecteur de l'espace possède trois composantes (x,y,z) dans un repère." },
+        { title: "Exemple", content: "Si u⃗(2,3,5) et v⃗(1,-1,2), alors u⃗+v⃗ = (3,2,7) et 2u⃗ = (4,6,10)." },
+        { title: "Remarque", content: "Les opérations sur les vecteurs de l'espace sont analogues à celles du plan." }
+      ],
       gameQuestions: [
         { question: "Comment calculer la norme du vecteur u⃗(x,y,z) ?", answer: "||u⃗|| = √(x² + y² + z²)" }
       ],
@@ -31,8 +37,11 @@ export default {
     {
       id: "bases-reperes",
       title: "Bases et repères",
-      definition: "Une base de l'espace est un triplet de vecteurs non coplanaires (i⃗, j⃗, k⃗). Un repère de l'espace est défini par un point O et une base. Tout vecteur de l'espace peut s'écrire comme combinaison linéaire des vecteurs de la base.",
-      example: "Dans le repère cartésien (O, i⃗, j⃗, k⃗), le vecteur OM⃗ du point M(2,3,5) s'écrit OM⃗ = 2i⃗ + 3j⃗ + 5k⃗.",
+      sections: [
+        { title: "Définition", content: "Une base de l'espace est un triplet de vecteurs non coplanaires (i⃗, j⃗, k⃗). Un repère de l'espace est défini par un point O et une base. Tout vecteur de l'espace peut s'écrire comme combinaison linéaire des vecteurs de la base." },
+        { title: "Exemple", content: "Dans le repère cartésien (O, i⃗, j⃗, k⃗), le vecteur OM⃗ du point M(2,3,5) s'écrit OM⃗ = 2i⃗ + 3j⃗ + 5k⃗." },
+        { title: "Remarque", content: "La notion de base est fondamentale pour le repérage dans l'espace." }
+      ],
       gameQuestions: [
         { question: "Quelles conditions doivent vérifier trois vecteurs pour former une base de l'espace ?", answer: "Ils doivent être non coplanaires (non colinéaires deux à deux et leur produit mixte est non nul)" }
       ],

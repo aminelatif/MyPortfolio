@@ -5,8 +5,6 @@ export default {
     {
       id: "relation-ordre",
       title: "Relation d'ordre",
-      definition: "Une relation d'ordre est une relation binaire qui permet de comparer des éléments d'un ensemble. Dans IR, on utilise les symboles < (inférieur à), > (supérieur à), ≤ (inférieur ou égal à), et ≥ (supérieur ou égal à).",
-      example: "5 < 7, -3 < 0, √2 < 2, 3 ≤ 3",
       sections: [
         { title: "Définition", content: "Une relation d'ordre est une relation binaire qui permet de comparer des éléments d'un ensemble. Dans IR, on utilise les symboles < (inférieur à), > (supérieur à), ≤ (inférieur ou égal à), et ≥ (supérieur ou égal à)." },
         { title: "Exemple", content: "5 < 7, -3 < 0, √2 < 2, 3 ≤ 3" },
@@ -24,8 +22,6 @@ export default {
     {
       id: "intervalles",
       title: "Intervalles dans IR",
-      definition: "Un intervalle est un sous-ensemble de IR contenant tous les nombres réels compris entre deux valeurs. On distingue les intervalles fermés, ouverts et semi-ouverts.",
-      example: "[a,b] = {x ∈ IR | a ≤ x ≤ b}\n]a,b[ = {x ∈ IR | a < x < b}",
       sections: [
         { title: "Définition", content: "Un intervalle est un sous-ensemble de IR contenant tous les nombres réels compris entre deux valeurs. On distingue les intervalles fermés, ouverts et semi-ouverts." },
         { title: "Exemple", content: "[a,b] = {x ∈ IR | a ≤ x ≤ b}\n]a,b[ = {x ∈ IR | a < x < b}" },

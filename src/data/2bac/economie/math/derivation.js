@@ -6,8 +6,11 @@ export default {
     {
       id: "definition-derivee",
       title: "Définition de la dérivée",
-      definition: "La dérivée d'une fonction en un point est la limite du taux d'accroissement.",
-      example: "La dérivée de f(x) = x² est f'(x) = 2x.",
+      sections: [
+        { title: "Définition", content: "La dérivée d'une fonction en un point est la limite du taux d'accroissement." },
+        { title: "Exemple", content: "La dérivée de f(x) = x² est f'(x) = 2x." },
+        { title: "Remarque", content: "La dérivation permet de calculer les variations instantanées, essentielles en économie pour l'étude des taux de variation." }
+      ],
       gameQuestions: [
         { question: "Quelle est la dérivée de f(x) = x³ ?", answer: "3x²" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "proprietes-derivee",
       title: "Propriétés de la dérivée",
-      definition: "La dérivée d'une somme est la somme des dérivées, et la dérivée d'un produit suit la règle du produit.",
-      example: "Si f(x) = x² et g(x) = 3x, alors (f + g)'(x) = 2x + 3.",
+      sections: [
+        { title: "Définition", content: "La dérivée d'une somme est la somme des dérivées, et la dérivée d'un produit suit la règle du produit." },
+        { title: "Exemple", content: "Si f(x) = x² et g(x) = 3x, alors (f + g)'(x) = 2x + 3." },
+        { title: "Remarque", content: "Les propriétés de la dérivée facilitent le calcul des variations de fonctions complexes en économie." }
+      ],
       gameQuestions: [
         { question: "Quelle est la dérivée de f(x) = x² + 3x ?", answer: "2x + 3" }
       ],

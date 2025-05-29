@@ -5,8 +5,11 @@ export default {
     {
       id: "formules-addition",
       title: "Formules d'addition",
-      definition: "Les formules d'addition permettent d'exprimer les fonctions trigonométriques d'une somme ou d'une différence d'angles.",
-      example: "cos(a+b) = cos(a)cos(b) - sin(a)sin(b)",
+      sections: [
+        { title: "Définition", content: "Les formules d'addition permettent d'exprimer les fonctions trigonométriques d'une somme ou d'une différence d'angles." },
+        { title: "Exemple", content: "cos(a+b) = cos(a)cos(b) - sin(a)sin(b)" },
+        { title: "Remarque", content: "Ces formules sont essentielles pour simplifier les expressions trigonométriques." }
+      ],
       gameQuestions: [
         { question: "Quelle est la formule de sin(a+b) ?", answer: "sin(a+b) = sin(a)cos(b) + cos(a)sin(b)" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "formules-duplication",
       title: "Formules de duplication",
-      definition: "Les formules de duplication permettent d'exprimer les fonctions trigonométriques d'un angle double.",
-      example: "cos(2a) = cos²(a) - sin²(a) = 2cos²(a) - 1 = 1 - 2sin²(a)",
+      sections: [
+        { title: "Définition", content: "Les formules de duplication permettent d'exprimer les fonctions trigonométriques d'un angle double." },
+        { title: "Exemple", content: "cos(2a) = cos²(a) - sin²(a) = 2cos²(a) - 1 = 1 - 2sin²(a)" },
+        { title: "Remarque", content: "Les formules de duplication sont utiles pour résoudre des équations trigonométriques." }
+      ],
       gameQuestions: [
         { question: "Quelle est la formule de sin(2a) ?", answer: "sin(2a) = 2sin(a)cos(a)" }
       ],
@@ -31,8 +37,11 @@ export default {
     {
       id: "equations-trigonometriques",
       title: "Équations trigonométriques",
-      definition: "Les équations trigonométriques sont des équations où l'inconnue apparaît dans des expressions trigonométriques.",
-      example: "Pour résoudre cos(x) = 1/2, on trouve x = ±π/3 + 2kπ, k ∈ ℤ",
+      sections: [
+        { title: "Définition", content: "Les équations trigonométriques sont des équations où l'inconnue apparaît dans des expressions trigonométriques." },
+        { title: "Exemple", content: "Pour résoudre cos(x) = 1/2, on trouve x = ±π/3 + 2kπ, k ∈ ℤ" },
+        { title: "Remarque", content: "Les équations trigonométriques peuvent avoir une infinité de solutions." }
+      ],
       gameQuestions: [
         { question: "Quelles sont les solutions de sin(x) = 0 sur [0, 2π] ?", answer: "x = 0, π, 2π" }
       ],

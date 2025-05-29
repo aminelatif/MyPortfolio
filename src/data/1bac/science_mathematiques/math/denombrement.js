@@ -5,8 +5,11 @@ export default {
     {
       id: "principes-base",
       title: "Principes fondamentaux",
-      definition: "Le dénombrement s'appuie sur deux principes fondamentaux : le principe multiplicatif (si une action peut être décomposée en k actions successives avec n₁, n₂, ..., nₖ façons d'effectuer chacune, alors il y a n₁×n₂×...×nₖ façons d'effectuer l'action complète) et le principe additif (si une action peut être réalisée de n façons ou de m façons, et que ces façons sont disjointes, alors il y a n+m façons au total).",
-      example: "Si on veut s'habiller en choisissant parmi 5 chemises et 3 pantalons, on peut créer 5×3 = 15 tenues différentes (principe multiplicatif).",
+      sections: [
+        { title: "Définition", content: "Le dénombrement s'appuie sur deux principes fondamentaux : le principe multiplicatif (si une action peut être décomposée en k actions successives avec n₁, n₂, ..., nₖ façons d'effectuer chacune, alors il y a n₁×n₂×...×nₖ façons d'effectuer l'action complète) et le principe additif (si une action peut être réalisée de n façons ou de m façons, et que ces façons sont disjointes, alors il y a n+m façons au total)." },
+        { title: "Exemple", content: "Si on veut s'habiller en choisissant parmi 5 chemises et 3 pantalons, on peut créer 5×3 = 15 tenues différentes (principe multiplicatif)." },
+        { title: "Remarque", content: "Le dénombrement est à la base de la combinatoire." }
+      ],
       gameQuestions: [
         { question: "Un restaurant propose 4 entrées, 6 plats et 3 desserts. Combien de menus différents (entrée + plat + dessert) peut-on composer ?", answer: "4×6×3 = 72 menus" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "arrangements-permutations",
       title: "Arrangements et permutations",
-      definition: "Un arrangement de p éléments parmi n (p≤n) est une liste ordonnée de p éléments choisis parmi n. Le nombre d'arrangements est A(n,p) = n!/(n-p)!. Une permutation de n éléments est un arrangement particulier où p=n, soit P(n) = n!.",
-      example: "Les arrangements de 2 lettres parmi {a,b,c} sont : ab, ac, ba, bc, ca, cb. Il y en a A(3,2) = 3!/(3-2)! = 6.",
+      sections: [
+        { title: "Définition", content: "Un arrangement de p éléments parmi n (p≤n) est une liste ordonnée de p éléments choisis parmi n. Le nombre d'arrangements est A(n,p) = n!/(n-p)!. Une permutation de n éléments est un arrangement particulier où p=n, soit P(n) = n!." },
+        { title: "Exemple", content: "Les arrangements de 2 lettres parmi {a,b,c} sont : ab, ac, ba, bc, ca, cb. Il y en a A(3,2) = 3!/(3-2)! = 6." },
+        { title: "Remarque", content: "Les arrangements et permutations tiennent compte de l'ordre." }
+      ],
       gameQuestions: [
         { question: "Combien de codes à 3 chiffres différents peut-on former avec les chiffres de 0 à 9 ?", answer: "A(10,3) = 10×9×8 = 720" }
       ],
@@ -31,8 +37,11 @@ export default {
     {
       id: "combinaisons",
       title: "Combinaisons",
-      definition: "Une combinaison de p éléments parmi n est un sous-ensemble de p éléments choisis parmi n, sans tenir compte de l'ordre. Le nombre de combinaisons est C(n,p) = n!/(p!(n-p)!).",
-      example: "Les combinaisons de 2 lettres parmi {a,b,c} sont : {a,b}, {a,c}, {b,c}. Il y en a C(3,2) = 3!/(2!(3-2)!) = 3.",
+      sections: [
+        { title: "Définition", content: "Une combinaison de p éléments parmi n est un sous-ensemble de p éléments choisis parmi n, sans tenir compte de l'ordre. Le nombre de combinaisons est C(n,p) = n!/(p!(n-p)!)." },
+        { title: "Exemple", content: "Les combinaisons de 2 lettres parmi {a,b,c} sont : {a,b}, {a,c}, {b,c}. Il y en a C(3,2) = 3!/(2!(3-2)!) = 3." },
+        { title: "Remarque", content: "Les combinaisons ne tiennent pas compte de l'ordre." }
+      ],
       gameQuestions: [
         { question: "Dans une classe de 30 élèves, combien d'équipes de 5 élèves peut-on former ?", answer: "C(30,5) = 30!/(5!×25!) = 142 506" }
       ],

@@ -5,8 +5,11 @@ export default {
     {
       id: "methode-etude",
       title: "Méthode d'étude complète",
-      definition: "L'étude complète d'une fonction comprend l'analyse de son domaine de définition, sa parité, ses limites, sa continuité, sa dérivabilité, ses variations, ses extrema, et ses asymptotes.",
-      example: "Pour étudier f(x) = (x² - 1)/(x - 2), on détermine d'abord le domaine Df = ℝ\\{2}, puis on calcule f'(x) pour étudier les variations...",
+      sections: [
+        { title: "Définition", content: "L'étude complète d'une fonction comprend l'analyse de son domaine de définition, sa parité, ses limites, sa continuité, sa dérivabilité, ses variations, ses extrema, et ses asymptotes." },
+        { title: "Exemple", content: "Pour étudier f(x) = (x² - 1)/(x - 2), on détermine d'abord le domaine Df = ℝ\\{2}, puis on calcule f'(x) pour étudier les variations..." },
+        { title: "Remarque", content: "L'ordre d'étude est important : on commence par le domaine de définition avant d'analyser les autres propriétés." }
+      ],
       gameQuestions: [
         { question: "Quel est le premier élément à déterminer lors de l'étude d'une fonction ?", answer: "Le domaine de définition" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "asymptotes",
       title: "Asymptotes et branches infinies",
-      definition: "Une asymptote est une droite dont la courbe se rapproche indéfiniment. On distingue les asymptotes horizontales (y = b), verticales (x = a) et obliques (y = mx + p).",
-      example: "Pour f(x) = (2x² + x)/(x - 1), il y a une asymptote verticale x = 1 et une asymptote oblique y = 2x + 3",
+      sections: [
+        { title: "Définition", content: "Une asymptote est une droite dont la courbe se rapproche indéfiniment. On distingue les asymptotes horizontales (y = b), verticales (x = a) et obliques (y = mx + p)." },
+        { title: "Exemple", content: "Pour f(x) = (2x² + x)/(x - 1), il y a une asymptote verticale x = 1 et une asymptote oblique y = 2x + 3" },
+        { title: "Remarque", content: "Les asymptotes permettent de mieux comprendre le comportement de la fonction aux bornes de son domaine." }
+      ],
       gameQuestions: [
         { question: "Comment déterminer si une fonction admet une asymptote horizontale en +∞ ?", answer: "En calculant la limite de la fonction quand x tend vers +∞" }
       ],
@@ -31,8 +37,11 @@ export default {
     {
       id: "representation-graphique",
       title: "Représentation graphique",
-      definition: "La représentation graphique d'une fonction est la courbe C_f d'équation y = f(x). Elle permet de visualiser ses propriétés (variations, extrema, symétries, asymptotes).",
-      example: "Pour tracer la courbe de f(x) = x³ - 3x, on étudie ses variations, ses points d'inflexion et sa symétrie par rapport à l'origine.",
+      sections: [
+        { title: "Définition", content: "La représentation graphique d'une fonction est la courbe C_f d'équation y = f(x). Elle permet de visualiser ses propriétés (variations, extrema, symétries, asymptotes)." },
+        { title: "Exemple", content: "Pour tracer la courbe de f(x) = x³ - 3x, on étudie ses variations, ses points d'inflexion et sa symétrie par rapport à l'origine." },
+        { title: "Remarque", content: "La représentation graphique est un outil précieux pour comprendre le comportement global d'une fonction." }
+      ],
       gameQuestions: [
         { question: "Comment reconnaître graphiquement que f est une fonction paire ?", answer: "La courbe est symétrique par rapport à l'axe des ordonnées" }
       ],

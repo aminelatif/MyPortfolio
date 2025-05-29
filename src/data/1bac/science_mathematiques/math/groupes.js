@@ -5,8 +5,11 @@ export default {
     {
       id: "definition-groupe",
       title: "Définition d'un groupe",
-      definition: "Un groupe est un ensemble muni d'une loi de composition interne qui vérifie les propriétés d'associativité, d'élément neutre et d'élément symétrique.",
-      example: "(ℤ,+) est un groupe car l'addition est associative, 0 est l'élément neutre et tout entier a a un opposé -a.",
+      sections: [
+        { title: "Définition", content: "Un groupe est un ensemble muni d'une loi de composition interne qui vérifie les propriétés d'associativité, d'élément neutre et d'élément symétrique." },
+        { title: "Exemple", content: "(ℤ,+) est un groupe car l'addition est associative, 0 est l'élément neutre et tout entier a a un opposé -a." },
+        { title: "Remarque", content: "La notion de groupe est fondamentale en algèbre et en mathématiques en général." }
+      ],
       gameQuestions: [
         { question: "Quel est l'élément neutre du groupe (ℝ*,×) ?", answer: "1" }
       ],

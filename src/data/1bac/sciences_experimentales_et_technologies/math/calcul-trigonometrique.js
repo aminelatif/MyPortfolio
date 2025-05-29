@@ -5,8 +5,11 @@ export default {
     {
       id: "cercle-trigonometrique",
       title: "Le cercle trigonométrique",
-      definition: "Le cercle trigonométrique est un cercle de rayon 1 centré à l'origine d'un repère orthonormé. Pour tout réel t, on définit le point M(t) sur ce cercle tel que l'arc OM(t) a pour mesure t. Les coordonnées de M(t) sont (cos(t), sin(t)).",
-      example: "Pour t = π/4, les coordonnées de M(π/4) sont (cos(π/4), sin(π/4)) = (√2/2, √2/2).",
+      sections: [
+        { title: "Définition", content: "Le cercle trigonométrique est un cercle de rayon 1 centré à l'origine d'un repère orthonormé. Pour tout réel t, on définit le point M(t) sur ce cercle tel que l'arc OM(t) a pour mesure t. Les coordonnées de M(t) sont (cos(t), sin(t))." },
+        { title: "Exemple", content: "Pour t = π/4, les coordonnées de M(π/4) sont (cos(π/4), sin(π/4)) = (√2/2, √2/2)." },
+        { title: "Remarque", content: "Le cercle trigonométrique permet de visualiser les angles et les valeurs des fonctions trigonométriques, facilitant la compréhension des propriétés de périodicité et de symétrie." }
+      ],
       gameQuestions: [
         { question: "Quelles sont les coordonnées du point M(π/2) sur le cercle trigonométrique?", answer: "(0, 1)" },
         { question: "Pour quelles valeurs de t dans [0, 2π[ a-t-on cos(t) = 0?", answer: "t = π/2 et t = 3π/2" }
@@ -19,8 +22,11 @@ export default {
     {
       id: "formules-trigonometriques",
       title: "Formules trigonométriques",
-      definition: "Plusieurs formules permettent de calculer avec les fonctions trigonométriques: cos²(t) + sin²(t) = 1, cos(a+b) = cos(a)cos(b) - sin(a)sin(b), sin(a+b) = sin(a)cos(b) + cos(a)sin(b), cos(2t) = cos²(t) - sin²(t) = 2cos²(t) - 1 = 1 - 2sin²(t), sin(2t) = 2sin(t)cos(t).",
-      example: "Pour calculer cos(π/3 + π/4), on utilise la formule de l'addition: cos(π/3 + π/4) = cos(π/3)cos(π/4) - sin(π/3)sin(π/4) = (1/2)(√2/2) - (√3/2)(√2/2) = √2/4 - √6/4.",
+      sections: [
+        { title: "Définition", content: "Plusieurs formules permettent de calculer avec les fonctions trigonométriques: cos²(t) + sin²(t) = 1, cos(a+b) = cos(a)cos(b) - sin(a)sin(b), sin(a+b) = sin(a)cos(b) + cos(a)sin(b), cos(2t) = cos²(t) - sin²(t) = 2cos²(t) - 1 = 1 - 2sin²(t), sin(2t) = 2sin(t)cos(t)." },
+        { title: "Exemple", content: "Pour calculer cos(π/3 + π/4), on utilise la formule de l'addition: cos(π/3 + π/4) = cos(π/3)cos(π/4) - sin(π/3)sin(π/4) = (1/2)(√2/2) - (√3/2)(√2/2) = √2/4 - √6/4." },
+        { title: "Remarque", content: "La maîtrise des formules trigonométriques est essentielle pour résoudre des équations, simplifier des expressions et étudier les fonctions périodiques." }
+      ],
       gameQuestions: [
         { question: "Quelle est la valeur de sin(π/6 + π/3)?", answer: "sin(π/6 + π/3) = sin(π/2) = 1" },
         { question: "Exprimez cos(t-π/2) en fonction de sin(t).", answer: "cos(t-π/2) = cos(t)cos(-π/2) - sin(t)sin(-π/2) = cos(t)·0 - sin(t)·(-1) = sin(t)" }
@@ -33,8 +39,11 @@ export default {
     {
       id: "equations-trigonometriques",
       title: "Équations trigonométriques",
-      definition: "Une équation trigonométrique est une équation où l'inconnue apparaît dans les arguments de fonctions trigonométriques. Pour les résoudre, on utilise les formules trigonométriques et les propriétés de périodicité: cos(t + 2π) = cos(t) et sin(t + 2π) = sin(t) pour tout t.",
-      example: "Pour résoudre cos(x) = 1/2 sur [0, 2π[, on sait que cos(π/3) = 1/2 et cos(2π - π/3) = cos(5π/3) = 1/2. Donc les solutions sont x = π/3 et x = 5π/3.",
+      sections: [
+        { title: "Définition", content: "Une équation trigonométrique est une équation où l'inconnue apparaît dans les arguments de fonctions trigonométriques. Pour les résoudre, on utilise les formules trigonométriques et les propriétés de périodicité: cos(t + 2π) = cos(t) et sin(t + 2π) = sin(t) pour tout t." },
+        { title: "Exemple", content: "Pour résoudre cos(x) = 1/2 sur [0, 2π[, on sait que cos(π/3) = 1/2 et cos(2π - π/3) = cos(5π/3) = 1/2. Donc les solutions sont x = π/3 et x = 5π/3." },
+        { title: "Remarque", content: "Les équations trigonométriques admettent souvent une infinité de solutions en raison de la périodicité des fonctions trigonométriques. Il est important de bien préciser l'intervalle de recherche des solutions." }
+      ],
       gameQuestions: [
         { question: "Résolvez sin(x) = 0 sur [0, 2π[.", answer: "x = 0 ou x = π" },
         { question: "Résolvez cos(2x) = 0 sur [0, 2π[.", answer: "2x = π/2 + kπ, donc x = π/4 + kπ/2 avec k entier. Sur [0, 2π[, on a x = π/4, x = 3π/4, x = 5π/4, x = 7π/4" }

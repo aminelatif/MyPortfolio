@@ -6,8 +6,11 @@ export default {
     {
       id: "definition-exponentielle",
       title: "Définition de la fonction exponentielle",
-      definition: "La fonction exponentielle est la fonction qui à tout réel x associe e^x.",
-      example: "e^0 = 1, e^1 = e ≈ 2,718.",
+      sections: [
+        { title: "Définition", content: "La fonction exponentielle est la fonction qui à tout réel x associe e^x." },
+        { title: "Exemple", content: "e^0 = 1, e^1 = e ≈ 2,718." },
+        { title: "Remarque", content: "La fonction exponentielle est utilisée pour modéliser la croissance continue en économie." }
+      ],
       gameQuestions: [
         { question: "Quelle est la valeur de e^2 ?", answer: "7,389" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "proprietes-exponentielle",
       title: "Propriétés de la fonction exponentielle",
-      definition: "La fonction exponentielle est strictement croissante et sa dérivée est égale à elle-même.",
-      example: "Si f(x) = e^x, alors f'(x) = e^x.",
+      sections: [
+        { title: "Définition", content: "La fonction exponentielle est strictement croissante et sa dérivée est égale à elle-même." },
+        { title: "Exemple", content: "Si f(x) = e^x, alors f'(x) = e^x." },
+        { title: "Remarque", content: "La dérivée de la fonction exponentielle facilite le calcul des taux de croissance instantanés." }
+      ],
       gameQuestions: [
         { question: "Quelle est la dérivée de f(x) = e^2x ?", answer: "2e^2x" }
       ],

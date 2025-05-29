@@ -5,8 +5,6 @@ export default {
     {
       id: "translations",
       title: "Translations",
-      definition: "Une translation est une transformation géométrique qui déplace tous les points du plan dans la même direction et de la même distance, selon un vecteur donné.",
-      example: "La translation de vecteur v⃗(3,2) transforme le point A(1,1) en A'(4,3).",
       sections: [
         { title: "Définition", content: "Une translation est une transformation géométrique qui déplace tous les points du plan dans la même direction et de la même distance, selon un vecteur donné." },
         { title: "Exemple", content: "La translation de vecteur v⃗(3,2) transforme le point A(1,1) en A'(4,3)." },
@@ -24,8 +22,6 @@ export default {
     {
       id: "rotations",
       title: "Rotations",
-      definition: "Une rotation est une transformation géométrique qui fait tourner tous les points du plan d'un angle donné autour d'un point fixe appelé centre de rotation.",
-      example: "La rotation de centre O et d'angle 90° transforme le point A(1,0) en A'(0,1).",
       sections: [
         { title: "Définition", content: "Une rotation est une transformation géométrique qui fait tourner tous les points du plan d'un angle donné autour d'un point fixe appelé centre de rotation." },
         { title: "Exemple", content: "La rotation de centre O et d'angle 90° transforme le point A(1,0) en A'(0,1)." },
@@ -42,8 +38,6 @@ export default {
     {
       id: "symetries",
       title: "Symétries",
-      definition: "Une symétrie est une transformation géométrique qui reflète des points par rapport à un axe (symétrie axiale) ou à un point (symétrie centrale).",
-      example: "La symétrie par rapport à l'axe des ordonnées transforme le point A(3,2) en A'(-3,2).",
       sections: [
         { title: "Définition", content: "Une symétrie est une transformation géométrique qui reflète des points par rapport à un axe (symétrie axiale) ou à un point (symétrie centrale)." },
         { title: "Exemple", content: "La symétrie par rapport à l'axe des ordonnées transforme le point A(3,2) en A'(-3,2)." },

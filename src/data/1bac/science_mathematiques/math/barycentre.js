@@ -5,8 +5,11 @@ export default {
     {
       id: "definition-barycentre",
       title: "Définition du barycentre",
-      definition: "Le barycentre de points pondérés (Ai, ai) est le point G tel que la somme vectorielle Σ ai.GAi = 0.",
-      example: "Le barycentre des points A(1,0) et B(3,4) affectés des coefficients 2 et 3 respectivement est G(2.2, 2.4).",
+      sections: [
+        { title: "Définition", content: "Le barycentre de points pondérés (Ai, ai) est le point G tel que la somme vectorielle Σ ai.GAi = 0." },
+        { title: "Exemple", content: "Le barycentre des points A(1,0) et B(3,4) affectés des coefficients 2 et 3 respectivement est G(2.2, 2.4)." },
+        { title: "Remarque", content: "Le barycentre généralise la notion de centre de gravité." }
+      ],
       gameQuestions: [
         { question: "Le centre de gravité d'un triangle est le barycentre de ses sommets affectés de quels coefficients ?", answer: "Coefficients égaux (1/3, 1/3, 1/3)" }
       ],
@@ -18,8 +21,11 @@ export default {
     {
       id: "proprietes-barycentre",
       title: "Propriétés du barycentre",
-      definition: "Le barycentre vérifie des propriétés d'associativité et de linéarité qui permettent de simplifier les calculs.",
-      example: "Le barycentre de (A, a) et (B, b) est sur la droite (AB) et divise le segment AB dans le rapport b/a.",
+      sections: [
+        { title: "Définition", content: "Le barycentre vérifie des propriétés d'associativité et de linéarité qui permettent de simplifier les calculs." },
+        { title: "Exemple", content: "Le barycentre de (A, a) et (B, b) est sur la droite (AB) et divise le segment AB dans le rapport b/a." },
+        { title: "Remarque", content: "Le barycentre est un outil puissant pour la résolution de problèmes géométriques." }
+      ],
       gameQuestions: [
         { question: "Où se trouve le barycentre de deux points affectés de coefficients de signes opposés ?", answer: "À l'extérieur du segment" }
       ],

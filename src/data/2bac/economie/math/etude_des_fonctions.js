@@ -6,8 +6,11 @@ export default {
     {
       id: "monotonie",
       title: "Monotonie d'une fonction",
-      definition: "Une fonction est croissante (resp. décroissante) sur un intervalle si sa dérivée est positive (resp. négative) sur cet intervalle.",
-      example: "La fonction f(x) = x² est décroissante sur ]-∞,0] et croissante sur [0,+∞[.",
+      sections: [
+        { title: "Définition", content: "Une fonction est croissante (resp. décroissante) sur un intervalle si sa dérivée est positive (resp. négative) sur cet intervalle." },
+        { title: "Exemple", content: "La fonction f(x) = x² est décroissante sur ]-∞,0] et croissante sur [0,+∞[." },
+        { title: "Remarque", content: "L'étude de la monotonie est cruciale pour comprendre l'évolution des grandeurs économiques." }
+      ],
       gameQuestions: [
         { question: "Sur quel intervalle la fonction f(x) = -x² est-elle croissante ?", answer: "]-∞,0]" }
       ],
@@ -19,8 +22,11 @@ export default {
     {
       id: "extremums",
       title: "Extremums d'une fonction",
-      definition: "Les extremums d'une fonction sont les points où la dérivée s'annule en changeant de signe.",
-      example: "La fonction f(x) = x² admet un minimum en x = 0.",
+      sections: [
+        { title: "Définition", content: "Les extremums d'une fonction sont les points où la dérivée s'annule en changeant de signe." },
+        { title: "Exemple", content: "La fonction f(x) = x² admet un minimum en x = 0." },
+        { title: "Remarque", content: "Les extremums sont essentiels pour l'optimisation des fonctions économiques." }
+      ],
       gameQuestions: [
         { question: "Quel est l'extremum de la fonction f(x) = x² - 4x + 3 ?", answer: "Minimum en x = 2" }
       ],
