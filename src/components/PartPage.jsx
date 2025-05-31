@@ -33,6 +33,7 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
   const [progress, setProgress] = useState(0);
   const [completedSteps, setCompletedSteps] = useState([]);
   const [error, setError] = useState(null);
+  const [visibleSolutions, setVisibleSolutions] = useState({});
   const navigate = useNavigate();
 
   // Get the current lesson and parts
@@ -217,6 +218,13 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
     }
   };
 
+  const toggleSolution = (index) => {
+    setVisibleSolutions(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   if (error) {
     return (
       <div className="bg-white p-6 rounded-lg shadow-md">
@@ -373,18 +381,45 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
                     <div className="text-gray-800 mb-4">
                       {renderWithMath(exercise.question)}
                     </div>
-                    {exercise.video && (
+                    {(exercise.solution || exercise.video) && (
                       <div className="mt-4">
-                        <div className="aspect-w-16 aspect-h-9">
-                          <iframe
-                            src={exercise.video}
-                            title={`Solution vidéo Exercice ${index + 1}`}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className="w-full h-64 md:h-80"
-                          ></iframe>
-                        </div>
+                        <button
+                          onClick={() => toggleSolution(index)}
+                          className={`inline-block px-4 py-2 rounded-lg shadow-md border text-sm font-medium transition duration-200 ${
+                            visibleSolutions[index]
+                              ? 'bg-red-100 text-red-700 hover:bg-red-200 border-red-300'
+                              : 'bg-green-100 text-green-700 hover:bg-green-200 border-green-300'
+                          }`}
+                        >
+                          {visibleSolutions[index] ? `Masquer la solution ${index + 1}` : `Afficher la solution ${index + 1}`}
+                        </button>
+
+                        {visibleSolutions[index] && (
+                          <div className="mt-3 bg-white rounded-lg shadow-lg border border-gray-200 p-4 space-y-4">
+                            <h5 className="text-gray-700 font-semibold text-base">Solution :</h5>
+
+                            {exercise.solution && (
+                              <div className="p-4 rounded-md bg-white border shadow mb-4">
+                                {renderWithMath(exercise.solution)}
+                              </div>
+                            )}
+
+                            {exercise.video && (
+                              <div className="p-4 rounded-md bg-white border shadow">
+                                <div className="aspect-w-16 aspect-h-9">
+                                  <iframe
+                                    src={exercise.video}
+                                    title={`Solution vidéo Exercice ${index + 1}`}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    className="w-full h-64 md:h-80 rounded"
+                                  ></iframe>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>

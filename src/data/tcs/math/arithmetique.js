@@ -16,7 +16,9 @@ export default {
         { question: "17 est-il divisible par 4 ?", answer: "Non" }
       ],
       exercises: [
-        { question: "Monter que $A=9^{n+2}+9^{n}*19$ est divisible par $20$", video: "https://www.youtube.com/embed/Rvl7q5fTc9M?si=b9gAZG1Uhg64bXsz" }
+        { question: "Monter que $A=9^{n+2}+9^{n}*19$ est divisible par $20$", 
+          video: "https://www.youtube.com/embed/Rvl7q5fTc9M?si=b9gAZG1Uhg64bXsz",
+          solution: "On peut factoriser $A$ par $20$ : $A = 9^n(9^2+19)=9^n*20$ donc $A$ est divisible par $20$."}
       ],
       gameType: "quiz"
     },
@@ -33,7 +35,11 @@ export default {
         { question: "Quel est le PGCD de 24 et 36 ?", answer: "12" }
       ],
       exercises: [
-        { question: "Calculez le PGCD de 48 et 72 en utilisant l'algorithme d'Euclide.", answer: "24" }
+        { question: "Monter que $A=9^{n+2}+9^{n}*19$ est divisible par $20$", 
+          video: "https://www.youtube.com/embed/Rvl7q5fTc9M?si=b9gAZG1Uhg64bXsz"},
+          
+        { question: "Calculez le PGCD de 48 et 72 en utilisant l'algorithme d'Euclide.",
+          solution: "On peut factoriser $A$ par $20$ : $A = 9^n(9^2+19)=9^n*20$ donc $A$ est divisible par $20$." }
       ],
       gameType: "tictactoe"
     }
