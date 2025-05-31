@@ -376,13 +376,16 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
             {part.exercises && part.exercises.length > 0 && (
               <div className="space-y-6">
                 {part.exercises.map((exercise, index) => (
-                  <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                    <h4 className="font-medium mb-4 text-lg">Exercice {index + 1}</h4>
-                    <div className="text-gray-800 mb-4">
-                      {renderWithMath(exercise.question)}
+                  <div key={index} className="bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="p-6">
+                      <h4 className="font-medium mb-4 text-lg">Exercice {index + 1}</h4>
+                      <div className="text-gray-800">
+                        {renderWithMath(exercise.question)}
+                      </div>
                     </div>
+
                     {(exercise.solution || exercise.video) && (
-                      <div className="mt-4">
+                      <div className="px-2 sm:px-4 pb-4">
                         <button
                           onClick={() => toggleSolution(index)}
                           className={`inline-block px-4 py-2 rounded-lg shadow-md border text-sm font-medium transition duration-200 ${
@@ -395,25 +398,25 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
                         </button>
 
                         {visibleSolutions[index] && (
-                          <div className="mt-3 bg-white rounded-lg shadow-lg border border-gray-200 p-4 space-y-4">
+                          <div className="mt-3 bg-white rounded-lg shadow-lg border border-gray-200 p-2 sm:p-4 space-y-4">
                             <h5 className="text-gray-700 font-semibold text-base">Solution :</h5>
 
                             {exercise.solution && (
-                              <div className="p-4 rounded-md bg-white border shadow mb-4">
+                              <div className="p-2 sm:p-4 rounded-md bg-white border shadow mb-4">
                                 {renderWithMath(exercise.solution)}
                               </div>
                             )}
 
                             {exercise.video && (
-                              <div className="p-4 rounded-md bg-white border shadow">
-                                <div className="aspect-w-16 aspect-h-9">
+                              <div className="p-2 sm:p-4 rounded-md bg-white border shadow">
+                                <div className="relative w-full pb-[56.25%]">
                                   <iframe
                                     src={exercise.video}
                                     title={`Solution vidéo Exercice ${index + 1}`}
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen
-                                    className="w-full h-64 md:h-80 rounded"
+                                    className="absolute top-0 left-0 w-full h-full rounded"
                                   ></iframe>
                                 </div>
                               </div>
