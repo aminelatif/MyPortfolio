@@ -323,7 +323,7 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
 
             {part.sections && part.sections.length > 0 && part.sections.map((section, index) => (
               <div key={index} className="mb-8 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
-                <div className="p-8">
+                <div className="p-4">
                   <h3 className="text-xl font-semibold mb-6 text-blue-700">{section.title}</h3>
                   <div className="text-gray-800 text-base leading-relaxed">
                     {renderWithMath(section.content)}
@@ -347,7 +347,7 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
             <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">
               {isLastPart ? 'Quiz Final' : 'Quiz Interactif'}
             </h3>
-            <div className="bg-gray-50 p-3 md:p-4 rounded-lg">
+            <div className="bg-gray-50 md:p-0 rounded-lg">
               <QuizGame 
                 questions={part.gameQuestions} 
               />
@@ -365,22 +365,33 @@ const PartPage = ({ part, allParts, onLessonProgressUpdate }) => {
         {activeTab === 'exercises' && part.exercises && (
           <div>
             <h3 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">Exercices</h3>
-            <div className="space-y-4">
-              {part.exercises.map((exercise, index) => (
-                <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                  <h4 className="font-medium mb-4 text-lg">Exercice {index + 1}</h4>
-                  <div className="text-gray-800 mb-6">
-                    {renderWithMath(exercise.question)}
-                  </div>
-                  <div className="mt-4 p-4 bg-white rounded-lg border border-gray-100">
-                    <h5 className="font-medium text-gray-700 mb-3">Solution:</h5>
-                    <div className="text-gray-800">
-                      {renderWithMath(exercise.answer)}
+            {part.exercises && part.exercises.length > 0 && (
+              <div className="space-y-6">
+                {part.exercises.map((exercise, index) => (
+                  <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h4 className="font-medium mb-4 text-lg">Exercice {index + 1}</h4>
+                    <div className="text-gray-800 mb-4">
+                      {renderWithMath(exercise.question)}
                     </div>
+                    {exercise.video && (
+                      <div className="mt-4">
+                        <div className="aspect-w-16 aspect-h-9">
+                          <iframe
+                            src={exercise.video}
+                            title={`Solution vidéo Exercice ${index + 1}`}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-64 md:h-80"
+                          ></iframe>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
+
             <button
               className={`btn btn-success mt-4 ${completedSteps.includes('exercises') ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={() => completeStep('exercises')}

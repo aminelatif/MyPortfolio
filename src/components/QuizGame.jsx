@@ -205,7 +205,7 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
   const question = processedQuestions[current];
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto     max-w-md sm:max-w-lg md:max-w-xl  ">
       <div className="bg-blue-500 text-white p-2.5 sm:p-3 text-center">
         <h2 className="text-lg sm:text-xl font-bold">Math Quiz Challenge</h2>
       </div>
@@ -238,7 +238,7 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
           
           <div className="space-y-1.5 sm:space-y-2">
             {question.options.map((option) => {
-              let optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 hover:border-blue-500 hover:bg-blue-50 text-sm sm:text-base";
+              let optionClasses = "w-full text-left p-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 hover:border-blue-500 hover:bg-blue-50 text-sm sm:text-base";
               
               if (showFeedback) {
                 if (option === processedQuestions[current].correct) {
