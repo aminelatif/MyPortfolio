@@ -187,17 +187,57 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
 
   if (showResults) {
     return (
-      <div className="text-center p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Quiz terminé!</h2>
-        <p className="text-xl mb-4">
-          Votre score: {accuracy}%
-        </p>
-        <button
-          onClick={handleReset}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
-        >
-          Recommencer
-        </button>
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold mb-2">Quiz terminé!</h2>
+          <p className="text-xl text-gray-700">
+            Votre score: {accuracy}%
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          {answers.map((answer, idx) => (
+            <div key={idx} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <div className="mb-3">
+                <span className="text-sm font-medium text-gray-500">Question {idx + 1}</span>
+                <div className="mt-1 text-gray-800">
+                  {renderWithMath(answer.question)}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className={`p-2 rounded ${
+                  answer.selected === answer.correct 
+                    ? 'bg-green-50 border border-green-200' 
+                    : 'bg-red-50 border border-red-200'
+                }`}>
+                  <span className="text-sm font-medium text-gray-500">Votre réponse :</span>
+                  <div className="mt-1">
+                    {renderWithMath(answer.selected || "Aucune")}
+                  </div>
+                </div>
+
+                {answer.selected !== answer.correct && (
+                  <div className="p-2 rounded bg-green-50 border border-green-200">
+                    <span className="text-sm font-medium text-gray-500">Bonne réponse :</span>
+                    <div className="mt-1">
+                      {renderWithMath(answer.correct)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleReset}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors duration-200"
+          >
+            Recommencer
+          </button>
+        </div>
       </div>
     );
   }
@@ -205,51 +245,53 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
   const question = processedQuestions[current];
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto     max-w-md sm:max-w-lg md:max-w-xl  ">
-      <div className="bg-blue-500 text-white p-2.5 sm:p-3 text-center">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-md mx-auto sm:max-w-lg md:max-w-xl">
+      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-3 sm:p-4 text-center">
         <h2 className="text-lg sm:text-xl font-bold">Math Quiz Challenge</h2>
       </div>
 
       <div className="relative">
         {/* Progress bar */}
-        <div className="h-1.5 sm:h-2 bg-gray-200">
+        <div className="h-2 bg-gray-100">
           <div 
-            className="h-full bg-blue-500" 
+            className="h-full bg-blue-500 transition-all duration-300 ease-in-out" 
             style={{ width: `${progress}%` }}
           ></div>
         </div>
         
         {/* Question content */}
-        <div className={`p-3 sm:p-4 transition-opacity duration-300 ${fadeIn ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex justify-between mb-3 sm:mb-4">
-            <span className="text-xs sm:text-sm font-medium px-2 py-1 bg-blue-100 rounded-md">
+        <div className={`p-4 sm:p-6 transition-all duration-300 ${fadeIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-sm font-medium px-3 py-1 bg-blue-50 text-blue-700 rounded-full">
               Question {current + 1} / {processedQuestions.length}
             </span>
-            <span className="text-xs sm:text-sm font-medium px-2 py-1 bg-green-100 rounded-md">
+            <span className="text-sm font-medium px-3 py-1 bg-green-50 text-green-700 rounded-full">
               Score: {answers.filter(a => a.isCorrect).length}
             </span>
           </div>
           
-          <div className="mb-3 sm:mb-4 bg-gray-50 p-3 sm:p-4 rounded">
-            <h3 className="text-base sm:text-lg font-bold mb-1">
+          <div className="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
               {renderWithMath(question.question)}
             </h3>
           </div>
           
-          <div className="space-y-1.5 sm:space-y-2">
+          <div className="space-y-3">
             {question.options.map((option) => {
-              let optionClasses = "w-full text-left p-2 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 hover:border-blue-500 hover:bg-blue-50 text-sm sm:text-base";
+              let optionClasses = "w-full text-left p-3 rounded-lg border transition-all duration-200 text-base";
               
               if (showFeedback) {
                 if (option === processedQuestions[current].correct) {
-                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-green-500 bg-green-50 text-sm sm:text-base";
+                  optionClasses += " border-green-500 bg-green-50 text-green-700";
                 } else if (option === selectedOption && option !== processedQuestions[current].correct) {
-                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-red-500 bg-red-50 text-sm sm:text-base";
+                  optionClasses += " border-red-500 bg-red-50 text-red-700";
                 } else {
-                  optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-gray-300 opacity-50 text-sm sm:text-base";
+                  optionClasses += " border-gray-200 bg-gray-50 text-gray-400";
                 }
               } else if (option === selectedOption) {
-                optionClasses = "w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded border border-blue-500 bg-blue-50 text-sm sm:text-base";
+                optionClasses += " border-blue-500 bg-blue-50 text-blue-700";
+              } else {
+                optionClasses += " border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700";
               }
               
               return (
@@ -259,13 +301,13 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
                   className={optionClasses}
                   disabled={showFeedback}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center justify-between">
                     <span className="font-medium">{renderWithMath(option)}</span>
                     {showFeedback && option === processedQuestions[current].correct && (
-                      <span className="ml-auto text-green-600">✓</span>
+                      <span className="ml-2 text-green-600 text-xl">✓</span>
                     )}
                     {showFeedback && option === selectedOption && option !== processedQuestions[current].correct && (
-                      <span className="ml-auto text-red-600">X</span>
+                      <span className="ml-2 text-red-600 text-xl">×</span>
                     )}
                   </div>
                 </button>
@@ -275,14 +317,14 @@ const QuizGame = ({ questions: propQuestions, onComplete }) => {
         </div>
       </div>
 
-      <div className="flex justify-end p-3 sm:p-4">
+      <div className="flex justify-end p-4 sm:p-6 border-t border-gray-100">
         <button
           onClick={() => handleNextQuestion(null, false)}
           disabled={selectedOption === null}
-          className={`px-6 py-2 rounded-lg transition-colors ${
+          className={`px-6 py-2 rounded-lg transition-all duration-200 ${
             selectedOption === null
               ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-blue-500 hover:bg-blue-600 text-white'
+              : 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm hover:shadow'
           }`}
         >
           {current < processedQuestions.length - 1 ? 'Question suivante' : 'Terminer'}
